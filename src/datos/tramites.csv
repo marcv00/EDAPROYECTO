@@ -1,0 +1,13 @@
+expediente;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento
+1;finalizado;20/07/2024;08:59;21/07/2024;16:35;Copia certificada de Expediente;Administracion[20/07/2024(08:59>Contabilidad[21/07/2024(10:54>DUIS[21/07/2024(12:35
+2;finalizado;20/07/2024;09:00;22/07/2024;15:26;Constancia de Estudios;Estudios Generales[20/07/2024(09:00>DUIS[21/07/2024(11:32>Estudios Generales[22/07/2024(11:12
+3;finalizado;20/07/2024;09:02;20/07/2024;09:12;Copia certificada de Expediente;Estudios Generales[20/07/2024(09:02
+4;proceso;20/07/2024;09:05;;;;Idiomas[20/07/2024(09:05>Administración[21/07/2024(08:59>Idiomas[21/07/2024(13:58
+5;finalizado;21/07/2024;14:05;21/07/2024;14:35;Oficio;Administracion[21/07/2024(14:05
+6;proceso;21/07/2024;14:06;;;;CREA[21/07/2024(14:06>DUIS[21/07/2024(15:06>Innova Ulima[21/07/2024(14:06>Idiomas[21/07/2024(16:06
+7;proceso;21/07/2024;15:25;;;;IDIC[21/07/2024(15:25>Contabilidad[21/07/2024(17:15>DUIS[22/07/2024(14:06
+8;proceso;21/07/2024;16:48;;;;Escuela Posgrado[21/07/2024(16:48>Contabilidad[22/07/2024(09:45
+9;proceso;21/07/2024;17:00;;;;IDIC[21/07/2024(17:00>DUIS[21/07/2024(17:35
+10;proceso;21/07/2024;17:02;;;;CREA[21/07/2024(17:02>Contabilidad[21/07/2024(17:48
+11;finalizado;22/07/2024;17:15;22/07/2024;19:36;Oficio;IDIC[22/07/2024(17:15>Innova Ulima[22/07/2024(18:00>DUIS[22/07/2024(18:29
+12;finalizado;22/07/2024;17:35;22/07/2024;19:45;Copia certificada de Expediente;Estudios Generales[22/07/2024(17:35>DUIS[22/07/2024(18:45>Estudios Generales[22/07/2024(19:35
