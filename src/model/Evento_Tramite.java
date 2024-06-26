@@ -10,7 +10,7 @@ package model;
  * @author KEVIN
  */
 public class Evento_Tramite {
-    
+    protected String hola;
     protected Expediente exp;
     protected Evento_Tramite sgte;
     protected Dependencia punto;
