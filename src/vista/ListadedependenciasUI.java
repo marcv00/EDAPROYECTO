@@ -5,14 +5,25 @@
  */
 package vista;
 
+import javax.swing.table.DefaultTableModel;
+import model.*;
+import static vista.ListaUsuarioUI.nuevo;
+
 /**
  *
  * @author User
  */
 public class ListadedependenciasUI extends javax.swing.JFrame {
-
+    
+    private DefaultTableModel modelo;
+    
+    
     public ListadedependenciasUI() {
         initComponents();
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        this.jTable1.setModel(modelo);
+        CargarTabla();
     }
 
     /**
@@ -52,6 +63,11 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Modificar");
 
@@ -96,6 +112,14 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jButton1.isSelected())
+        {
+            CrearDependencia dep = new CrearDependencia();
+            dep.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -107,6 +131,20 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void CargarTabla()
+        {
+            int filas = this.jTable1.getRowCount();
+            for (int i =0;i<filas;i++)
+            {
+                modelo.removeRow(0);
+            }
+            String nombre = CrearDependencia.probar.getNombre();
+            String[] dato = new String[1];
+            dato[0]=nombre;
+            modelo.addRow(dato);
+                 
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
