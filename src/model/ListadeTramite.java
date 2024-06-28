@@ -9,7 +9,6 @@ package model;
  *
  * @author KEVIN
  */
-import model.*;
 public class ListadeTramite {
     
     private Evento_Tramite L;
@@ -40,7 +39,7 @@ public class ListadeTramite {
        System.out.println("");
    }
    
-   public void insertar(Expediente exp, Dependencia punto, String horain, String horafin, Personal empleado)
+   public void insertar(Expediente exp, Dependencia punto, String horain, String horafin, Usuario empleado)
    {
        Evento_Tramite nuevo = new Evento_Tramite(exp, punto, horain, horafin, empleado);
        if(estaVacia())

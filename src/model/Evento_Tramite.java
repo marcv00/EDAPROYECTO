@@ -10,16 +10,14 @@ package model;
  * @author KEVIN
  */
 public class Evento_Tramite {
-    protected String Kevin;
-    protected String adios;
-    protected String hola;
+    
     protected Expediente exp;
     protected Evento_Tramite sgte;
     protected Dependencia punto;
     protected String horain, horafin;
-    protected Personal empleado;
+    protected Usuario empleado;
 
-    public Evento_Tramite(Expediente exp, Dependencia punto, String horain, String horafin, Personal empleado) {
+    public Evento_Tramite(Expediente exp, Dependencia punto, String horain, String horafin, Usuario empleado) {
         this.exp = exp;
         this.sgte = null;
         this.punto = punto;
@@ -52,11 +50,11 @@ public class Evento_Tramite {
         this.punto = punto;
     }
 
-    public Personal getEmpleado() {
+    public Usuario getEmpleado() {
         return empleado;
     }
 
-    public void setEmpleado(Personal empleado) {
+    public void setEmpleado(Usuario empleado) {
         this.empleado = empleado;
     }
 

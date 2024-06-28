@@ -9,19 +9,29 @@ package model;
  *
  * @author KEVIN
  */
-public abstract class Usuario {
+public class Usuario {
     
-    protected String ID, contraseña, nombre, dependencia, correo;
-    protected char tipo;
+    private String ID, contraseña, nombre, correo;
+    private Usuario sgte;
+    
     
 
-    public Usuario(String ID, String contraseña, char tipo, String nombre, String dependencia, String correo) {
+    public Usuario() {
+        this.ID="";
+        this.contraseña="";
+        this.correo="";
+        this.nombre="";
+        this.sgte = null;
+    }
+
+    
+    
+    public Usuario(String ID, String contraseña, String nombre, String correo) {
         this.ID = ID;
         this.contraseña = contraseña;
         this.nombre = nombre;
-        this.dependencia = dependencia;
         this.correo = correo;
-        this.tipo = tipo;
+        this.sgte = null;
     }
 
     public String getID() {
@@ -48,14 +58,6 @@ public abstract class Usuario {
         this.nombre = nombre;
     }
 
-    public String getDependencia() {
-        return dependencia;
-    }
-
-    public void setDependencia(String dependencia) {
-        this.dependencia = dependencia;
-    }
-
     public String getCorreo() {
         return correo;
     }
@@ -64,15 +66,17 @@ public abstract class Usuario {
         this.correo = correo;
     }
 
-    public char getTipo() {
-        return tipo;
+    public Usuario getSgte() {
+        return sgte;
     }
 
-    public void setTipo(char tipo) {
-        this.tipo = tipo;
+    public void setSgte(Usuario sgte) {
+        this.sgte = sgte;
     }
 
-    //prioridad 1-3 id interesado estado dependencia empleado hora
+     
+
+
     
     
 }

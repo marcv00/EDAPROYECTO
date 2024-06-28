@@ -11,11 +11,12 @@ package model;
  */
 public class Dependencia {
     
-    protected String nombre;
+    private String nombre;
+    private Dependencia sgte;
 
-    public Dependencia(String nombre) {
+    public Dependencia(String nombre, Usuario nuevo, Dependencia sgte) {
         this.nombre = nombre;
-       
+        this.sgte = null;
     }
 
     public String getNombre() {
@@ -25,6 +26,17 @@ public class Dependencia {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Dependencia getSgte() {
+        return sgte;
+    }
+
+    public void setSgte(Dependencia sgte) {
+        this.sgte = sgte;
+    }
+
+    
+    
 
 
     

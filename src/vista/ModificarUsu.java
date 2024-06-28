@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package vista;
-
+import javax.swing.JOptionPane;
+import model.*;
 /**
  *
  * @author KEVIN
@@ -42,23 +43,20 @@ public class ModificarUsu extends javax.swing.JFrame {
 
         jRadioButton1.setText("ID");
 
-        jTextField2.setText("jTextField2");
-
-        jRadioButton2.setText("jRadioButton2");
+        jRadioButton2.setText("Contraseña");
 
         jLabel1.setText("MODIFICAR USUARIO");
 
-        jTextField3.setText("jTextField3");
+        jRadioButton3.setText("Nombre");
 
-        jRadioButton3.setText("jRadioButton3");
-
-        jTextField4.setText("jTextField4");
-
-        jRadioButton4.setText("jRadioButton4");
-
-        jTextField5.setText("jTextField5");
+        jRadioButton4.setText("Correo");
 
         jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,10 +78,10 @@ public class ModificarUsu extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(39, 39, 39)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                            .addComponent(jTextField2)
                                             .addComponent(jTextField3)
                                             .addComponent(jTextField4)
-                                            .addComponent(jTextField5)))))
+                                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))))
                             .addComponent(jRadioButton3)
                             .addComponent(jRadioButton1)))
                     .addGroup(layout.createSequentialGroup()
@@ -119,6 +117,31 @@ public class ModificarUsu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(jRadioButton1.isSelected())
+        {
+            String ID = jTextField2.getText();
+            ListaUsuarioUI.nuevo.setID(ID);
+        }
+        if(jRadioButton2.isSelected())
+        {
+            String contraseña = jTextField3.getText();
+            ListaUsuarioUI.nuevo.setContraseña(contraseña);
+        }
+        if(jRadioButton3.isSelected())
+        {
+            String nombre = jTextField4.getText();
+            ListaUsuarioUI.nuevo.setNombre(nombre);
+        }
+        if(jRadioButton4.isSelected())
+        {
+            String correo = jTextField5.getText();
+            ListaUsuarioUI.nuevo.setCorreo(correo);
+        }
+        JOptionPane.showMessageDialog(this, "Modificacion exitosa");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

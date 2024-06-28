@@ -13,9 +13,9 @@ public class Expediente {
     
     private String ID, estado, asunto, docref;
     private int prioridad;
-    private Interesado nuevo;
+    private Usuario nuevo;
 
-    public Expediente(String ID, String estado, int prioridad, Interesado nuevo, String asunto, String docref) {
+    public Expediente(String ID, String estado, int prioridad, Usuario nuevo, String asunto, String docref) {
         this.ID = ID;
         this.estado = estado;
         this.prioridad = prioridad;
@@ -48,11 +48,11 @@ public class Expediente {
         this.prioridad = prioridad;
     }
 
-    public Interesado getNuevo() {
+    public Usuario getNuevo() {
         return nuevo;
     }
 
-    public void setNuevo(Interesado nuevo) {
+    public void setNuevo(Usuario nuevo) {
         this.nuevo = nuevo;
     }
 
