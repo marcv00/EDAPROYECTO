@@ -13,11 +13,12 @@ public class Dependencia {
     
     private String nombre;
     private Dependencia sgte;
+    
 
-    public Dependencia(String nombre, Usuario nuevo, Dependencia sgte) {
+    public Dependencia(String nombre) {
         this.nombre = nombre;
         this.sgte = null;
-    }
+            }
 
     public String getNombre() {
         return nombre;
@@ -34,7 +35,7 @@ public class Dependencia {
     public void setSgte(Dependencia sgte) {
         this.sgte = sgte;
     }
-
+    
     
     
 

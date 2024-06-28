@@ -630,8 +630,15 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         }//GEN-LAST:event_jButton1ActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        ModificarUsu Modificar = new ModificarUsu();
-        Modificar.setVisible(true);
+        if(this.jTable1.getRowCount()>0)
+        {
+            ModificarUsu Modificar = new ModificarUsu();
+            Modificar.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "No se selecciono un usuario");
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -663,7 +670,17 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
+        String ID = this.jTextField1.getText();
+        nuevo = CrearusuarioUI.Interesado.buscarID(ID);
+        if(this.jTable1.getRowCount()>0)
+        {
+            CrearusuarioUI.Interesado.eliminar(nuevo.getID());
+            JOptionPane.showMessageDialog(this, "Usuario Eliminado");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "No se selecciono un usuario");
+        } 
     }//GEN-LAST:event_eliminarActionPerformed
 
         
@@ -702,7 +719,8 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         
         public void CargarTabla(Usuario aux)
         {
-            if(modelo.getRowCount()>1)
+            int filas = this.jTable1.getRowCount();
+            for (int i =0;i<filas;i++)
             {
                 modelo.removeRow(0);
             }
