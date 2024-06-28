@@ -9,7 +9,7 @@ import model.*;
 public class ListaUsuarioUI extends javax.swing.JFrame {
         
         private DefaultTableModel modelo;
-        private Usuario nuevo;
+        public static Usuario nuevo;
        
         
         public ListaUsuarioUI() {
@@ -619,7 +619,6 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             String ID = this.jTextField1.getText();
             nuevo = CrearusuarioUI.Interesado.buscarID(ID);
-             
             if(nuevo.getID().equalsIgnoreCase(ID))
             {
                 CargarTabla(nuevo);
@@ -631,7 +630,8 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         }//GEN-LAST:event_jButton1ActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        
+        ModificarUsu Modificar = new ModificarUsu();
+        Modificar.setVisible(true);
     }//GEN-LAST:event_modificarActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -702,16 +702,20 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         
         public void CargarTabla(Usuario aux)
         {
+            if(modelo.getRowCount()>1)
+            {
+                modelo.removeRow(0);
+            }
             String datos[] = new String[4];
-            datos[0] = aux.getID();
-            datos[1] = aux.getContraseña();
-            datos[2] = aux.getNombre();
-            datos[3] = aux.getCorreo();
+            datos[0] = nuevo.getID();
+            datos[1] = nuevo.getContraseña();
+            datos[2] = nuevo.getNombre();
+            datos[3] = nuevo.getCorreo();
             
             modelo.addRow(datos);
                  
         }
-
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Usuario;
     private javax.swing.JButton eliminar;
