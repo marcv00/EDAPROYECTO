@@ -10,6 +10,7 @@ package model;
  * @author KEVIN
  */
 public class Evento_Tramite {
+    protected String Kevin;
     protected String adios;
     protected String hola;
     protected Expediente exp;
