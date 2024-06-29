@@ -13,7 +13,7 @@ import model.*;
  */
 public class CrearusuarioUI extends javax.swing.JFrame {
     
-    public static Administracion Interesado;
+    public static AdministracionUsuario Interesado;
    
 
     /**
@@ -21,7 +21,7 @@ public class CrearusuarioUI extends javax.swing.JFrame {
      */
     public CrearusuarioUI() {
         initComponents();
-        Interesado = new Administracion();
+        Interesado = new AdministracionUsuario();
         
     }
 

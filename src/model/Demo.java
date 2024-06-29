@@ -5,8 +5,6 @@
  */
 package model;
 
-import vista.CrearusuarioUI;
-
 /**
  *
  * @author KEVIN
@@ -14,13 +12,17 @@ import vista.CrearusuarioUI;
 public class Demo {
     
     public static void main(String[] args) {
-        Administracion ad = new Administracion();
-        Usuario nuevo = new Usuario("ID", "Contra","Nom","Cor");
+        AdminDependencia nuevo = new AdminDependencia();
         
-        ad.insertar("ID", "Contra","Nom","Cor");
-        ad.mostrar();
+        nuevo.insertar("pepe");
+        nuevo.insertar("jose");
         
-        Usuario otro = CrearusuarioUI.Interesado.buscarID("I202232");
-        System.out.println(otro.getID());
+        System.out.println(nuevo.NDep());
+        String[] datos = new String[nuevo.NDep()];
+        for(int i = 0; i<nuevo.NDep();i++)
+        {
+            System.out.println(nuevo.ObtenerDepedencias(i));
+        }
+        
     }
 }
