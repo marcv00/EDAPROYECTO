@@ -39,9 +39,9 @@ public class ListadeTramite {
        System.out.println("");
    }
    
-   public void insertar(Expediente exp, Dependencia punto, String horain, String horafin, Usuario empleado)
+   public void insertar(Expediente exp, Dependencia punto, String horain, String horafin)
    {
-       Evento_Tramite nuevo = new Evento_Tramite(exp, punto, horain, horafin, empleado);
+       Evento_Tramite nuevo = new Evento_Tramite(exp, punto, horain, horafin);
        if(estaVacia())
        {
            this.L = nuevo;

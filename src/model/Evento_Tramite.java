@@ -17,7 +17,7 @@ public class Evento_Tramite {
     protected String horain, horafin;
     protected Usuario empleado;
 
-    public Evento_Tramite(Expediente exp, Dependencia punto, String horain, String horafin, Usuario empleado) {
+    public Evento_Tramite(Expediente exp, Dependencia punto, String horain, String horafin) {
         this.exp = exp;
         this.sgte = null;
         this.punto = punto;

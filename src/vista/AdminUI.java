@@ -26,7 +26,6 @@ public class AdminUI extends javax.swing.JFrame {
         usuarioLabel = new javax.swing.JLabel();
         mainTitleLabel = new javax.swing.JLabel();
         listadedependienteButton1 = new javax.swing.JButton();
-        crearusuarioButton2 = new javax.swing.JButton();
         listadeusuariosButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
@@ -49,17 +48,6 @@ public class AdminUI extends javax.swing.JFrame {
         listadedependienteButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listadedependienteButton1ActionPerformed(evt);
-            }
-        });
-
-        crearusuarioButton2.setBackground(new java.awt.Color(0, 0, 0));
-        crearusuarioButton2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        crearusuarioButton2.setForeground(new java.awt.Color(255, 255, 255));
-        crearusuarioButton2.setText("CREAR USUARIO");
-        crearusuarioButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        crearusuarioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearusuarioButton2ActionPerformed(evt);
             }
         });
 
@@ -91,9 +79,7 @@ public class AdminUI extends javax.swing.JFrame {
                         .addGap(70, 70, 70)
                         .addComponent(mainTitleLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(crearusuarioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(123, 123, 123)
+                        .addGap(349, 349, 349)
                         .addComponent(usuarioLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -111,14 +97,9 @@ public class AdminUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(mainTitleLabel)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(usuarioLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(crearusuarioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
+                .addComponent(usuarioLabel)
+                .addGap(35, 35, 35)
                 .addComponent(listadeusuariosButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(listadedependienteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,12 +115,6 @@ public class AdminUI extends javax.swing.JFrame {
         ListadedependenciasUI listadependencia=new ListadedependenciasUI();
         listadependencia.setVisible(true);
     }//GEN-LAST:event_listadedependienteButton1ActionPerformed
-
-    private void crearusuarioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearusuarioButton2ActionPerformed
-       CrearusuarioUI  crear=new CrearusuarioUI();
-       crear.setVisible(true);
-       
-    }//GEN-LAST:event_crearusuarioButton2ActionPerformed
 
     private void listadeusuariosButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadeusuariosButton3ActionPerformed
       
@@ -262,7 +237,6 @@ public class AdminUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton crearusuarioButton2;
     private javax.swing.JButton jButton1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton listadedependienteButton1;

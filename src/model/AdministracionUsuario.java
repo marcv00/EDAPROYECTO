@@ -118,8 +118,37 @@ public class AdministracionUsuario {
        }
    }
 
-    
+    public int NDep()
+   {
+       int cant = 0;
    
+       Usuario ptr = this.U;
+       while (ptr != null)
+       {   
+           cant++;
+           ptr = ptr.getSgte();
+       }
+       return cant;
+
+   }
    
+   public Usuario ObtenerUsuario(int ubicacion)
+   {
+       int i = 0;
+       Usuario ptr = this.U;
+       if(!estaVacia())
+       {
+        while (i!=ubicacion)
+        {
+           ptr = ptr.getSgte();
+           i++;
+        }
+           return ptr;
+       }
+        else
+       {
+           return null;
+       }
+   }
    
 }

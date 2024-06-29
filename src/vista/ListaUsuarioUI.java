@@ -6,10 +6,11 @@ import javax.swing.table.DefaultTableModel;
 import model.*;
 
 
+
 public class ListaUsuarioUI extends javax.swing.JFrame {
         
         private DefaultTableModel modelo;
-        public static Usuario nuevo;
+        public static AdministracionUsuario Interesados;
        
         
         public ListaUsuarioUI() {
@@ -20,7 +21,8 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 modelo.addColumn("Nombre");
                 modelo.addColumn("Correo");
                 this.jTable1.setModel(modelo);
-                nuevo = new Usuario();
+                Interesados = new AdministracionUsuario();
+                CargarTabla();
                 
         }
 
@@ -89,6 +91,16 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         modificar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        Mostrar = new javax.swing.JButton();
 
         jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jFrame1.setResizable(false);
@@ -514,6 +526,11 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         Usuario.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
@@ -540,46 +557,82 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Agregar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton1.setText("ID");
+
+        jRadioButton2.setText("Contraseña");
+
+        jRadioButton3.setText("Nombre");
+
+        jRadioButton4.setText("Correo");
+
+        Mostrar.setText("Mostrar");
+        Mostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MostrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(6, 6, 6))
+                    .addComponent(jSeparator2)
+                    .addComponent(jSeparator1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jRadioButton1)
+                                        .addComponent(jRadioButton4)
+                                        .addComponent(jButton3))
+                                    .addGap(17, 17, 17))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jRadioButton2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jRadioButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addGap(6, 6, 6))
-                            .addComponent(jSeparator2)
-                            .addComponent(jSeparator1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(Usuario)
-                                .addGap(29, 29, 29)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(modificar)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 202, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addGap(9, 9, 9))))
+                                .addComponent(eliminar))
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(183, 183, 183)
-                                .addComponent(modificar)
-                                .addGap(43, 43, 43)
-                                .addComponent(eliminar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(Usuario)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Mostrar))
+                        .addGap(0, 362, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -598,15 +651,37 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                     .addComponent(Usuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(eliminar)
-                    .addComponent(modificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Mostrar)
+                        .addGap(0, 32, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton2)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioButton3))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton4)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(modificar)
+                            .addComponent(eliminar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
+                .addContainerGap())
         );
 
         pack();
@@ -618,10 +693,13 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
 
         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             String ID = this.jTextField1.getText();
-            nuevo = CrearusuarioUI.Interesado.buscarID(ID);
+            Usuario nuevo = Interesados.buscarID(ID);
             if(nuevo.getID().equalsIgnoreCase(ID))
             {
-                CargarTabla(nuevo);
+                limpiar();
+                modelo.addRow(new Object[] {nuevo.getID(),nuevo.getContraseña(),nuevo.getNombre(),nuevo.getCorreo()});
+                limpiartexto();
+                
             }
             else
             {
@@ -667,14 +745,16 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        AdminUI admin = new AdminUI();
+        admin.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         String ID = this.jTextField1.getText();
-        nuevo = CrearusuarioUI.Interesado.buscarID(ID);
+        Usuario nuevo = Interesados.buscarID(ID);
         if(this.jTable1.getRowCount()>0)
         {
-            CrearusuarioUI.Interesado.eliminar(nuevo.getID());
+            Interesados.eliminar(nuevo.getID());
             JOptionPane.showMessageDialog(this, "Usuario Eliminado");
         }
         else
@@ -682,6 +762,43 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se selecciono un usuario");
         } 
     }//GEN-LAST:event_eliminarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String ID = this.jTextField5.getText();
+        String contraseña = this.jTextField6.getText();
+        String nombre = this.jTextField7.getText();
+        String correo = this.jTextField8.getText();
+        if(Interesados.buscarUsuario(ID, contraseña).equalsIgnoreCase(ID))
+        {
+            JOptionPane.showMessageDialog(this, "Usuario ya registrado ");
+        }
+        else
+        {
+            Interesados.insertar(ID, contraseña, nombre, correo);
+            Agregar();
+            limpiartexto();
+            JOptionPane.showMessageDialog(this, "Registro exitoso ");
+            
+                
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+        Usuario nuevo = Interesados.ObtenerUsuario(fila);
+        jTextField5.setText(nuevo.getID());
+        jTextField6.setText(nuevo.getContraseña());
+        jTextField7.setText(nuevo.getNombre());
+        jTextField8.setText(nuevo.getCorreo());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        CargarTabla();
+    }//GEN-LAST:event_MostrarActionPerformed
 
         
         public static void main(String args[]) {
@@ -717,7 +834,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 });
         }
         
-        public void CargarTabla(Usuario aux)
+        public void CargarTabla()
         {
             int filas = this.jTable1.getRowCount();
             for (int i =0;i<filas;i++)
@@ -725,20 +842,57 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 modelo.removeRow(0);
             }
             String datos[] = new String[4];
-            datos[0] = nuevo.getID();
-            datos[1] = nuevo.getContraseña();
-            datos[2] = nuevo.getNombre();
-            datos[3] = nuevo.getCorreo();
-            
-            modelo.addRow(datos);
-                 
+            for(int i = 0;i<Interesados.NDep();i++)
+            {
+                Usuario encontrado = Interesados.ObtenerUsuario(i);
+                datos[0] = encontrado.getID();
+                datos[1] = encontrado.getContraseña();
+                datos[2] = encontrado.getNombre();
+                datos[3] = encontrado.getCorreo();
+                modelo.addRow(datos);
+            }    
+        }
+        public void Agregar()
+        {
+            modelo.addRow(new Object[]{
+                jTextField5.getText(),jTextField6.getText(),jTextField7.getText(),jTextField8.getText()});
+        }
+    
+        public void modificar()
+        {
+            int fila = jTable1.getSelectedRow();
+            modelo.setValueAt(jTextField1.getText(), fila, 0);
+        }
+    
+        public void eliminar()
+        {
+            int fila = jTable1.getSelectedRow();
+            modelo.removeRow(fila);
+        }
+        public void limpiar()
+        {
+            int filas = jTable1.getRowCount();
+            for (int i=0;i<filas;i++)
+            {
+                modelo.removeRow(0);
+            }
+        }
+        public void limpiartexto()
+        {
+            jTextField1.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+            jTextField7.setText("");
+            jTextField8.setText("");
         }
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Mostrar;
     private javax.swing.JLabel Usuario;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -774,6 +928,10 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -794,6 +952,10 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     private javax.swing.JButton modificar;
     // End of variables declaration//GEN-END:variables
 }

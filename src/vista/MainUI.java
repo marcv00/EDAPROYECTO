@@ -223,7 +223,7 @@ public class MainUI extends javax.swing.JFrame{
                 }
                 else if (ID.substring(0,1).equalsIgnoreCase("I"))
                 {
-                    nuevo = CrearusuarioUI.Interesado.buscarUsuario(ID, contraseña);
+                    nuevo = ListaUsuarioUI.Interesados.buscarUsuario(ID, contraseña);
                     System.out.println(nuevo);
                     if(nuevo.equalsIgnoreCase(ID))
                     {
