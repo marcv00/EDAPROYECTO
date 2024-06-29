@@ -26,6 +26,19 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 
         }
 
+    public ListaUsuarioUI(AdministracionUsuario Interesados) {
+        initComponents();
+        this.Interesados = Interesados;
+        modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
+        modelo.addColumn("Contraseña");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Correo");
+        this.jTable1.setModel(modelo);
+        CargarTabla();
+    }
+        
+
         
         @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -885,6 +898,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             jTextField7.setText("");
             jTextField8.setText("");
         }
+        
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Mostrar;

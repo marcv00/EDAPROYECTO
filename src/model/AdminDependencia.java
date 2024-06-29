@@ -10,6 +10,7 @@ package model;
  * @author KEVIN
  */
 public class AdminDependencia {
+    
     private Dependencia U;
             
    public AdminDependencia()
@@ -124,7 +125,7 @@ public class AdminDependencia {
         }
            return ptr.getNombre();
        }
-        else
+       else
        {
            return "-1";
        }
