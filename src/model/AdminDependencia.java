@@ -83,7 +83,8 @@ public class AdminDependencia {
            prev = ptr;
            ptr = ptr.getSgte();  
        }
-       if (ptr != null && !ptr.getNombre().equalsIgnoreCase(nombre))
+       System.out.println(ptr.getNombre());
+       if (ptr != null && ptr.getNombre().equalsIgnoreCase(nombre))
        {
            if (prev == null) //eliminando al primero de la lista
            {
@@ -91,7 +92,7 @@ public class AdminDependencia {
            }
            else
            {   
-            prev.setSgte(ptr.getSgte());
+                prev.setSgte(ptr.getSgte());
            }
        }
    }
@@ -126,6 +127,25 @@ public class AdminDependencia {
         else
        {
            return "-1";
+       }
+   }
+   
+   public String buscarNombre(String nombre)
+   {
+       Dependencia ptr = this.U;
+       while (ptr != null && !ptr.getNombre().equalsIgnoreCase(nombre))
+       {
+           ptr = ptr.getSgte();
+       }
+       if (ptr == null)
+       {
+           return "-1";
+       }
+       else
+       {
+          
+           return ptr.getNombre();
+           
        }
    }
    

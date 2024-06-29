@@ -13,9 +13,12 @@ public class Demo {
     
     public static void main(String[] args) {
         AdminDependencia nuevo = new AdminDependencia();
+        if(nuevo.estaVacia())
+        {
+            nuevo.insertar("pepe");
+            nuevo.insertar("jose");
+        }
         
-        nuevo.insertar("pepe");
-        nuevo.insertar("jose");
         
         System.out.println(nuevo.NDep());
         String[] datos = new String[nuevo.NDep()];
@@ -24,5 +27,10 @@ public class Demo {
             System.out.println(nuevo.ObtenerDepedencias(i));
         }
         
+        nuevo.eliminar("jose");
+        for(int i = 0; i<nuevo.NDep();i++)
+        {
+            System.out.println(nuevo.ObtenerDepedencias(i));
+        }
     }
 }

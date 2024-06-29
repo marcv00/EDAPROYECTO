@@ -87,7 +87,7 @@ public class AdministracionUsuario {
            prev = ptr;
            ptr = ptr.getSgte();  
        }
-       if (ptr != null && !ptr.getID().equalsIgnoreCase(ID))
+       if (ptr != null && ptr.getID().equalsIgnoreCase(ID))
        {
            if (prev == null) //eliminando al primero de la lista
            {

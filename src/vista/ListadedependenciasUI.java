@@ -8,7 +8,7 @@ package vista;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.*;
-import static vista.ListaUsuarioUI.nuevo;
+
 
 /**
  *
@@ -17,7 +17,9 @@ import static vista.ListaUsuarioUI.nuevo;
 public class ListadedependenciasUI extends javax.swing.JFrame {
     
     private DefaultTableModel modelo;
-    private AdminDependencia Dependencia;
+    private AdminDependencia Dependencias;
+    private String cambio;
+    
     
     
     public ListadedependenciasUI() {
@@ -25,6 +27,7 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         this.jTable1.setModel(modelo);
+        Dependencias = new AdminDependencia();
         CargarTabla();
         
         
@@ -47,6 +50,7 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +100,13 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre de la dependencia:");
 
+        jButton4.setText("Atras");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,17 +120,19 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jButton1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton3))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton4))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,8 +151,10 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2)
-                            .addComponent(jButton3))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                            .addComponent(jButton3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                        .addComponent(jButton4)))
+                .addContainerGap())
         );
 
         pack();
@@ -148,37 +163,73 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         String nombre = jTextField1.getText();
-        Dependencia.insertar(nombre);
-        JOptionPane.showMessageDialog(this, "Registro correcto");
-        Agregar();
         
+        if(Dependencias.buscarNombre(nombre).equalsIgnoreCase(nombre))
+        {    
+            JOptionPane.showMessageDialog(this, "Dependencia ya registrada");
+        }
+        else 
+        {
+            Dependencias.insertar(nombre);
+            JOptionPane.showMessageDialog(this, "Registro correcto");
+            Agregar();
+            jTextField1.setText("");
+
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        
+        int fila = jTable1.getSelectedRow();
+        String nuevo = Dependencias.ObtenerDepedencias(fila);
+        cambio = nuevo;
+        jTextField1.setText(nuevo);
         
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int fila = jTable1.getSelectedRow();
-        String nuevo = Dependencia.ObtenerDepedencias(fila);
-        Dependencia otro = Dependencia.buscarDependencia(nuevo);
-        String cambio = jTextField1.getSelectedText();
-        otro.setNombre(cambio);
-        modificar();
+        Dependencias.mostrar();System.out.println(cambio);
+        Dependencia otro = Dependencias.buscarDependencia(cambio);
+        String cambio1 = jTextField1.getText();
+        String comparar = Dependencias.buscarNombre(cambio1);
+        if(comparar.equalsIgnoreCase(cambio1))
+        {
+            JOptionPane.showMessageDialog(this, "Dedendencia ya existe");
+        }
+        else
+        {
+            otro.setNombre(cambio1);
+            modificar();
+            jTextField1.setText("");
+
+        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         int fila = jTable1.getSelectedRow();
-        String nuevo = Dependencia.ObtenerDepedencias(fila);
-        Dependencia.eliminar(nuevo);
-        eliminar();
+        String nuevo = Dependencias.ObtenerDepedencias(fila);
+        if(!Dependencias.buscarNombre(nuevo).equalsIgnoreCase(nuevo))
+        {
+            JOptionPane.showMessageDialog(this, "No se encontro la dependencia");
+        }
+        else
+        {
+            Dependencias.eliminar(nuevo);
+            jTextField1.setText("");
+            eliminar();
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        AdminUI ventana = new AdminUI();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,9 +253,9 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
             }
             String[] dato = new String[1];
             
-            for(int i = 0;i<Dependencia.NDep();i++)
+            for(int i = 0;i<Dependencias.NDep();i++)
             {
-                dato[0]= Dependencia.ObtenerDepedencias(i);
+                dato[0]= Dependencias.ObtenerDepedencias(i);
                 modelo.addRow(dato);
             }
             
@@ -231,6 +282,7 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
