@@ -44,8 +44,19 @@ public class ModificarUsu extends javax.swing.JFrame {
         jRadioButton1.setText("ID");
 
         jRadioButton2.setText("Contraseña");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("MODIFICAR USUARIO");
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         jRadioButton3.setText("Nombre");
 
@@ -142,6 +153,14 @@ public class ModificarUsu extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "Modificacion exitosa");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
