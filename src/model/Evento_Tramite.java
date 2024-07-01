@@ -15,7 +15,7 @@ public class Evento_Tramite {
     protected Evento_Tramite sgte;
     protected Dependencia punto;
     protected String horain, horafin;
-    protected Usuario empleado;
+    protected Administrador empleado;
 
     public Evento_Tramite(Expediente exp, Dependencia punto, String horain, String horafin) {
         this.exp = exp;
@@ -50,11 +50,11 @@ public class Evento_Tramite {
         this.punto = punto;
     }
 
-    public Usuario getEmpleado() {
+    public Administrador getEmpleado() {
         return empleado;
     }
 
-    public void setEmpleado(Usuario empleado) {
+    public void setEmpleado(Administrador empleado) {
         this.empleado = empleado;
     }
 

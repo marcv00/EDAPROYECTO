@@ -16,7 +16,7 @@ public class MainUI extends javax.swing.JFrame{
     
         public MainUI() {
                 initComponents();
-                boss = new Administrador("A202234","bosses");
+                boss = new Administrador("A202234","bosses","" ,"");
         }
         
         /**
@@ -30,7 +30,6 @@ public class MainUI extends javax.swing.JFrame{
 
         jPanel1 = new javax.swing.JPanel();
         mainTitleLabel = new javax.swing.JLabel();
-        mainLogoLabel = new javax.swing.JLabel();
         nombreUsuarioTextField = new javax.swing.JTextField();
         usuarioLabel = new javax.swing.JLabel();
         ingresarButton = new javax.swing.JButton();
@@ -40,7 +39,6 @@ public class MainUI extends javax.swing.JFrame{
         segTramiteButton = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         infoLabel = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -60,8 +58,6 @@ public class MainUI extends javax.swing.JFrame{
         mainTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         mainTitleLabel.setText("SISTEMA DE GESTIÓN DE TRÁMITES DOCUMENTARIOS");
         mainTitleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        mainLogoLabel.setIconTextGap(0);
 
         nombreUsuarioTextField.setToolTipText("");
         nombreUsuarioTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -107,17 +103,6 @@ public class MainUI extends javax.swing.JFrame{
         infoLabel.setForeground(new java.awt.Color(0, 102, 255));
         infoLabel.setText("Contacto y/o Soporte: ulsystemsupport@ulima.edu.pe");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,28 +116,20 @@ public class MainUI extends javax.swing.JFrame{
                             .addComponent(jSeparator1)
                             .addComponent(segTramiteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mainTitleLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(97, 97, 97)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(usuarioLabel)
-                                                    .addComponent(contrasenaLabel))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(nombreUsuarioTextField)
-                                                    .addComponent(contrasenaUsuarioPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(ingresarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(178, 178, 178)
-                                .addComponent(mainLogoLabel)))
+                            .addComponent(mainTitleLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(97, 97, 97)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(usuarioLabel)
+                                        .addComponent(contrasenaLabel))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(nombreUsuarioTextField)
+                                        .addComponent(contrasenaUsuarioPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ingresarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 51, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -163,9 +140,7 @@ public class MainUI extends javax.swing.JFrame{
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(mainLogoLabel)
-                .addGap(26, 26, 26)
+                .addGap(110, 110, 110)
                 .addComponent(mainTitleLabel)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -173,17 +148,12 @@ public class MainUI extends javax.swing.JFrame{
                     .addComponent(usuarioLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contrasenaLabel)
-                            .addComponent(contrasenaUsuarioPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addComponent(ingresarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)))
+                    .addComponent(contrasenaLabel)
+                    .addComponent(contrasenaUsuarioPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(ingresarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(segTramiteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -294,10 +264,8 @@ public class MainUI extends javax.swing.JFrame{
     private javax.swing.JLabel infoLabel;
     private javax.swing.JButton ingresarButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel mainLogoLabel;
     private javax.swing.JLabel mainTitleLabel;
     private javax.swing.JTextField nombreUsuarioTextField;
     private javax.swing.JButton segTramiteButton;

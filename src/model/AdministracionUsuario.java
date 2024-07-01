@@ -11,7 +11,7 @@ package model;
  */
 public class AdministracionUsuario {
     
-   private Usuario U;
+   private Administrador U;
             
    public AdministracionUsuario()
    {
@@ -27,7 +27,7 @@ public class AdministracionUsuario {
    
    public void mostrar()
    {
-       Usuario ptr = this.U;
+       Administrador ptr = this.U;
        while (ptr !=null)
        {
            System.out.print( ptr.getID() + "\n"+
@@ -41,14 +41,14 @@ public class AdministracionUsuario {
    
    public void insertar(String ID, String contraseña, String nombre, String correo)
    {
-       Usuario nuevo = new Usuario(ID, contraseña, nombre, correo);
+       Administrador nuevo = new Administrador(ID, contraseña, nombre, correo);
        if(estaVacia())
        {
            this.U = nuevo;
        }
        else
        {
-           Usuario ptr = this.U;
+           Administrador ptr = this.U;
            while (ptr.getSgte() != null)
            {
                ptr = ptr.getSgte();
@@ -61,7 +61,7 @@ public class AdministracionUsuario {
    
    public String buscarUsuario(String ID, String contraseña)
    {
-       Usuario ptr = this.U;
+       Administrador ptr = this.U;
        while (ptr != null && !ptr.getID().equalsIgnoreCase(ID) && !ptr.getContraseña().equalsIgnoreCase(contraseña))
        {
            ptr = ptr.getSgte();
@@ -80,8 +80,8 @@ public class AdministracionUsuario {
    
    public void eliminar(String ID)
    {
-       Usuario ptr = this.U;
-       Usuario prev = null;
+       Administrador ptr = this.U;
+       Administrador prev = null;
        while (ptr != null && !ptr.getID().equalsIgnoreCase(ID))
        {
            prev = ptr;
@@ -100,9 +100,9 @@ public class AdministracionUsuario {
        }
    }
    
-   public Usuario buscarID(String ID)
+   public Administrador buscarID(String ID)
    {
-       Usuario ptr = this.U;
+       Administrador ptr = this.U;
        while (ptr != null && !ptr.getID().equalsIgnoreCase(ID))
        {
            ptr = ptr.getSgte();
@@ -122,7 +122,7 @@ public class AdministracionUsuario {
    {
        int cant = 0;
    
-       Usuario ptr = this.U;
+       Administrador ptr = this.U;
        while (ptr != null)
        {   
            cant++;
@@ -132,10 +132,10 @@ public class AdministracionUsuario {
 
    }
    
-   public Usuario ObtenerUsuario(int ubicacion)
+   public Administrador ObtenerUsuario(int ubicacion)
    {
        int i = 0;
-       Usuario ptr = this.U;
+       Administrador ptr = this.U;
        if(!estaVacia())
        {
         while (i!=ubicacion)
