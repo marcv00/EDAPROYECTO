@@ -1,41 +1,83 @@
 
 package vista;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.*;
 
+// Imports necesarios para lectura de archivo
+import helpers.Lector;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 
 public class ListaUsuarioUI extends javax.swing.JFrame {
         
-        private DefaultTableModel modelo;
-        public static AdministracionUsuario Interesados;
-       
-        
-        public ListaUsuarioUI() {
-                initComponents();
-                modelo = new DefaultTableModel();
-                modelo.addColumn("ID");
-                modelo.addColumn("Contraseña");
-                modelo.addColumn("Nombre");
-                modelo.addColumn("Correo");
-                this.jTable1.setModel(modelo);
-                Interesados = new AdministracionUsuario();
-                CargarTabla();
-                
-        }
+    private DefaultTableModel modelo;
+    public static AdministracionUsuario Interesados;
 
+
+    public ListaUsuarioUI() {
+        initComponents();
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("ID");
+        modelo.addColumn("Contraseña");
+        modelo.addColumn("Correo");
+        this.jTable1.setModel(modelo);
+        Interesados = new AdministracionUsuario();
+        //CargarTabla();
+        cargarTablaDesdeCSV();
+
+    }
+    
+    // Podria ya no ser necesario este contructor porque se leera de archivo.
+    // No es necesario pasar cosas para almecanamiento de datos usados en ventanas anteriores.
     public ListaUsuarioUI(AdministracionUsuario Interesados) {
         initComponents();
         this.Interesados = Interesados;
         modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
         modelo.addColumn("ID");
         modelo.addColumn("Contraseña");
-        modelo.addColumn("Nombre");
         modelo.addColumn("Correo");
         this.jTable1.setModel(modelo);
         CargarTabla();
+        //cargarTablaDesdeCSV();
+    }
+    
+    public void cargarTablaDesdeCSV() {
+        String filePath = "src/datos/interesados.csv";
+        BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
+                                    // Cada br.readLine() leera la linea siguiente a la almacenada en br
+        
+        try {
+            br = new BufferedReader(new FileReader(filePath));
+            String line;
+            boolean firstLine = true; // Para saltar la primera línea (encabezados)
+            
+            while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Saltar la primera línea (encabezados)
+                }
+                
+                String[] datos = line.split(";");
+                if (datos.length == 4) {
+                    modelo.addRow(datos);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+        } finally { // Se ejecuta independientemente de si se produjo una excepción durante la ejecución del código en el bloque try
+            if (br != null) {
+                try {
+                    br.close(); // Cerrar el BufferedReader para liberar recursos usados en la lectura
+                } catch (IOException e) {
+                    e.printStackTrace(); // Manejo de errores al cerrar el archivo
+                }
+            }
+        }
     }
         
 
@@ -93,22 +135,22 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jLabel30 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        idBusquedaTextField = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        buscarPorIdButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         Usuario = new javax.swing.JLabel();
-        modificar = new javax.swing.JButton();
-        eliminar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        modificarBtn = new javax.swing.JButton();
+        eliminarBtn = new javax.swing.JButton();
+        atrasBtn = new javax.swing.JButton();
+        agregarBtn = new javax.swing.JButton();
+        idTextField = new javax.swing.JTextField();
+        contraseñaTextField = new javax.swing.JTextField();
+        nombreTextField = new javax.swing.JTextField();
+        correoTextField = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -513,18 +555,18 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         jLabel1.setText("Lista de usuario");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextField1.setToolTipText("");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        idBusquedaTextField.setToolTipText("");
+        idBusquedaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                idBusquedaTextFieldActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Buscar");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buscarPorIdButton.setText("Buscar");
+        buscarPorIdButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        buscarPorIdButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buscarPorIdButtonActionPerformed(evt);
             }
         });
 
@@ -547,33 +589,33 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         Usuario.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
-        Usuario.setText("Usuario");
+        Usuario.setText("Busca un usuario por ID:");
 
-        modificar.setText("Modificar");
-        modificar.addActionListener(new java.awt.event.ActionListener() {
+        modificarBtn.setText("Modificar");
+        modificarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarActionPerformed(evt);
+                modificarBtnActionPerformed(evt);
             }
         });
 
-        eliminar.setText("Eliminar");
-        eliminar.addActionListener(new java.awt.event.ActionListener() {
+        eliminarBtn.setText("Eliminar");
+        eliminarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarActionPerformed(evt);
+                eliminarBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Atras");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        atrasBtn.setText("Atras");
+        atrasBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                atrasBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Agregar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        agregarBtn.setText("Agregar");
+        agregarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                agregarBtnActionPerformed(evt);
             }
         });
 
@@ -615,7 +657,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jRadioButton1)
                                         .addComponent(jRadioButton4)
-                                        .addComponent(jButton3))
+                                        .addComponent(agregarBtn))
                                     .addGap(17, 17, 17))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jRadioButton2)
@@ -625,27 +667,27 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(modificar)
+                                .addComponent(modificarBtn)
                                 .addGap(18, 18, 18)
-                                .addComponent(eliminar))
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(eliminarBtn))
+                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(correoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(atrasBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Usuario)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(idBusquedaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(buscarPorIdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Mostrar))
-                        .addGap(0, 362, Short.MAX_VALUE)))
+                        .addGap(0, 415, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -659,8 +701,8 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(idBusquedaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarPorIdButton)
                     .addComponent(Usuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -673,54 +715,73 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                         .addGap(0, 32, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton2)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButton3))
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton4)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(correoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(modificar)
-                            .addComponent(eliminar))
+                            .addComponent(agregarBtn)
+                            .addComponent(modificarBtn)
+                            .addComponent(eliminarBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(atrasBtn)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        private void idBusquedaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idBusquedaTextFieldActionPerformed
                
-        }//GEN-LAST:event_jTextField1ActionPerformed
+        }//GEN-LAST:event_idBusquedaTextFieldActionPerformed
 
-        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            String ID = this.jTextField1.getText();
-            Usuario nuevo = Interesados.buscarID(ID);
-            if(nuevo.getID().equalsIgnoreCase(ID))
-            {
-                limpiar();
-                modelo.addRow(new Object[] {nuevo.getID(),nuevo.getContraseña(),nuevo.getNombre(),nuevo.getCorreo()});
-                limpiartexto();
-                
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(this, "No se encontro el usuario");
-            }
-        }//GEN-LAST:event_jButton1ActionPerformed
+        private void buscarPorIdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPorIdButtonActionPerformed
+            String ID = this.idBusquedaTextField.getText().trim(); // Obtener el ID y eliminar espacios en blanco al inicio y fin
 
-    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+            if (ID.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese un ID a buscar", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+                return; // Salir del método si el campo está vacío
+            }
+
+            try {
+                // Ruta del archivo CSV
+                String filePath = "src/datos/interesados.csv";
+
+                // Buscar la fila por el ID en el archivo CSV
+                String[] datosEncontrados = Lector.retornarFilaPorValorEnColumna(filePath, "id", ID);
+
+                if (datosEncontrados.length > 0) {
+                    // Limpiar la tabla antes de agregar la nueva fila
+                    limpiar(); // Suponiendo que limpiarTabla() es un método que borra todas las filas del modelo
+
+                    // Agregar los datos encontrados a la tabla
+                    modelo.addRow(new Object[] { datosEncontrados[0], datosEncontrados[1], datosEncontrados[2], datosEncontrados[3] });
+
+                    // Limpiar los campos de texto de búsqueda
+                    limpiartexto(); // Suponiendo que limpiarCamposBusqueda() limpia los campos de texto de búsqueda
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se encontró el usuario con ID: " + ID, "Usuario no encontrado", JOptionPane.WARNING_MESSAGE);
+                }
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error al buscar usuario en el archivo CSV", "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace(); // Opcional: Imprimir el error en consola para depuración
+            }
+        }//GEN-LAST:event_buscarPorIdButtonActionPerformed
+
+    private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
         if(this.jTable1.getRowCount()>0)
         {
             ModificarUsu Modificar = new ModificarUsu();
@@ -730,7 +791,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "No se selecciono un usuario");
         }
-    }//GEN-LAST:event_modificarActionPerformed
+    }//GEN-LAST:event_modificarBtnActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
       
@@ -756,157 +817,254 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void atrasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasBtnActionPerformed
         // TODO add your handling code here:
         AdminUI admin = new AdminUI();
         admin.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_atrasBtnActionPerformed
 
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        String ID = this.jTextField1.getText();
-        Usuario nuevo = Interesados.buscarID(ID);
-        if(this.jTable1.getRowCount()>0)
-        {
-            Interesados.eliminar(nuevo.getID());
-            JOptionPane.showMessageDialog(this, "Usuario Eliminado");
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "No se selecciono un usuario");
-        } 
-    }//GEN-LAST:event_eliminarActionPerformed
+    private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
+//        String ID = this.jTextField1.getText();
+//        Usuario nuevo = Interesados.buscarID(ID);
+//        if(this.jTable1.getRowCount()>0)
+//        {
+//            Interesados.eliminar(nuevo.getID());
+//            JOptionPane.showMessageDialog(this, "Usuario Eliminado");
+//        }
+//        else
+//        {
+//            JOptionPane.showMessageDialog(this, "No se selecciono un usuario");
+//        } 
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        String ID = this.jTextField5.getText();
-        String contraseña = this.jTextField6.getText();
-        String nombre = this.jTextField7.getText();
-        String correo = this.jTextField8.getText();
-        if(Interesados.buscarUsuario(ID, contraseña).equalsIgnoreCase(ID))
-        {
-            JOptionPane.showMessageDialog(this, "Usuario ya registrado ");
+          // Funcionalidad con CSV
+          // Ruta del archivo CSV
+            String filePath = "src/datos/interesados.csv";
+
+            try {
+                // Verificar si hay una fila seleccionada en la tabla
+                int fila = jTable1.getSelectedRow();
+                if (fila != -1) {
+                    // Obtener el ID de la fila seleccionada
+                    String id = (String) modelo.getValueAt(fila, 1);
+
+                    // Confirmar si se desea eliminar el usuario
+                    int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar este usuario?", "Confirmar Eliminación", JOptionPane.OK_CANCEL_OPTION);
+                    if (opcion == JOptionPane.OK_OPTION) {
+                        // Eliminar el registro del archivo CSV
+                        Lector.eliminarRegistroPorValorEnColumna(filePath,"id", id);
+
+                        // Eliminar la fila de la tabla
+                        modelo.removeRow(fila);
+                        limpiartexto();
+
+                        JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Eliminación cancelada");
+                    }
+                } else {
+                    // Obtener el ID del campo de texto
+                    String id = this.idTextField.getText().trim();
+
+                    if (!id.isEmpty()) {
+                        // Confirmar si se desea eliminar el usuario
+                        int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar este usuario?", "Confirmar Eliminación", JOptionPane.OK_CANCEL_OPTION);
+                        if (opcion == JOptionPane.OK_OPTION) {
+                            // Eliminar el registro del archivo CSV
+                            Lector.eliminarRegistroPorValorEnColumna(filePath, "id", id);
+
+                            // Eliminar la fila correspondiente en la tabla
+                            for (int i = 0; i < modelo.getRowCount(); i++) {
+                                if (modelo.getValueAt(i, 1).equals(id)) {
+                                    modelo.removeRow(i);
+                                    break;
+                                }
+                            }
+
+                            JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente");
+                            limpiartexto();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Eliminación cancelada");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se seleccionó un usuario y el campo de ID está vacío.", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al eliminar el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_eliminarBtnActionPerformed
+
+    private void agregarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBtnActionPerformed
+        // Obtener los datos de los campos de texto
+        String ID = this.idTextField.getText().trim();
+        String contraseña = this.contraseñaTextField.getText().trim();
+        String nombre = this.nombreTextField.getText().trim();
+        String correo = this.correoTextField.getText().trim();
+        
+            // Verificar que todos los campos estén completos
+        if (ID.isEmpty() || contraseña.isEmpty() || nombre.isEmpty() || correo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-        else
-        {
-            Interesados.insertar(ID, contraseña, nombre, correo);
-            Agregar();
+        
+//        if(Interesados.buscarUsuario(ID, contraseña).equalsIgnoreCase(ID))
+//        {
+//            JOptionPane.showMessageDialog(this, "Usuario ya registrado ");
+//        }
+//        else
+//        {
+//            Interesados.insertar(ID, contraseña, nombre, correo);
+//            Agregar();
+//            limpiartexto();
+//            JOptionPane.showMessageDialog(this, "Registro exitoso ");
+//
+//
+//        }
+
+
+        // Funcionalidad con CSV
+        
+        // Crear un arreglo de Strings con los datos
+        String[] datos = {nombre, ID, contraseña, correo};
+
+        // Ruta del archivo CSV
+        String filePath = "src/datos/interesados.csv";
+
+        try {
+            // Verificar si el registro ya existe antes de agregarlo
+            Lector.agregarNuevoRegistro(filePath, datos);
+
+            // Agregar los datos a la tabla
+            modelo.addRow(datos);
+
+            // Limpiar los campos de texto después de agregar
             limpiartexto();
-            JOptionPane.showMessageDialog(this, "Registro exitoso ");
-            
-                
+
+            // Mostrar mensaje de éxito
+            JOptionPane.showMessageDialog(this, "Registro exitoso");
+        } catch (IllegalArgumentException e) {
+            // Manejar la excepción si el ID ya existe en el archivo CSV
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de duplicado", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            // Manejar cualquier excepción que ocurra durante la escritura del archivo
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al registrar el usuario");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_agregarBtnActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int fila = jTable1.getSelectedRow();
         Usuario nuevo = Interesados.ObtenerUsuario(fila);
-        jTextField5.setText(nuevo.getID());
-        jTextField6.setText(nuevo.getContraseña());
-        jTextField7.setText(nuevo.getNombre());
-        jTextField8.setText(nuevo.getCorreo());
+        idTextField.setText(nuevo.getID());
+        contraseñaTextField.setText(nuevo.getContraseña());
+        nombreTextField.setText(nuevo.getNombre());
+        correoTextField.setText(nuevo.getCorreo());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
         // TODO add your handling code here:
         limpiar();
-        CargarTabla();
+        //CargarTabla();
+        cargarTablaDesdeCSV();
     }//GEN-LAST:event_MostrarActionPerformed
 
         
-        public static void main(String args[]) {
-                /* Set the Nimbus look and feel */
-                //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-                /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-                 */
-                try {
-                        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                                if ("Nimbus".equals(info.getName())) {
-                                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                                        break;
-                                }
-                        }
-                } catch (ClassNotFoundException ex) {
-                        java.util.logging.Logger.getLogger(ListaUsuarioUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                        java.util.logging.Logger.getLogger(ListaUsuarioUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                        java.util.logging.Logger.getLogger(ListaUsuarioUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                        java.util.logging.Logger.getLogger(ListaUsuarioUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                }
-                //</editor-fold>
-                //</editor-fold>
+    public static void main(String args[]) {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+             */
+            try {
+                    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                            if ("Nimbus".equals(info.getName())) {
+                                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                                    break;
+                            }
+                    }
+            } catch (ClassNotFoundException ex) {
+                    java.util.logging.Logger.getLogger(ListaUsuarioUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                    java.util.logging.Logger.getLogger(ListaUsuarioUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                    java.util.logging.Logger.getLogger(ListaUsuarioUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                    java.util.logging.Logger.getLogger(ListaUsuarioUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            //</editor-fold>
+            //</editor-fold>
 
-                /* Create and display the form */
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                        public void run() {
-                                new ListaUsuarioUI().setVisible(true);
-                        }
-                });
-        }
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                            new ListaUsuarioUI().setVisible(true);
+                    }
+            });
+    }
         
-        public void CargarTabla()
+    public void CargarTabla()
+    {
+        int filas = this.jTable1.getRowCount();
+        for (int i =0;i<filas;i++)
         {
-            int filas = this.jTable1.getRowCount();
-            for (int i =0;i<filas;i++)
-            {
-                modelo.removeRow(0);
-            }
-            String datos[] = new String[4];
-            for(int i = 0;i<Interesados.NDep();i++)
-            {
-                Usuario encontrado = Interesados.ObtenerUsuario(i);
-                datos[0] = encontrado.getID();
-                datos[1] = encontrado.getContraseña();
-                datos[2] = encontrado.getNombre();
-                datos[3] = encontrado.getCorreo();
-                modelo.addRow(datos);
-            }    
+            modelo.removeRow(0);
         }
-        public void Agregar()
+        String datos[] = new String[4];
+        for(int i = 0;i<Interesados.NDep();i++)
         {
-            modelo.addRow(new Object[]{
-                jTextField5.getText(),jTextField6.getText(),jTextField7.getText(),jTextField8.getText()});
-        }
-    
-        public void modificar()
+            Usuario encontrado = Interesados.ObtenerUsuario(i);
+            datos[0] = encontrado.getID();
+            datos[1] = encontrado.getContraseña();
+            datos[2] = encontrado.getNombre();
+            datos[3] = encontrado.getCorreo();
+            modelo.addRow(datos);
+        }    
+    }
+    public void Agregar()
+    {
+        modelo.addRow(new Object[]{
+            idTextField.getText(),contraseñaTextField.getText(),nombreTextField.getText(),correoTextField.getText()});
+    }
+
+    public void modificar()
+    {
+        int fila = jTable1.getSelectedRow();
+        modelo.setValueAt(idBusquedaTextField.getText(), fila, 0);
+    }
+
+    public void limpiar()
+    {
+        int filas = jTable1.getRowCount();
+        for (int i=0;i<filas;i++)
         {
-            int fila = jTable1.getSelectedRow();
-            modelo.setValueAt(jTextField1.getText(), fila, 0);
+            modelo.removeRow(0);
         }
-    
-        public void eliminar()
-        {
-            int fila = jTable1.getSelectedRow();
-            modelo.removeRow(fila);
-        }
-        public void limpiar()
-        {
-            int filas = jTable1.getRowCount();
-            for (int i=0;i<filas;i++)
-            {
-                modelo.removeRow(0);
-            }
-        }
-        public void limpiartexto()
-        {
-            jTextField1.setText("");
-            jTextField5.setText("");
-            jTextField6.setText("");
-            jTextField7.setText("");
-            jTextField8.setText("");
-        }
-        
+    }
+    public void limpiartexto()
+    {
+        idBusquedaTextField.setText("");
+        idTextField.setText("");
+        contraseñaTextField.setText("");
+        nombreTextField.setText("");
+        correoTextField.setText("");
+    }
+
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Mostrar;
     private javax.swing.JLabel Usuario;
-    private javax.swing.JButton eliminar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton agregarBtn;
+    private javax.swing.JButton atrasBtn;
+    private javax.swing.JButton buscarPorIdButton;
+    private javax.swing.JTextField contraseñaTextField;
+    private javax.swing.JTextField correoTextField;
+    private javax.swing.JButton eliminarBtn;
+    private javax.swing.JTextField idBusquedaTextField;
+    private javax.swing.JTextField idTextField;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -962,14 +1120,10 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JButton modificar;
+    private javax.swing.JButton modificarBtn;
+    private javax.swing.JTextField nombreTextField;
     // End of variables declaration//GEN-END:variables
 }

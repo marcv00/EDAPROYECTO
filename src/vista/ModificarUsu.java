@@ -134,22 +134,22 @@ public class ModificarUsu extends javax.swing.JFrame {
         if(jRadioButton1.isSelected())
         {
             String ID = jTextField2.getText();
-            ListaUsuarioUI.nuevo.setID(ID);
+            //ListaUsuarioUI.nuevo.setID(ID);
         }
         if(jRadioButton2.isSelected())
         {
             String contraseña = jTextField3.getText();
-            ListaUsuarioUI.nuevo.setContraseña(contraseña);
+            //ListaUsuarioUI.nuevo.setContraseña(contraseña);
         }
         if(jRadioButton3.isSelected())
         {
             String nombre = jTextField4.getText();
-            ListaUsuarioUI.nuevo.setNombre(nombre);
+            //ListaUsuarioUI.nuevo.setNombre(nombre);
         }
         if(jRadioButton4.isSelected())
         {
             String correo = jTextField5.getText();
-            ListaUsuarioUI.nuevo.setCorreo(correo);
+            //ListaUsuarioUI.nuevo.setCorreo(correo);
         }
         JOptionPane.showMessageDialog(this, "Modificacion exitosa");
     }//GEN-LAST:event_jButton1ActionPerformed
