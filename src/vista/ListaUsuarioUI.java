@@ -938,7 +938,8 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             // Verificar si el registro ya existe antes de agregarlo
             Lector.agregarNuevoRegistro(filePath, datos);
 
-            // Agregar los datos a la tabla
+            // Agregar los datos a la tabla y a la clase interesados
+            Interesados.insertar (datos[1],datos[2],datos[0],datos[3]);
             modelo.addRow(datos);
 
             // Limpiar los campos de texto después de agregar
