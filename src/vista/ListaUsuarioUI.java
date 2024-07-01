@@ -31,20 +31,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
 
     }
     
-    // Podria ya no ser necesario este contructor porque se leera de archivo.
-    // No es necesario pasar cosas para almecanamiento de datos usados en ventanas anteriores.
-    public ListaUsuarioUI(AdministracionUsuario Interesados) {
-        initComponents();
-        this.Interesados = Interesados;
-        modelo = new DefaultTableModel();
-        modelo.addColumn("Nombre");
-        modelo.addColumn("ID");
-        modelo.addColumn("Contraseña");
-        modelo.addColumn("Correo");
-        this.jTable1.setModel(modelo);
-        CargarTabla();
-        //cargarTablaDesdeCSV();
-    }
+ 
     
     public void cargarTablaDesdeCSV() {
         String filePath = "src/datos/interesados.csv";
