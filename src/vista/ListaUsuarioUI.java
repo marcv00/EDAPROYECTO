@@ -64,6 +64,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 
                 String[] datos = line.split(";");
                 if (datos.length == 4) {
+                    Interesados.insertar (datos[1],datos[2],datos[0],datos[3]);
                     modelo.addRow(datos);
                 }
             }
