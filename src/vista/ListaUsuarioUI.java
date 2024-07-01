@@ -34,7 +34,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
  
     
     public void cargarTablaDesdeCSV() {
-        String filePath = "src/datos/interesados.csv";
+        String filePath = "src/datos/admins.csv";
         BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
                                     // Cada br.readLine() leera la linea siguiente a la almacenada en br
         
@@ -744,7 +744,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
 
             try {
                 // Ruta del archivo CSV
-                String filePath = "src/datos/interesados.csv";
+                String filePath = "src/datos/admins.csv";
 
                 // Buscar la fila por el ID en el archivo CSV
                 String[] datosEncontrados = Lector.retornarFilaPorValorEnColumna(filePath, "id", ID);
@@ -813,11 +813,11 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
 
     private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
 //        String ID = this.jTextField1.getText();
-//        Usuario nuevo = Interesados.buscarID(ID);
+//        Administrador nuevo = Interesados.buscarID(ID);
 //        if(this.jTable1.getRowCount()>0)
 //        {
 //            Interesados.eliminar(nuevo.getID());
-//            JOptionPane.showMessageDialog(this, "Usuario Eliminado");
+//            JOptionPane.showMessageDialog(this, "Administrador Eliminado");
 //        }
 //        else
 //        {
@@ -826,7 +826,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
 
           // Funcionalidad con CSV
           // Ruta del archivo CSV
-            String filePath = "src/datos/interesados.csv";
+            String filePath = "src/datos/admins.csv";
 
             try {
                 // Verificar si hay una fila seleccionada en la tabla
@@ -900,7 +900,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         
 //        if(Interesados.buscarUsuario(ID, contraseña).equalsIgnoreCase(ID))
 //        {
-//            JOptionPane.showMessageDialog(this, "Usuario ya registrado ");
+//            JOptionPane.showMessageDialog(this, "Administrador ya registrado ");
 //        }
 //        else
 //        {
@@ -919,7 +919,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         String[] datos = {nombre, ID, contraseña, correo};
 
         // Ruta del archivo CSV
-        String filePath = "src/datos/interesados.csv";
+        String filePath = "src/datos/admins.csv";
 
         try {
             // Verificar si el registro ya existe antes de agregarlo
@@ -956,7 +956,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             // Handle case where value is null, if needed
             System.out.println("Value is null");
         }
-        Usuario nuevo = Interesados.buscarID(id_usuario_encontrado);
+        Administrador nuevo = Interesados.buscarID(id_usuario_encontrado);
         idTextField.setText(nuevo.getID());
         contraseñaTextField.setText(nuevo.getContraseña());
         nombreTextField.setText(nuevo.getNombre());
@@ -1014,7 +1014,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         String datos[] = new String[4];
         for(int i = 0;i<Interesados.NDep();i++)
         {
-            Usuario encontrado = Interesados.ObtenerUsuario(i);
+            Administrador encontrado = Interesados.ObtenerUsuario(i);
             datos[0] = encontrado.getID();
             datos[1] = encontrado.getContraseña();
             datos[2] = encontrado.getNombre();
