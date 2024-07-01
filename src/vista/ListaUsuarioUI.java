@@ -946,8 +946,17 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        int fila = jTable1.getSelectedRow();
-        Usuario nuevo = Interesados.ObtenerUsuario(fila);
+
+        Object id_usuario_encontrado_object = modelo.getValueAt(jTable1.getSelectedRow(), 1);
+        String id_usuario_encontrado = "";
+        // Check and cast the value to the appropriate type
+        if (id_usuario_encontrado_object != null) {
+            id_usuario_encontrado = id_usuario_encontrado_object.toString(); // Convert Object to String
+        } else {
+            // Handle case where value is null, if needed
+            System.out.println("Value is null");
+        }
+        Usuario nuevo = Interesados.buscarID(id_usuario_encontrado);
         idTextField.setText(nuevo.getID());
         contraseñaTextField.setText(nuevo.getContraseña());
         nombreTextField.setText(nuevo.getNombre());
