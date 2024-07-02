@@ -38,6 +38,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
                                     // Cada br.readLine() leera la linea siguiente a la almacenada en br
         
+                                    
         try {
             br = new BufferedReader(new FileReader(filePath));
             String line;
@@ -50,9 +51,10 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 }
                 
                 String[] datos = line.split(";");
-                if (datos.length == 4) {
-                    Interesados.insertar (datos[1],datos[2],datos[0],datos[3]);
-                    modelo.addRow(datos);
+                if (datos.length == 6) { // Verificar existencia de 6 columnas en admins.csv
+                    Interesados.insertar (datos[1],datos[2],datos[0],datos[5]);
+                    String[] row_a_insertar = {datos[1],datos[2],datos[0],datos[5]};
+                    modelo.addRow(row_a_insertar);
                 }
             }
         } catch (IOException e) {
