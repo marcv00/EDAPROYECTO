@@ -14,7 +14,7 @@ import java.io.BufferedReader;
 public class ListaUsuarioUI extends javax.swing.JFrame {
         
     private DefaultTableModel modelo;
-    public static AdministracionUsuario Interesados;
+    private AdministracionUsuario Interesados;
 
 
     public ListaUsuarioUI() {
@@ -53,7 +53,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 String[] datos = line.split(";");
                 if (datos.length == 6) { // Verificar existencia de 6 columnas en admins.csv
                     Interesados.insertar (datos[1],datos[2],datos[0],datos[5]);
-                    String[] row_a_insertar = {datos[1],datos[2],datos[0],datos[5]};
+                    String[] row_a_insertar = {datos[0],datos[1],datos[2],datos[5]};
                     modelo.addRow(row_a_insertar);
                 }
             }
@@ -774,8 +774,42 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
     private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
         if(this.jTable1.getRowCount()>0)
         {
-            ModificarUsu Modificar = new ModificarUsu();
-            Modificar.setVisible(true);
+            Object id_usuario_encontrado_object = modelo.getValueAt(jTable1.getSelectedRow(), 1);
+            String id_usuario_encontrado = "";
+            // Check and cast the value to the appropriate type
+            if (id_usuario_encontrado_object != null) {
+                id_usuario_encontrado = id_usuario_encontrado_object.toString(); // Convert Object to String
+            } else {
+                // Handle case where value is null, if needed
+                System.out.println("Value is null");
+            }
+            Administrador nuevo = Interesados.buscarID(id_usuario_encontrado);
+            if(jRadioButton1.isSelected())
+            {
+                String ID = idTextField.getText();
+                nuevo.setID(ID);
+                
+                //ListaUsuarioUI.nuevo.setID(ID);
+            }
+            if(jRadioButton2.isSelected())
+            {
+                String contraseña = contraseñaTextField.getText();
+                //ListaUsuarioUI.nuevo.setContraseña(contraseña);
+                nuevo.setContraseña(contraseña);
+            }
+            if(jRadioButton3.isSelected())
+            {
+                String nombre = nombreTextField.getText();
+                //ListaUsuarioUI.nuevo.setNombre(nombre);
+                nuevo.setNombre(nombre);
+            }
+            if(jRadioButton4.isSelected())
+            {
+                String correo = correoTextField.getText();
+                //ListaUsuarioUI.nuevo.setCorreo(correo);
+                nuevo.setCorreo(correo);
+            }
+            JOptionPane.showMessageDialog(this, "Modificacion exitosa");
         }
         else
         {
@@ -959,6 +993,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             System.out.println("Value is null");
         }
         Administrador nuevo = Interesados.buscarID(id_usuario_encontrado);
+        System.out.println(nuevo.getID());
         idTextField.setText(nuevo.getID());
         contraseñaTextField.setText(nuevo.getContraseña());
         nombreTextField.setText(nuevo.getNombre());

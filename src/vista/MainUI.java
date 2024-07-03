@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package vista;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import model.*;
 
@@ -12,11 +15,11 @@ import model.*;
  * @author villa
  */
 public class MainUI extends javax.swing.JFrame{
-        private Administrador boss;
+        private AdministracionUsuario Admins;
     
         public MainUI() {
                 initComponents();
-                boss = new Administrador("A202234","bosses","" ,"");
+                Admins = new AdministracionUsuario();
         }
         
         /**
@@ -37,7 +40,6 @@ public class MainUI extends javax.swing.JFrame{
         contrasenaUsuarioPasswordField = new javax.swing.JPasswordField();
         segTramiteButton = new javax.swing.JButton();
         mainTitleLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -69,7 +71,7 @@ public class MainUI extends javax.swing.JFrame{
         ingresarButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         ingresarButton.setForeground(new java.awt.Color(255, 255, 255));
         ingresarButton.setText("INGRESAR");
-        ingresarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ingresarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ingresarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingresarButtonActionPerformed(evt);
@@ -89,7 +91,7 @@ public class MainUI extends javax.swing.JFrame{
         segTramiteButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         segTramiteButton.setForeground(new java.awt.Color(255, 255, 255));
         segTramiteButton.setText("SEGUIMIENTO DE TRÁMITES");
-        segTramiteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        segTramiteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         segTramiteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 segTramiteButtonActionPerformed(evt);
@@ -101,9 +103,6 @@ public class MainUI extends javax.swing.JFrame{
         mainTitleLabel1.setText("DOCUMENTARIOS");
         mainTitleLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/universidad-de-lima-recreation-wellness-and-student-life-center-sasaki_1 (1) (1).jpg"))); // NOI18N
-        jLabel2.setText("jLabel2");
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         jLabel3.setText("Login de Administrador");
 
@@ -112,29 +111,27 @@ public class MainUI extends javax.swing.JFrame{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(mainTitleLabel)
-                    .addComponent(mainTitleLabel1)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(435, 435, 435)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator3)
+                    .addComponent(segTramiteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contrasenaLabel)
-                            .addComponent(usuarioLabel))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ingresarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nombreUsuarioTextField)
-                            .addComponent(contrasenaUsuarioPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(segTramiteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(mainTitleLabel)
+                            .addComponent(mainTitleLabel1)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(contrasenaLabel)
+                                    .addComponent(usuarioLabel))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ingresarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(nombreUsuarioTextField)
+                                    .addComponent(contrasenaUsuarioPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -163,8 +160,8 @@ public class MainUI extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(segTramiteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(segTramiteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
         );
 
         pack();
@@ -176,44 +173,55 @@ public class MainUI extends javax.swing.JFrame{
 
         private void ingresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarButtonActionPerformed
                 // TODO add your handling code here:
-                String nuevo;
-                String ID = nombreUsuarioTextField.getText();
-                String contraseña = contrasenaUsuarioPasswordField.getText();
-                if(ID.substring(0,1).equalsIgnoreCase("A"))
-                {
-                    if(boss.getID().equalsIgnoreCase(ID) && boss.getContraseña().equalsIgnoreCase(contraseña))
-                    {
-                    AdminUI VistaAdmin = new AdminUI();
-                    VistaAdmin.setVisible(true); // hide
+            String filePath = "src/datos/admins.csv";
+            BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
+                                        // Cada br.readLine() leera la linea siguiente a la almacenada en br
+
+
+            try {
+                br = new BufferedReader(new FileReader(filePath));
+                String line;
+                boolean firstLine = true; // Para saltar la primera línea (encabezados)
+
+                while ((line = br.readLine()) != null) {
+                    if (firstLine) {
+                        firstLine = false;
+                        continue; // Saltar la primera línea (encabezados)
                     }
-                    else if (!boss.getID().equalsIgnoreCase(ID) || !boss.getContraseña().equalsIgnoreCase(contraseña))
-                    {
-                        JOptionPane.showMessageDialog(this, "ID o contraseña del usuario incorrecta");
-                    }
-                    else if (!boss.getID().equalsIgnoreCase(ID) || !boss.getContraseña().equalsIgnoreCase(contraseña))
-                    {
-                        JOptionPane.showMessageDialog(this, "Usuario no registrado");
-                    }
-                }
-                else if (ID.substring(0,1).equalsIgnoreCase("I"))
-                {
-                    nuevo = ListaUsuarioUI.Interesados.buscarUsuario(ID, contraseña);
-                    System.out.println(nuevo);
-                    if(nuevo.equalsIgnoreCase(ID))
-                    {
-                        SegTramiteUI VistaInteresado = new SegTramiteUI();
-                        VistaInteresado.setVisible(true); // hide
-                    }
-                    else if (!nuevo.equalsIgnoreCase(ID) && !nuevo.equalsIgnoreCase("-1"))
-                    {
-                        JOptionPane.showMessageDialog(this, "ID o contraseña del usuario incorrecta");
-                    }
-                    else if (nuevo == "-1")
-                    {
-                        JOptionPane.showMessageDialog(this, "Usuario no registrado");
+
+                    String[] datos = line.split(";");
+                    if (datos.length == 6) { // Verificar existencia de 6 columnas en admins.csv
+                        Admins.insertar (datos[1],datos[2],datos[0],datos[5]);
+                        
+                        
                     }
                 }
-                
+            } catch (IOException e) {
+                e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+            } finally { // Se ejecuta independientemente de si se produjo una excepción durante la ejecución del código en el bloque try
+                if (br != null) {
+                    try {
+                        br.close(); // Cerrar el BufferedReader para liberar recursos usados en la lectura
+                    } catch (IOException e) {
+                        e.printStackTrace(); // Manejo de errores al cerrar el archivo
+                    }
+                }
+            }
+            String ID = nombreUsuarioTextField.getText();
+            String contraseña = contrasenaUsuarioPasswordField.getText();
+            if (Admins.buscarID(ID).getID().equalsIgnoreCase(ID) && Admins.buscarID(ID).getContraseña().equalsIgnoreCase(contraseña))
+            {
+                AdminUI admin = new AdminUI();
+                admin.setVisible(true);
+            }
+            else if (!Admins.buscarID(ID).getID().equalsIgnoreCase(ID) || !Admins.buscarID(ID).getContraseña().equalsIgnoreCase(contraseña))
+            {
+                JOptionPane.showMessageDialog(this, "Usuario y/o contraseña incorrecto");
+            }
+            else if (!Admins.buscarID(ID).getID().equalsIgnoreCase(ID) && !Admins.buscarID(ID).getContraseña().equalsIgnoreCase(contraseña))
+            {
+                JOptionPane.showMessageDialog(this, "Usuario no registrado");
+            }
                 
                 
         }//GEN-LAST:event_ingresarButtonActionPerformed
@@ -267,7 +275,6 @@ public class MainUI extends javax.swing.JFrame{
     private javax.swing.JPasswordField contrasenaUsuarioPasswordField;
     private javax.swing.JButton ingresarButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
