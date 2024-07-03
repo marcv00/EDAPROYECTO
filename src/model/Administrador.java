@@ -9,28 +9,15 @@ package model;
  *
  * @author KEVIN
  */
-public class Administrador {
+public class Administrador extends Persona{
     
-    private String ID, contraseña, nombre, correo, dependencia;
+    private String ID, contraseña, dependencia;
     private Administrador sgte;
     
-    
-
-    public Administrador() {
-        this.ID="";
-        this.contraseña="";
-        this.correo="";
-        this.nombre="";
-        this.dependencia="";
-        this.sgte = null;
-    }
-
-    
-    
     public Administrador(String ID, String contraseña, String nombre, String correo, String dependencia) {
+        super(nombre, correo);
         this.ID = ID;
         this.contraseña = contraseña;
-        this.nombre = nombre;
         this.correo = correo;
         this.dependencia = dependencia;
         this.sgte = null;

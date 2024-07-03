@@ -1,1 +1,2 @@
-expediente;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento;dependencia
+idexpediente;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento
+                                                                                

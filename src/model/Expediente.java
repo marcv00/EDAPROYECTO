@@ -11,13 +11,12 @@ package model;
  */
 public class Expediente {
     
-    private String ID, estado, asunto, docref;
+    private String ID, asunto, docref;
     private int prioridad;
-    private Administrador nuevo;
+    private Interesado nuevo;
 
-    public Expediente(String ID, String estado, int prioridad, Administrador nuevo, String asunto, String docref) {
+    public Expediente(String ID, int prioridad, Interesado nuevo, String asunto, String docref) {
         this.ID = ID;
-        this.estado = estado;
         this.prioridad = prioridad;
         this.nuevo = nuevo;
         this.asunto = asunto;
@@ -32,14 +31,6 @@ public class Expediente {
         this.ID = ID;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
     public int getPrioridad() {
         return prioridad;
     }
@@ -48,11 +39,11 @@ public class Expediente {
         this.prioridad = prioridad;
     }
 
-    public Administrador getNuevo() {
+    public Interesado getNuevo() {
         return nuevo;
     }
 
-    public void setNuevo(Administrador nuevo) {
+    public void setNuevo(Interesado nuevo) {
         this.nuevo = nuevo;
     }
 

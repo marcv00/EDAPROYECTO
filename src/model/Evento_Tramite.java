@@ -11,18 +11,13 @@ package model;
  */
 public class Evento_Tramite {
     
-    protected Expediente exp;
-    protected Evento_Tramite sgte;
-    protected Dependencia punto;
-    protected String horain, horafin;
-    protected Administrador empleado;
+    private Expediente exp;
+    private Dependencia punto;
+    private String horain, horafin;
 
-    public Evento_Tramite(Expediente exp, Dependencia punto, String horain, String horafin) {
+    public Evento_Tramite(Expediente exp, String horain, String horafin) {
         this.exp = exp;
-        this.sgte = null;
-        this.punto = punto;
         this.horain = horain;
-        this.empleado = empleado;
         this.horafin = horafin;
     }
 
@@ -34,28 +29,12 @@ public class Evento_Tramite {
         this.exp = exp;
     }
 
-    public Evento_Tramite getSgte() {
-        return sgte;
-    }
-
-    public void setSgte(Evento_Tramite sgte) {
-        this.sgte = sgte;
-    }
-
     public Dependencia getPunto() {
         return punto;
     }
 
     public void setPunto(Dependencia punto) {
         this.punto = punto;
-    }
-
-    public Administrador getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Administrador empleado) {
-        this.empleado = empleado;
     }
 
     public String getHorain() {

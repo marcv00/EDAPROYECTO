@@ -5,6 +5,9 @@
  */
 package vista;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.*;
@@ -28,7 +31,7 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         modelo.addColumn("Nombre");
         this.jTable1.setModel(modelo);
         Dependencias = new AdminDependencia();
-        CargarTabla();
+        cargarTablaDesdeCSV();
         
         
     }
@@ -244,22 +247,42 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         });
     }
     
-    public void CargarTabla()
-        {
-            int filas = this.jTable1.getRowCount();
-            for (int i =0;i<filas;i++)
-            {
-                modelo.removeRow(0);
-            }
-            String[] dato = new String[1];
+    public void cargarTablaDesdeCSV() {
+        String filePath = "src/datos/dependencias.csv";
+        BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
+                                    // Cada br.readLine() leera la linea siguiente a la almacenada en br
+        
+                                    
+        try {
+            br = new BufferedReader(new FileReader(filePath));
+            String line;
+            boolean firstLine = true; // Para saltar la primera línea (encabezados)
             
-            for(int i = 0;i<Dependencias.NDep();i++)
-            {
-                dato[0]= Dependencias.ObtenerDepedencias(i);
-                modelo.addRow(dato);
+            while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Saltar la primera línea (encabezados)
+                }
+                
+                String dato = line.trim();
+                if (!dato.isEmpty()) { // Verificar existencia de 5 columnas en admins.csv
+                    Dependencias.insertar(dato);
+                    String[] row_a_insertar = {dato};
+                    modelo.addRow(row_a_insertar);
+                }
             }
-            
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+        } finally { // Se ejecuta independientemente de si se produjo una excepción durante la ejecución del código en el bloque try
+            if (br != null) {
+                try {
+                    br.close(); // Cerrar el BufferedReader para liberar recursos usados en la lectura
+                } catch (IOException e) {
+                    e.printStackTrace(); // Manejo de errores al cerrar el archivo
+                }
+            }
         }
+    }
     
     public void Agregar()
     {
