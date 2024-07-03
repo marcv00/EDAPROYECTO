@@ -10,11 +10,15 @@ import model.*;
 public class AdminUI extends javax.swing.JFrame {
 
    
-    
+    // Para testing
     public AdminUI() {
+        initComponents();     
+    }
+    
+    // Para uso
+    public AdminUI(Administrador admin_logueado) {
         initComponents();
-        
-        
+        welcomeLabel.setText("Bienvenido/a " + admin_logueado.getNombre().split(" ")[0]);
     }
    
     // </editor-fold>
@@ -23,49 +27,50 @@ public class AdminUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
-        usuarioLabel = new javax.swing.JLabel();
-        mainTitleLabel = new javax.swing.JLabel();
-        listadedependienteButton1 = new javax.swing.JButton();
-        listadeusuariosButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        welcomeLabel = new javax.swing.JLabel();
+        listaDeDependenciasButton = new javax.swing.JButton();
+        listaDeUsuariosButton = new javax.swing.JButton();
+        salirButton = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        usuarioLabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        welcomeLabel.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        welcomeLabel.setText("Bienvenido: Admin");
+        welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        mainTitleLabel.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        mainTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        mainTitleLabel.setText("SISTEMA DE ADMINISTRACIÓN DE USUARIOS");
-        mainTitleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        listadedependienteButton1.setBackground(new java.awt.Color(0, 0, 0));
-        listadedependienteButton1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        listadedependienteButton1.setForeground(new java.awt.Color(255, 255, 255));
-        listadedependienteButton1.setText("LISTA DE DEPENDENCIAS");
-        listadedependienteButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        listadedependienteButton1.addActionListener(new java.awt.event.ActionListener() {
+        listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeDependenciasButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        listaDeDependenciasButton.setForeground(new java.awt.Color(255, 255, 255));
+        listaDeDependenciasButton.setText("LISTA DE DEPENDENCIAS");
+        listaDeDependenciasButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaDeDependenciasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listadedependienteButton1ActionPerformed(evt);
+                listaDeDependenciasButtonActionPerformed(evt);
             }
         });
 
-        listadeusuariosButton3.setBackground(new java.awt.Color(0, 0, 0));
-        listadeusuariosButton3.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        listadeusuariosButton3.setForeground(new java.awt.Color(255, 255, 255));
-        listadeusuariosButton3.setText("LISTA DE USUARIOS");
-        listadeusuariosButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        listadeusuariosButton3.addActionListener(new java.awt.event.ActionListener() {
+        listaDeUsuariosButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeUsuariosButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        listaDeUsuariosButton.setForeground(new java.awt.Color(255, 255, 255));
+        listaDeUsuariosButton.setText("LISTA DE USUARIOS");
+        listaDeUsuariosButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaDeUsuariosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listadeusuariosButton3ActionPerformed(evt);
+                listaDeUsuariosButtonActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Atras");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        salirButton.setBackground(new java.awt.Color(255, 51, 51));
+        salirButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        salirButton.setForeground(new java.awt.Color(255, 255, 255));
+        salirButton.setText("Salir");
+        salirButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                salirButtonActionPerformed(evt);
             }
         });
 
@@ -74,134 +79,56 @@ public class AdminUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(welcomeLabel)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(mainTitleLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(349, 349, 349)
-                        .addComponent(usuarioLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(listadeusuariosButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(listadedependienteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(jButton1)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(277, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(mainTitleLabel)
-                .addGap(35, 35, 35)
-                .addComponent(usuarioLabel)
-                .addGap(35, 35, 35)
-                .addComponent(listadeusuariosButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(listadedependienteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(28, 28, 28))
+                .addGap(21, 21, 21)
+                .addComponent(salirButton)
+                .addGap(74, 74, 74)
+                .addComponent(welcomeLabel)
+                .addGap(78, 78, 78)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listadedependienteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadedependienteButton1ActionPerformed
+    private void listaDeDependenciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaDeDependenciasButtonActionPerformed
         ListadedependenciasUI listadependencia=new ListadedependenciasUI();
         listadependencia.setVisible(true);
-    }//GEN-LAST:event_listadedependienteButton1ActionPerformed
+    }//GEN-LAST:event_listaDeDependenciasButtonActionPerformed
 
-    private void listadeusuariosButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadeusuariosButton3ActionPerformed
+    private void listaDeUsuariosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaDeUsuariosButtonActionPerformed
       
         ListaUsuarioUI listausuario=new ListaUsuarioUI();
         listausuario.setVisible(true);
-         
+    
+    }//GEN-LAST:event_listaDeUsuariosButtonActionPerformed
 
-
-            
-    }//GEN-LAST:event_listadeusuariosButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         // TODO add your handling code here:
-        MainUI volver = new MainUI();
-        volver.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-// Método para mostrar el menú de usuarios
-    /*private void mostrarMenuUsuarios() {
-        String[] opciones = {"Filtrar por Empleados", "Filtrar por Externos", "Filtrar por Admins", "Eliminar Usuario", "Modificar Usuario"};
-        String opcionSeleccionada = (String) JOptionPane.showInputDialog(this, "Seleccione una opción", "Gestión de Usuarios", JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+        MainUI new_main = new MainUI();
+        this.dispose();
+        new_main.setVisible(true);
+    }//GEN-LAST:event_salirButtonActionPerformed
 
-        if (opcionSeleccionada != null) {
-            switch (opcionSeleccionada) {
-                case "Filtrar por Empleados":
-                    mostrarUsuariosFiltrados("Empleado");
-                    break;
-                case "Filtrar por Externos":
-                    mostrarUsuariosFiltrados("Externo");
-                    break;
-                case "Filtrar por Admins":
-                    mostrarUsuariosFiltrados("Admin");
-                    break;
-                case "Eliminar Usuario":
-                    String nombreEliminar = JOptionPane.showInputDialog(this, "Ingrese el nombre del usuario a eliminar:");
-                    if (nombreEliminar != null && !nombreEliminar.isEmpty()) {
-                        eliminarUsuario(nombreEliminar);
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Nombre de usuario no válido.");
-                    }
-                    break;
-                case "Modificar Usuario":
-                    String nombreModificar = JOptionPane.showInputDialog(this, "Ingrese el nombre del usuario a modificar:");
-                    if (nombreModificar != null && !nombreModificar.isEmpty()) {
-                        String nuevoNombre = JOptionPane.showInputDialog(this, "Ingrese el nuevo nombre:");
-                        String nuevoTipo = JOptionPane.showInputDialog(this, "Ingrese el nuevo tipo (Empleado, Externo o Admin):");
-                        if (nuevoNombre != null && nuevoTipo != null && !nuevoNombre.isEmpty() && !nuevoTipo.isEmpty()) {
-                            modificarUsuario(nombreModificar, nuevoNombre, nuevoTipo);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Datos no válidos.");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Nombre de usuario no válido.");
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-    // Clase interna para representar usuarios
-    /*
-    private class Usuario {
-        private String nombre;
-        private String tipo;
-
-        public Usuario(String nombre, String tipo) {
-            this.nombre = nombre;
-            this.tipo = tipo;
-        }
-
-        public String getNombre() {
-            return nombre;
-        }
-
-        public void setNombre(String nombre) {
-            this.nombre = nombre;
-        }
-
-        public String getTipo() {
-            return tipo;
-        }
-
-        public void setTipo(String tipo) {
-            this.tipo = tipo;
-        }
-    }
-    */
+    /*/
     /**
      * @param args the command line arguments
      */
@@ -230,18 +157,17 @@ public class AdminUI extends javax.swing.JFrame {
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            public void run(){
                 new AdminUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton listadedependienteButton1;
-    private javax.swing.JButton listadeusuariosButton3;
-    private javax.swing.JLabel mainTitleLabel;
-    private javax.swing.JLabel usuarioLabel;
+    private javax.swing.JButton listaDeDependenciasButton;
+    private javax.swing.JButton listaDeUsuariosButton;
+    private javax.swing.JButton salirButton;
+    private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package vista;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.*;
 
@@ -16,7 +17,10 @@ import model.*;
  */
 public class MainUI extends javax.swing.JFrame{
         private AdministracionUsuario Admins;
-    
+                // Set the icon
+        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/banner_principal_vertical.jpg"));
+        
+        
         public MainUI() {
                 initComponents();
                 Admins = new AdministracionUsuario();
@@ -43,6 +47,7 @@ public class MainUI extends javax.swing.JFrame{
         jSeparator3 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -106,12 +111,16 @@ public class MainUI extends javax.swing.JFrame{
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         jLabel3.setText("Login de Administrador");
 
+        jLabel2.setIcon(icon);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(435, 435, 435)
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator3)
                     .addComponent(segTramiteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -131,8 +140,8 @@ public class MainUI extends javax.swing.JFrame{
                                     .addComponent(contrasenaUsuarioPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGap(0, 25, Short.MAX_VALUE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +170,11 @@ public class MainUI extends javax.swing.JFrame{
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(segTramiteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -190,10 +203,9 @@ public class MainUI extends javax.swing.JFrame{
                     }
 
                     String[] datos = line.split(";");
-                    if (datos.length == 6) { // Verificar existencia de 6 columnas en admins.csv
-                        Admins.insertar (datos[1],datos[2],datos[0],datos[5]);
-                        
-                        
+                    if (datos.length == 5) { // Verificar existencia de 5 columnas en admins.csv
+                        Admins.insertar (datos[1],datos[2],datos[0],datos[4], datos[3]);
+  
                     }
                 }
             } catch (IOException e) {
@@ -210,8 +222,12 @@ public class MainUI extends javax.swing.JFrame{
             String ID = nombreUsuarioTextField.getText();
             String contraseña = contrasenaUsuarioPasswordField.getText();
             if (Admins.buscarID(ID).getID().equalsIgnoreCase(ID) && Admins.buscarID(ID).getContraseña().equalsIgnoreCase(contraseña))
-            {
-                AdminUI admin = new AdminUI();
+            {   
+                
+               
+                // Hacer Invisible la ui
+                this.dispose();
+                AdminUI admin = new AdminUI(Admins.buscarID(ID)); // El admin existe y sera logueado
                 admin.setVisible(true);
             }
             else if (!Admins.buscarID(ID).getID().equalsIgnoreCase(ID) || !Admins.buscarID(ID).getContraseña().equalsIgnoreCase(contraseña))
@@ -228,7 +244,8 @@ public class MainUI extends javax.swing.JFrame{
 
         private void segTramiteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_segTramiteButtonActionPerformed
                 SegTramiteUI frmSegTramite = new SegTramiteUI();
-                frmSegTramite.setVisible(true); // hide
+                this.dispose(); //Cerrar ventana de main
+                frmSegTramite.setVisible(true); // Abrir la ventana de seguimiento de tramite
         }//GEN-LAST:event_segTramiteButtonActionPerformed
 
     private void contrasenaUsuarioPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrasenaUsuarioPasswordFieldActionPerformed
@@ -275,6 +292,7 @@ public class MainUI extends javax.swing.JFrame{
     private javax.swing.JPasswordField contrasenaUsuarioPasswordField;
     private javax.swing.JButton ingresarButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;

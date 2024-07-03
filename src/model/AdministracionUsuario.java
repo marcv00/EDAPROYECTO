@@ -39,9 +39,9 @@ public class AdministracionUsuario {
        System.out.println("");
    }
    
-   public void insertar(String ID, String contraseña, String nombre, String correo)
+   public void insertar(String ID, String contraseña, String nombre, String correo, String dependencia)
    {
-       Administrador nuevo = new Administrador(ID, contraseña, nombre, correo);
+       Administrador nuevo = new Administrador(ID, contraseña, nombre, correo, dependencia);
        if(estaVacia())
        {
            this.U = nuevo;

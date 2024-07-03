@@ -11,7 +11,7 @@ package model;
  */
 public class Administrador {
     
-    private String ID, contraseña, nombre, correo;
+    private String ID, contraseña, nombre, correo, dependencia;
     private Administrador sgte;
     
     
@@ -21,16 +21,18 @@ public class Administrador {
         this.contraseña="";
         this.correo="";
         this.nombre="";
+        this.dependencia="";
         this.sgte = null;
     }
 
     
     
-    public Administrador(String ID, String contraseña, String nombre, String correo) {
+    public Administrador(String ID, String contraseña, String nombre, String correo, String dependencia) {
         this.ID = ID;
         this.contraseña = contraseña;
         this.nombre = nombre;
         this.correo = correo;
+        this.dependencia = dependencia;
         this.sgte = null;
     }
 
@@ -65,7 +67,15 @@ public class Administrador {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+    
+    public String getDependencia() {
+        return dependencia;
+    }
 
+    public void setDependencia(String dependencia) {
+        this.dependencia = dependencia;
+    }
+    
     public Administrador getSgte() {
         return sgte;
     }
@@ -73,10 +83,6 @@ public class Administrador {
     public void setSgte(Administrador sgte) {
         this.sgte = sgte;
     }
-
-     
-
-
-    
+   
     
 }

@@ -14,7 +14,7 @@ import java.io.BufferedReader;
 public class ListaUsuarioUI extends javax.swing.JFrame {
         
     private DefaultTableModel modelo;
-    private AdministracionUsuario Interesados;
+    private AdministracionUsuario Admins;
 
 
     public ListaUsuarioUI() {
@@ -25,7 +25,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         modelo.addColumn("Contraseña");
         modelo.addColumn("Correo");
         this.jTable1.setModel(modelo);
-        Interesados = new AdministracionUsuario();
+        Admins = new AdministracionUsuario();
         //CargarTabla();
         cargarTablaDesdeCSV();
 
@@ -51,9 +51,9 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 }
                 
                 String[] datos = line.split(";");
-                if (datos.length == 6) { // Verificar existencia de 6 columnas en admins.csv
-                    Interesados.insertar (datos[1],datos[2],datos[0],datos[5]);
-                    String[] row_a_insertar = {datos[0],datos[1],datos[2],datos[5]};
+                if (datos.length == 5) { // Verificar existencia de 5 columnas en admins.csv
+                    Admins.insertar(datos[1],datos[2],datos[0],datos[4], datos[3]);
+                    String[] row_a_insertar = {datos[0],datos[1],datos[2],datos[4]};
                     modelo.addRow(row_a_insertar);
                 }
             }
@@ -756,7 +756,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                     limpiar(); // Suponiendo que limpiarTabla() es un método que borra todas las filas del modelo
 
                     // Agregar los datos encontrados a la tabla
-                    modelo.addRow(new Object[] { datosEncontrados[0], datosEncontrados[1], datosEncontrados[2], datosEncontrados[3] });
+                    modelo.addRow(new Object[] { datosEncontrados[0], datosEncontrados[1], datosEncontrados[2], datosEncontrados[4] });
 
                     // Limpiar los campos de texto de búsqueda
                     limpiartexto(); // Suponiendo que limpiarCamposBusqueda() limpia los campos de texto de búsqueda
@@ -783,7 +783,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 // Handle case where value is null, if needed
                 System.out.println("Value is null");
             }
-            Administrador nuevo = Interesados.buscarID(id_usuario_encontrado);
+            Administrador nuevo = Admins.buscarID(id_usuario_encontrado);
             if(jRadioButton1.isSelected())
             {
                 String ID = idTextField.getText();
@@ -849,10 +849,10 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
 
     private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
 //        String ID = this.jTextField1.getText();
-//        Administrador nuevo = Interesados.buscarID(ID);
+//        Administrador nuevo = Admins.buscarID(ID);
 //        if(this.jTable1.getRowCount()>0)
 //        {
-//            Interesados.eliminar(nuevo.getID());
+//            Admins.eliminar(nuevo.getID());
 //            JOptionPane.showMessageDialog(this, "Administrador Eliminado");
 //        }
 //        else
@@ -934,13 +934,13 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             return;
         }
         
-//        if(Interesados.buscarUsuario(ID, contraseña).equalsIgnoreCase(ID))
+//        if(Admins.buscarUsuario(ID, contraseña).equalsIgnoreCase(ID))
 //        {
 //            JOptionPane.showMessageDialog(this, "Administrador ya registrado ");
 //        }
 //        else
 //        {
-//            Interesados.insertar(ID, contraseña, nombre, correo);
+//            Admins.insertar(ID, contraseña, nombre, correo);
 //            Agregar();
 //            limpiartexto();
 //            JOptionPane.showMessageDialog(this, "Registro exitoso ");
@@ -962,7 +962,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             Lector.agregarNuevoRegistro(filePath, datos);
 
             // Agregar los datos a la tabla y a la clase interesados
-            Interesados.insertar (datos[1],datos[2],datos[0],datos[3]);
+            Admins.insertar(datos[1],datos[2],datos[0],datos[3], datos[4]);
             modelo.addRow(datos);
 
             // Limpiar los campos de texto después de agregar
@@ -992,8 +992,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             // Handle case where value is null, if needed
             System.out.println("Value is null");
         }
-        Administrador nuevo = Interesados.buscarID(id_usuario_encontrado);
-        System.out.println(nuevo.getID());
+        Administrador nuevo = Admins.buscarID(id_usuario_encontrado);
         idTextField.setText(nuevo.getID());
         contraseñaTextField.setText(nuevo.getContraseña());
         nombreTextField.setText(nuevo.getNombre());
@@ -1049,9 +1048,9 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             modelo.removeRow(0);
         }
         String datos[] = new String[4];
-        for(int i = 0;i<Interesados.NDep();i++)
+        for(int i = 0;i<Admins.NDep();i++)
         {
-            Administrador encontrado = Interesados.ObtenerUsuario(i);
+            Administrador encontrado = Admins.ObtenerUsuario(i);
             datos[0] = encontrado.getID();
             datos[1] = encontrado.getContraseña();
             datos[2] = encontrado.getNombre();
