@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vista;
+import model.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  *
@@ -10,11 +14,15 @@ package vista;
  */
 public class VisualizaciónTrámite extends javax.swing.JFrame {
 
+    private AdminDependencia dependencias;
+    
     /**
      * Creates new form VisualizaciónTrámite
      */
     public VisualizaciónTrámite() {
         initComponents();
+        dependencias = new AdminDependencia();
+        CargarDependencias();
     }
 
     /**
@@ -70,7 +78,11 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
 
         jLabel1.setText("Seleccionar Dependencia");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Registro Tramite");
 
@@ -178,6 +190,11 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,6 +230,44 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         });
     }
 
+    public void CargarDependencias()
+    {
+        String filePath = "src/datos/dependencias.csv";
+        BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
+                                    // Cada br.readLine() leera la linea siguiente a la almacenada en br
+        
+                                    
+        try {
+            br = new BufferedReader(new FileReader(filePath));
+            String line;
+            boolean firstLine = true; // Para saltar la primera línea (encabezados)
+            
+            while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Saltar la primera línea (encabezados)
+                }
+                
+                String datos = line.trim();
+                if (!datos.isEmpty()) { // Verificar existencia de 6 columnas en admins.csv
+                    dependencias.insertar (datos);
+                    dependencias.mostrar();
+                    jComboBox1.addItem(datos);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+        } finally { // Se ejecuta independientemente de si se produjo una excepción durante la ejecución del código en el bloque try
+            if (br != null) {
+                try {
+                    br.close(); // Cerrar el BufferedReader para liberar recursos usados en la lectura
+                } catch (IOException e) {
+                    e.printStackTrace(); // Manejo de errores al cerrar el archivo
+                }
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
