@@ -26,31 +26,25 @@ public class AdminUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        tabsPanel = new javax.swing.JTabbedPane();
+        homePanel = new javax.swing.JPanel();
         welcomeLabel = new javax.swing.JLabel();
-        listaDeDependenciasButton = new javax.swing.JButton();
         listaDeUsuariosButton = new javax.swing.JButton();
+        listaDeDependenciasButton = new javax.swing.JButton();
+        bandejaPanel = new javax.swing.JPanel();
         salirButton = new javax.swing.JButton();
-
-        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tabsPanel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        homePanel.setBackground(new java.awt.Color(228, 139, 42));
+
         welcomeLabel.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         welcomeLabel.setText("Bienvenido: Admin");
         welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
-        listaDeDependenciasButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        listaDeDependenciasButton.setForeground(new java.awt.Color(255, 255, 255));
-        listaDeDependenciasButton.setText("LISTA DE DEPENDENCIAS");
-        listaDeDependenciasButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        listaDeDependenciasButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaDeDependenciasButtonActionPerformed(evt);
-            }
-        });
 
         listaDeUsuariosButton.setBackground(new java.awt.Color(0, 0, 0));
         listaDeUsuariosButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -63,10 +57,63 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
-        salirButton.setBackground(new java.awt.Color(255, 51, 51));
+        listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeDependenciasButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        listaDeDependenciasButton.setForeground(new java.awt.Color(255, 255, 255));
+        listaDeDependenciasButton.setText("LISTA DE DEPENDENCIAS");
+        listaDeDependenciasButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaDeDependenciasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaDeDependenciasButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
+        homePanel.setLayout(homePanelLayout);
+        homePanelLayout.setHorizontalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                    .addComponent(welcomeLabel)
+                    .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(600, Short.MAX_VALUE))
+        );
+        homePanelLayout.setVerticalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(welcomeLabel)
+                .addGap(15, 15, 15)
+                .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 147, Short.MAX_VALUE))
+        );
+
+        tabsPanel.addTab("Home", homePanel);
+
+        bandejaPanel.setBackground(new java.awt.Color(228, 139, 42));
+
+        javax.swing.GroupLayout bandejaPanelLayout = new javax.swing.GroupLayout(bandejaPanel);
+        bandejaPanel.setLayout(bandejaPanelLayout);
+        bandejaPanelLayout.setHorizontalGroup(
+            bandejaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 866, Short.MAX_VALUE)
+        );
+        bandejaPanelLayout.setVerticalGroup(
+            bandejaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 381, Short.MAX_VALUE)
+        );
+
+        tabsPanel.addTab("Bandeja", bandejaPanel);
+
+        salirButton.setBackground(new java.awt.Color(255, 0, 0));
         salirButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         salirButton.setForeground(new java.awt.Color(255, 255, 255));
         salirButton.setText("Salir");
+        salirButton.setBorder(null);
         salirButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         salirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,32 +125,17 @@ public class AdminUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(welcomeLabel)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(277, Short.MAX_VALUE))
+            .addComponent(tabsPanel)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(salirButton)
-                .addGap(74, 74, 74)
-                .addComponent(welcomeLabel)
-                .addGap(78, 78, 78)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(142, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabsPanel))
         );
 
         pack();
@@ -164,10 +196,12 @@ public class AdminUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel bandejaPanel;
+    private javax.swing.JPanel homePanel;
     private javax.swing.JButton listaDeDependenciasButton;
     private javax.swing.JButton listaDeUsuariosButton;
     private javax.swing.JButton salirButton;
+    private javax.swing.JTabbedPane tabsPanel;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 }

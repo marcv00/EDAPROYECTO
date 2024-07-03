@@ -221,10 +221,13 @@ public class MainUI extends javax.swing.JFrame{
             }
             String ID = nombreUsuarioTextField.getText();
             String contraseña = contrasenaUsuarioPasswordField.getText();
-            if (Admins.buscarID(ID).getID().equalsIgnoreCase(ID) && Admins.buscarID(ID).getContraseña().equalsIgnoreCase(contraseña))
-            {   
-                
-               
+            
+            if (Admins.buscarID(ID) == null)
+            {
+                JOptionPane.showMessageDialog(this, "Usuario no registrado");
+            }
+            else if (Admins.buscarID(ID).getID().equalsIgnoreCase(ID) && Admins.buscarID(ID).getContraseña().equalsIgnoreCase(contraseña))
+            {    
                 // Hacer Invisible la ui
                 this.dispose();
                 AdminUI admin = new AdminUI(Admins.buscarID(ID)); // El admin existe y sera logueado
@@ -233,10 +236,6 @@ public class MainUI extends javax.swing.JFrame{
             else if (!Admins.buscarID(ID).getID().equalsIgnoreCase(ID) || !Admins.buscarID(ID).getContraseña().equalsIgnoreCase(contraseña))
             {
                 JOptionPane.showMessageDialog(this, "Usuario y/o contraseña incorrecto");
-            }
-            else if (!Admins.buscarID(ID).getID().equalsIgnoreCase(ID) && !Admins.buscarID(ID).getContraseña().equalsIgnoreCase(contraseña))
-            {
-                JOptionPane.showMessageDialog(this, "Usuario no registrado");
             }
                 
                 
