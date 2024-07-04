@@ -9,7 +9,7 @@ import model.*;
 
 public class AdminUI extends javax.swing.JFrame {
 
-   
+   private static Administrador nuevo;
     // Para testing
     public AdminUI() {
         initComponents();     
@@ -19,6 +19,7 @@ public class AdminUI extends javax.swing.JFrame {
     public AdminUI(Administrador admin_logueado) {
         initComponents();
         welcomeLabel.setText("Bienvenido/a " + admin_logueado.getNombre().split(" ")[0]);
+        nuevo = admin_logueado;
     }
    
     // </editor-fold>
@@ -31,6 +32,7 @@ public class AdminUI extends javax.swing.JFrame {
         welcomeLabel = new javax.swing.JLabel();
         listaDeUsuariosButton = new javax.swing.JButton();
         listaDeDependenciasButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         bandejaPanel = new javax.swing.JPanel();
         salirButton = new javax.swing.JButton();
 
@@ -68,6 +70,13 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Proceso deTramite");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
@@ -78,7 +87,9 @@ public class AdminUI extends javax.swing.JFrame {
                     .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                     .addComponent(welcomeLabel)
                     .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(600, Short.MAX_VALUE))
+                .addGap(220, 220, 220)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +97,9 @@ public class AdminUI extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(welcomeLabel)
                 .addGap(15, 15, 15)
-                .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 147, Short.MAX_VALUE))
@@ -114,7 +127,7 @@ public class AdminUI extends javax.swing.JFrame {
         salirButton.setForeground(new java.awt.Color(255, 255, 255));
         salirButton.setText("Salir");
         salirButton.setBorder(null);
-        salirButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salirButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         salirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirButtonActionPerformed(evt);
@@ -160,6 +173,13 @@ public class AdminUI extends javax.swing.JFrame {
         new_main.setVisible(true);
     }//GEN-LAST:event_salirButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        VisualizaciónTrámite tramite = new VisualizaciónTrámite(nuevo);
+        tramite.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /*/
     /**
      * @param args the command line arguments
@@ -190,7 +210,7 @@ public class AdminUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run(){
-                new AdminUI().setVisible(true);
+                new AdminUI(nuevo).setVisible(true);
             }
         });
     }
@@ -198,6 +218,7 @@ public class AdminUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bandejaPanel;
     private javax.swing.JPanel homePanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton listaDeDependenciasButton;
     private javax.swing.JButton listaDeUsuariosButton;
     private javax.swing.JButton salirButton;

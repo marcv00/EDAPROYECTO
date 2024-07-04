@@ -12,10 +12,10 @@ package model;
 public class Expediente {
     
     private String ID, asunto, docref;
-    private int prioridad;
+    private String prioridad;
     private Interesado nuevo;
 
-    public Expediente(String ID, int prioridad, Interesado nuevo, String asunto, String docref) {
+    public Expediente(String ID, String prioridad, Interesado nuevo, String asunto, String docref) {
         this.ID = ID;
         this.prioridad = prioridad;
         this.nuevo = nuevo;
@@ -31,11 +31,11 @@ public class Expediente {
         this.ID = ID;
     }
 
-    public int getPrioridad() {
+    public String getPrioridad() {
         return prioridad;
     }
 
-    public void setPrioridad(int prioridad) {
+    public void setPrioridad(String prioridad) {
         this.prioridad = prioridad;
     }
 

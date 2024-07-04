@@ -15,6 +15,7 @@ import java.io.IOException;
 public class VisualizaciónTrámite extends javax.swing.JFrame {
 
     private AdminDependencia dependencias;
+    private static Administrador nuevo;
     
     /**
      * Creates new form VisualizaciónTrámite
@@ -24,7 +25,13 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         dependencias = new AdminDependencia();
         CargarDependencias();
     }
-
+    public VisualizaciónTrámite(Administrador admin_logueado) {
+        initComponents();
+        dependencias = new AdminDependencia();
+        nuevo = admin_logueado;
+        CargarDependencias();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +51,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -51,19 +59,19 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "PRIORIDAD", "ASUNTO", "REFERENCIA", "DNI", "NOMBRES", "CORREO", "HORA INICIO", "HORA FIN"
+                "ID", "PRIORIDAD", "ASUNTO", "REFERENCIA", "DNI", "NOMBRES", "CORREO"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -78,12 +86,25 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         });
 
         jButton1.setText("Registro Tramite");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Derivar Tramite");
 
         jLabel2.setText("Seleccionar Dependencia");
 
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
         jButton3.setText("Finalizar Tramite");
+
+        jButton4.setText("Atras");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,10 +129,14 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                                     .addComponent(jButton3)
                                     .addComponent(jLabel2)
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addContainerGap(18, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +159,9 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addGap(54, 54, 54)
                         .addComponent(jButton3)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addContainerGap())
         );
 
         pack();
@@ -144,6 +171,16 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        RegTramite registrar = new RegTramite(nuevo);
+        registrar.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,7 +212,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VisualizaciónTrámite().setVisible(true);
+                new VisualizaciónTrámite(nuevo).setVisible(true);
             }
         });
     }
@@ -222,6 +259,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
