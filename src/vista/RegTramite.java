@@ -285,11 +285,11 @@ public class RegTramite extends javax.swing.JFrame {
             Lector.agregarNuevoRegistro(filePath, datos);
 
             // Agregar los datos a la tabla y a la clase interesados
-            Admins.insertar(datos[1],datos[2],datos[0],datos[3], datos[4]);
-            modelo.addRow(datos);
+            //Admins.insertar(datos[1],datos[2],datos[0],datos[3], datos[4]);
+            //modelo.addRow(datos);
 
             // Limpiar los campos de texto después de agregar
-            limpiartexto();
+            //limpiartexto();
 
             // Mostrar mensaje de éxito
             JOptionPane.showMessageDialog(this, "Registro exitoso");
