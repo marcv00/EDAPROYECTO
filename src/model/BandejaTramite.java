@@ -81,15 +81,15 @@ public class BandejaTramite {
     public void mostrarCola() {
         Tramite aux = frente;
         while (aux != null) {
-            System.out.println("Expediente: ID: "+frente.getExp().getID()+"\n"+
-                                            "Prioridad: "+frente.getExp().getPrioridad()+"\n"+
-                                            "Interesado: DNI: "+frente.getExp().getNuevo().getDNI()+"\n"+
-                                                        "Nombre: "+frente.getExp().getNuevo().getNombre()+"\n"+
-                                                        "Correo: "+frente.getExp().getNuevo().getCorreo()+"\n"+
-                                 "Estado: "+frente.getEstado()+"\n"+
-                                "Hora inicio: "+frente.getHorain()+"\n"+
-                                "Hora fin: "+frente.getHorafin()+"\n"+
-                                "Documento generado: "+frente.getDocumento()+"\n");
+            System.out.println("Expediente: ID: "+aux.getExp().getID()+"\n"+
+                                            "Prioridad: "+aux.getExp().getPrioridad()+"\n"+
+                                            "Interesado: DNI: "+aux.getExp().getNuevo().getDNI()+"\n"+
+                                                        "Nombre: "+aux.getExp().getNuevo().getNombre()+"\n"+
+                                                        "Correo: "+aux.getExp().getNuevo().getCorreo()+"\n"+
+                                 "Estado: "+aux.getEstado()+"\n"+
+                                "Hora inicio: "+aux.getHorain()+"\n"+
+                                "Hora fin: "+aux.getHorafin()+"\n"+
+                                "Documento generado: "+aux.getDocumento()+"\n");
             aux = aux.getSgte();
             
         }
