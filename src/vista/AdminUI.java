@@ -17,13 +17,23 @@ public class AdminUI extends javax.swing.JFrame {
    private static Administrador nuevo;
     // Para testing
     public AdminUI() {
-        initComponents();     
+        initComponents();
+        // Initialize DateTimeLabelUpdater and Timer
+        DateTimeLabelUpdater updater = new DateTimeLabelUpdater(dateTimeLabel);
+        Timer timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updater.updateLabel();
+            }
+        });
+        timer.start();
+        updater.updateLabel();
     }
     
     // Para uso
     public AdminUI(Administrador admin_logueado) {
         initComponents();
-        welcomeLabel.setText("Bienvenido/a " + admin_logueado.getNombre().split(" ")[0]);
+        welcomeLabel.setText("Bienvenid@ " + admin_logueado.getNombre().split(" ")[0] + "!");
         nuevo = admin_logueado;
         // Initialize DateTimeLabelUpdater and Timer
         DateTimeLabelUpdater updater = new DateTimeLabelUpdater(dateTimeLabel);
@@ -42,109 +52,153 @@ public class AdminUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         tabsPanel = new javax.swing.JTabbedPane();
         homePanel = new javax.swing.JPanel();
+        dateTimeLabel = new javax.swing.JLabel();
         welcomeLabel = new javax.swing.JLabel();
+        tramitesPanel = new javax.swing.JPanel();
+        welcomeLabel1 = new javax.swing.JLabel();
+        listaDeUsuariosPanel = new javax.swing.JPanel();
+        welcomeLabel2 = new javax.swing.JLabel();
+        dependenciasPanel = new javax.swing.JPanel();
+        welcomeLabel3 = new javax.swing.JLabel();
+        salirButton = new javax.swing.JButton();
         listaDeUsuariosButton = new javax.swing.JButton();
         listaDeDependenciasButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        bandejaPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        salirButton = new javax.swing.JButton();
-        dateTimeLabel = new javax.swing.JLabel();
+        tramitesButton = new javax.swing.JButton();
+        homeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabsPanel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        homePanel.setBackground(new java.awt.Color(228, 139, 42));
+        homePanel.setBackground(new java.awt.Color(255, 164, 68));
+
+        dateTimeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        dateTimeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dateTimeLabel.setText("Fecha y Hora Actual");
 
         welcomeLabel.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        welcomeLabel.setText("Bienvenido: Admin");
+        welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        welcomeLabel.setText("Bienvenid@ Admin");
         welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        listaDeUsuariosButton.setBackground(new java.awt.Color(0, 0, 0));
-        listaDeUsuariosButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        listaDeUsuariosButton.setForeground(new java.awt.Color(255, 255, 255));
-        listaDeUsuariosButton.setText("LISTA DE USUARIOS");
-        listaDeUsuariosButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        listaDeUsuariosButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaDeUsuariosButtonActionPerformed(evt);
-            }
-        });
-
-        listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
-        listaDeDependenciasButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        listaDeDependenciasButton.setForeground(new java.awt.Color(255, 255, 255));
-        listaDeDependenciasButton.setText("LISTA DE DEPENDENCIAS");
-        listaDeDependenciasButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        listaDeDependenciasButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaDeDependenciasButtonActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Proceso deTramite");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                    .addComponent(welcomeLabel)
-                    .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(220, 220, 220)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dateTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(703, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(22, 22, 22)
+                .addComponent(dateTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(welcomeLabel)
-                .addGap(15, 15, 15)
-                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
-                .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(388, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Home", homePanel);
 
-        bandejaPanel.setBackground(new java.awt.Color(228, 139, 42));
+        tramitesPanel.setBackground(new java.awt.Color(255, 164, 68));
 
-        javax.swing.GroupLayout bandejaPanelLayout = new javax.swing.GroupLayout(bandejaPanel);
-        bandejaPanel.setLayout(bandejaPanelLayout);
-        bandejaPanelLayout.setHorizontalGroup(
-            bandejaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 866, Short.MAX_VALUE)
+        welcomeLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        welcomeLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        welcomeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        welcomeLabel1.setText("Trámites en Bandeja");
+        welcomeLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout tramitesPanelLayout = new javax.swing.GroupLayout(tramitesPanel);
+        tramitesPanel.setLayout(tramitesPanelLayout);
+        tramitesPanelLayout.setHorizontalGroup(
+            tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tramitesPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(608, Short.MAX_VALUE))
         );
-        bandejaPanelLayout.setVerticalGroup(
-            bandejaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
+        tramitesPanelLayout.setVerticalGroup(
+            tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tramitesPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(398, Short.MAX_VALUE))
         );
 
-        tabsPanel.addTab("Bandeja", bandejaPanel);
+        tabsPanel.addTab("Home", tramitesPanel);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        listaDeUsuariosPanel.setBackground(new java.awt.Color(255, 164, 68));
+
+        welcomeLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        welcomeLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        welcomeLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        welcomeLabel2.setText("Lista de Usuarios en el Sistema");
+        welcomeLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout listaDeUsuariosPanelLayout = new javax.swing.GroupLayout(listaDeUsuariosPanel);
+        listaDeUsuariosPanel.setLayout(listaDeUsuariosPanelLayout);
+        listaDeUsuariosPanelLayout.setHorizontalGroup(
+            listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(welcomeLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(626, Short.MAX_VALUE))
+        );
+        listaDeUsuariosPanelLayout.setVerticalGroup(
+            listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(welcomeLabel2)
+                .addContainerGap(388, Short.MAX_VALUE))
+        );
+
+        tabsPanel.addTab("Home", listaDeUsuariosPanel);
+
+        dependenciasPanel.setBackground(new java.awt.Color(255, 164, 68));
+
+        welcomeLabel3.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        welcomeLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        welcomeLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        welcomeLabel3.setText("Lista de Dependencias");
+        welcomeLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout dependenciasPanelLayout = new javax.swing.GroupLayout(dependenciasPanel);
+        dependenciasPanel.setLayout(dependenciasPanelLayout);
+        dependenciasPanelLayout.setHorizontalGroup(
+            dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(welcomeLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(611, Short.MAX_VALUE))
+        );
+        dependenciasPanelLayout.setVerticalGroup(
+            dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(welcomeLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(382, Short.MAX_VALUE))
+        );
+
+        tabsPanel.addTab("Home", dependenciasPanel);
+
+        jPanel1.add(tabsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, -40, 1050, 510));
 
         salirButton.setBackground(new java.awt.Color(255, 0, 0));
         salirButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         salirButton.setForeground(new java.awt.Color(255, 255, 255));
-        salirButton.setText("Salir");
+        salirButton.setText("Cerrar sesión");
         salirButton.setBorder(null);
         salirButton.setBorderPainted(false);
         salirButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -153,55 +207,107 @@ public class AdminUI extends javax.swing.JFrame {
                 salirButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(salirButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 350, 260, 48));
 
-        dateTimeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        dateTimeLabel.setText("Fecha y Hora Actual");
+        listaDeUsuariosButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeUsuariosButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        listaDeUsuariosButton.setForeground(new java.awt.Color(255, 255, 255));
+        listaDeUsuariosButton.setText("USUARIOS");
+        listaDeUsuariosButton.setBorder(null);
+        listaDeUsuariosButton.setBorderPainted(false);
+        listaDeUsuariosButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        listaDeUsuariosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaDeUsuariosButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(listaDeUsuariosButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 248, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(dateTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(salirButton, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                .addComponent(dateTimeLabel))
-        );
+        listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeDependenciasButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        listaDeDependenciasButton.setForeground(new java.awt.Color(255, 255, 255));
+        listaDeDependenciasButton.setText("DEPENDENCIAS");
+        listaDeDependenciasButton.setBorder(null);
+        listaDeDependenciasButton.setBorderPainted(false);
+        listaDeDependenciasButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        listaDeDependenciasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaDeDependenciasButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(listaDeDependenciasButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 248, 50));
+
+        tramitesButton.setBackground(new java.awt.Color(0, 0, 0));
+        tramitesButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        tramitesButton.setForeground(new java.awt.Color(255, 255, 255));
+        tramitesButton.setText("TRÁMITES");
+        tramitesButton.setBorder(null);
+        tramitesButton.setBorderPainted(false);
+        tramitesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        tramitesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tramitesButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(tramitesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 250, 50));
+
+        homeButton.setBackground(new java.awt.Color(228, 139, 42));
+        homeButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        homeButton.setForeground(new java.awt.Color(255, 255, 255));
+        homeButton.setText("HOME");
+        homeButton.setBorder(null);
+        homeButton.setBorderPainted(false);
+        homeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(homeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 250, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(tabsPanel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1264, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaDeDependenciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaDeDependenciasButtonActionPerformed
-        ListadedependenciasUI listadependencia=new ListadedependenciasUI();
-        listadependencia.setVisible(true);
+        //ListadedependenciasUI listadependencia=new ListadedependenciasUI();
+        // Colocar el boton del color de su panel
+        listaDeDependenciasButton.setBackground(new java.awt.Color(228, 139, 42, 255));
+        
+        // Colocar los otros botones a negro
+        homeButton.setBackground(new java.awt.Color(0, 0, 0));
+        tramitesButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeUsuariosButton.setBackground(new java.awt.Color(0, 0, 0));
+        
+        tabsPanel.setSelectedIndex(3);
     }//GEN-LAST:event_listaDeDependenciasButtonActionPerformed
 
     private void listaDeUsuariosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaDeUsuariosButtonActionPerformed
       
-        ListaUsuarioUI listausuario=new ListaUsuarioUI();
-        listausuario.setVisible(true);
-    
+        //ListaUsuarioUI listausuario=new ListaUsuarioUI();
+        //listausuario.setVisible(true);
+        
+        // Colocar el boton del color de su panel
+        listaDeUsuariosButton.setBackground(new java.awt.Color(228, 139, 42, 255));
+        
+        // Colocar los otros botones a negro
+        homeButton.setBackground(new java.awt.Color(0, 0, 0));
+        tramitesButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
+        
+        tabsPanel.setSelectedIndex(2);
     }//GEN-LAST:event_listaDeUsuariosButtonActionPerformed
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
@@ -211,12 +317,35 @@ public class AdminUI extends javax.swing.JFrame {
         new_main.setVisible(true);
     }//GEN-LAST:event_salirButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void tramitesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tramitesButtonActionPerformed
         // TODO add your handling code here:
+        // Colocar el boton del color de su panel
+        tramitesButton.setBackground(new java.awt.Color(228, 139, 42, 255));
+        
+        // Colocar los otros botones a negro
+        homeButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeUsuariosButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
+        tabsPanel.setSelectedIndex(1);
+        //VisualizaciónTrámite tramite = new VisualizaciónTrámite(nuevo);
+        //tramite.setVisible(true);
+    }//GEN-LAST:event_tramitesButtonActionPerformed
+
+    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
+        // Colocar el boton del color de su panel
+        homeButton.setBackground(new java.awt.Color(228, 139, 42, 255));
+        
+        // Colocar los otros botones a negro
+        listaDeUsuariosButton.setBackground(new java.awt.Color(0, 0, 0));
+        tramitesButton.setBackground(new java.awt.Color(0, 0, 0));
+        listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
+        tabsPanel.setSelectedIndex(0);
         System.out.println(nuevo.getDependencia());
         VisualizaciónTrámite tramite = new VisualizaciónTrámite(nuevo);
         tramite.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_homeButtonActionPerformed
+
+                                       
 
     /*/
     /**
@@ -254,15 +383,21 @@ public class AdminUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bandejaPanel;
     private javax.swing.JLabel dateTimeLabel;
+    private javax.swing.JPanel dependenciasPanel;
+    private javax.swing.JButton homeButton;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton listaDeDependenciasButton;
     private javax.swing.JButton listaDeUsuariosButton;
+    private javax.swing.JPanel listaDeUsuariosPanel;
     private javax.swing.JButton salirButton;
     private javax.swing.JTabbedPane tabsPanel;
+    private javax.swing.JButton tramitesButton;
+    private javax.swing.JPanel tramitesPanel;
     private javax.swing.JLabel welcomeLabel;
+    private javax.swing.JLabel welcomeLabel1;
+    private javax.swing.JLabel welcomeLabel2;
+    private javax.swing.JLabel welcomeLabel3;
     // End of variables declaration//GEN-END:variables
 }
