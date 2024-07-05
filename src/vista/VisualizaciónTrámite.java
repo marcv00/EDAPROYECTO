@@ -225,6 +225,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         CambiarSeguimiento(aux);
         jTextField2.setText(nuevo.getDependencia());
         eliminar(nuevo.getDependencia(),aux);
+        System.out.println("bien");
         
         
         
