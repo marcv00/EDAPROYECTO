@@ -674,27 +674,27 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jRadioButton4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="agregarBtn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="idRadioButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="correoRadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="agregarButton" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="contraseñaRadioButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
+                              <Component id="nombreRadioButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="modificarBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="modificarButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="eliminarBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="eliminarButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="idTextField" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                           <Component id="contraseñaTextField" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
@@ -716,7 +716,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="buscarPorIdButton" min="-2" pref="83" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="Mostrar" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="actualizarButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="415" max="32767" attributes="0"/>
                   </Group>
@@ -748,34 +748,34 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="174" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="Mostrar" min="-2" max="-2" attributes="0"/>
+                      <Component id="actualizarButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="idTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="idRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="contraseñaRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="contraseñaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="nombreTextField" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nombreRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="correoRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="correoTextField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="agregarBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="modificarBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="eliminarBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="agregarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="modificarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="eliminarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="atrasBtn" min="-2" max="-2" attributes="0"/>
@@ -854,20 +854,20 @@
         <Property name="text" type="java.lang.String" value="Busca un usuario por ID:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="modificarBtn">
+    <Component class="javax.swing.JButton" name="modificarButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarBtnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="eliminarBtn">
+    <Component class="javax.swing.JButton" name="eliminarButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarBtnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="atrasBtn">
@@ -878,12 +878,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atrasBtnActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="agregarBtn">
+    <Component class="javax.swing.JButton" name="agregarButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agregarBtnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agregarButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="idTextField">
@@ -894,32 +894,32 @@
     </Component>
     <Component class="javax.swing.JTextField" name="correoTextField">
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="idRadioButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+    <Component class="javax.swing.JRadioButton" name="contrase&#xf1;aRadioButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+    <Component class="javax.swing.JRadioButton" name="nombreRadioButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombre"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+    <Component class="javax.swing.JRadioButton" name="correoRadioButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Correo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="Mostrar">
+    <Component class="javax.swing.JButton" name="actualizarButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mostrar"/>
+        <Property name="text" type="java.lang.String" value="Actualizar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MostrarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="actualizarButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

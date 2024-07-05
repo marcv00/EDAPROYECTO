@@ -61,7 +61,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        dependenciasComboBox = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -115,9 +115,9 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
 
         jLabel2.setText("Seleccionar Dependencia");
 
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        dependenciasComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                dependenciasComboBoxActionPerformed(evt);
             }
         });
 
@@ -149,7 +149,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                                     .addComponent(jButton2)
                                     .addComponent(jButton3)
                                     .addComponent(jLabel2)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dependenciasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(24, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
@@ -183,7 +183,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dependenciasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(jButton2)
                         .addGap(54, 54, 54)
@@ -209,13 +209,13 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         registrar.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void dependenciasComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dependenciasComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_dependenciasComboBoxActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String dependencia = jComboBox2.getSelectedItem().toString();
+        String dependencia = dependenciasComboBox.getSelectedItem().toString();
         jTextField1.setText(dependencia);
         Tramite aux = bandeja.desencolar();
         aux.setDependencia(dependencia);
@@ -293,7 +293,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                 
                 String datos = line.trim();
                 if (!datos.isEmpty()) { // Verificar existencia de 6 columnas en admins.csv
-                    jComboBox2.addItem(datos);
+                    dependenciasComboBox.addItem(datos);
                 }
             }
         } catch (IOException e) {
@@ -442,12 +442,12 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> dependenciasComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuItem jMenuItem1;

@@ -133,19 +133,19 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         Usuario = new javax.swing.JLabel();
-        modificarBtn = new javax.swing.JButton();
-        eliminarBtn = new javax.swing.JButton();
+        modificarButton = new javax.swing.JButton();
+        eliminarButton = new javax.swing.JButton();
         atrasBtn = new javax.swing.JButton();
-        agregarBtn = new javax.swing.JButton();
+        agregarButton = new javax.swing.JButton();
         idTextField = new javax.swing.JTextField();
         contraseñaTextField = new javax.swing.JTextField();
         nombreTextField = new javax.swing.JTextField();
         correoTextField = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        Mostrar = new javax.swing.JButton();
+        idRadioButton = new javax.swing.JRadioButton();
+        contraseñaRadioButton = new javax.swing.JRadioButton();
+        nombreRadioButton = new javax.swing.JRadioButton();
+        correoRadioButton = new javax.swing.JRadioButton();
+        actualizarButton = new javax.swing.JButton();
 
         jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jFrame1.setResizable(false);
@@ -581,17 +581,17 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         Usuario.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
         Usuario.setText("Busca un usuario por ID:");
 
-        modificarBtn.setText("Modificar");
-        modificarBtn.addActionListener(new java.awt.event.ActionListener() {
+        modificarButton.setText("Modificar");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarBtnActionPerformed(evt);
+                modificarButtonActionPerformed(evt);
             }
         });
 
-        eliminarBtn.setText("Eliminar");
-        eliminarBtn.addActionListener(new java.awt.event.ActionListener() {
+        eliminarButton.setText("Eliminar");
+        eliminarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarBtnActionPerformed(evt);
+                eliminarButtonActionPerformed(evt);
             }
         });
 
@@ -602,25 +602,25 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             }
         });
 
-        agregarBtn.setText("Agregar");
-        agregarBtn.addActionListener(new java.awt.event.ActionListener() {
+        agregarButton.setText("Agregar");
+        agregarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarBtnActionPerformed(evt);
+                agregarButtonActionPerformed(evt);
             }
         });
 
-        jRadioButton1.setText("ID");
+        idRadioButton.setText("ID");
 
-        jRadioButton2.setText("Contraseña");
+        contraseñaRadioButton.setText("Contraseña");
 
-        jRadioButton3.setText("Nombre");
+        nombreRadioButton.setText("Nombre");
 
-        jRadioButton4.setText("Correo");
+        correoRadioButton.setText("Correo");
 
-        Mostrar.setText("Mostrar");
-        Mostrar.addActionListener(new java.awt.event.ActionListener() {
+        actualizarButton.setText("Actualizar");
+        actualizarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MostrarActionPerformed(evt);
+                actualizarButtonActionPerformed(evt);
             }
         });
 
@@ -645,21 +645,21 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jRadioButton1)
-                                        .addComponent(jRadioButton4)
-                                        .addComponent(agregarBtn))
+                                        .addComponent(idRadioButton)
+                                        .addComponent(correoRadioButton)
+                                        .addComponent(agregarButton))
                                     .addGap(17, 17, 17))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jRadioButton2)
+                                    .addComponent(contraseñaRadioButton)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton3)
+                                .addComponent(nombreRadioButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(modificarBtn)
+                                .addComponent(modificarButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(eliminarBtn))
+                                .addComponent(eliminarButton))
                             .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -676,7 +676,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                                 .addComponent(idBusquedaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(buscarPorIdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Mostrar))
+                            .addComponent(actualizarButton))
                         .addGap(0, 415, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -701,29 +701,29 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Mostrar)
+                        .addComponent(actualizarButton)
                         .addGap(0, 32, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton1))
+                            .addComponent(idRadioButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton2)
+                            .addComponent(contraseñaRadioButton)
                             .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton3))
+                            .addComponent(nombreRadioButton))
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton4)
+                            .addComponent(correoRadioButton)
                             .addComponent(correoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(agregarBtn)
-                            .addComponent(modificarBtn)
-                            .addComponent(eliminarBtn))
+                            .addComponent(agregarButton)
+                            .addComponent(modificarButton)
+                            .addComponent(eliminarButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(atrasBtn)))
                 .addContainerGap())
@@ -771,7 +771,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             }
         }//GEN-LAST:event_buscarPorIdButtonActionPerformed
 
-    private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
+    private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         if(this.jTable1.getRowCount()>0)
         {
             Object id_usuario_encontrado_object = modelo.getValueAt(jTable1.getSelectedRow(), 1);
@@ -784,26 +784,26 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 System.out.println("Value is null");
             }
             Administrador nuevo = Admins.buscarID(id_usuario_encontrado);
-            if(jRadioButton1.isSelected())
+            if(idRadioButton.isSelected())
             {
                 String ID = idTextField.getText();
                 nuevo.setID(ID);
                 
                 //ListaUsuarioUI.nuevo.setID(ID);
             }
-            if(jRadioButton2.isSelected())
+            if(contraseñaRadioButton.isSelected())
             {
                 String contraseña = contraseñaTextField.getText();
                 //ListaUsuarioUI.nuevo.setContraseña(contraseña);
                 nuevo.setContraseña(contraseña);
             }
-            if(jRadioButton3.isSelected())
+            if(nombreRadioButton.isSelected())
             {
                 String nombre = nombreTextField.getText();
                 //ListaUsuarioUI.nuevo.setNombre(nombre);
                 nuevo.setNombre(nombre);
             }
-            if(jRadioButton4.isSelected())
+            if(correoRadioButton.isSelected())
             {
                 String correo = correoTextField.getText();
                 //ListaUsuarioUI.nuevo.setCorreo(correo);
@@ -815,7 +815,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "No se selecciono un usuario");
         }
-    }//GEN-LAST:event_modificarBtnActionPerformed
+    }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
       
@@ -847,18 +847,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         admin.setVisible(true);
     }//GEN-LAST:event_atrasBtnActionPerformed
 
-    private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
-//        String ID = this.jTextField1.getText();
-//        Administrador nuevo = Admins.buscarID(ID);
-//        if(this.jTable1.getRowCount()>0)
-//        {
-//            Admins.eliminar(nuevo.getID());
-//            JOptionPane.showMessageDialog(this, "Administrador Eliminado");
-//        }
-//        else
-//        {
-//            JOptionPane.showMessageDialog(this, "No se selecciono un usuario");
-//        } 
+    private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
 
           // Funcionalidad con CSV
           // Ruta del archivo CSV
@@ -919,9 +908,9 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error al eliminar el usuario", "Error", JOptionPane.ERROR_MESSAGE);
             }
-    }//GEN-LAST:event_eliminarBtnActionPerformed
+    }//GEN-LAST:event_eliminarButtonActionPerformed
 
-    private void agregarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBtnActionPerformed
+    private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
         // Obtener los datos de los campos de texto
         String ID = this.idTextField.getText().trim();
         String contraseña = this.contraseñaTextField.getText().trim();
@@ -978,7 +967,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al registrar el usuario");
         }
-    }//GEN-LAST:event_agregarBtnActionPerformed
+    }//GEN-LAST:event_agregarButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -999,12 +988,12 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
         correoTextField.setText(nuevo.getCorreo());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
+    private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
         // TODO add your handling code here:
         limpiar();
         //CargarTabla();
         cargarTablaDesdeCSV();
-    }//GEN-LAST:event_MostrarActionPerformed
+    }//GEN-LAST:event_actualizarButtonActionPerformed
 
         
     public static void main(String args[]) {
@@ -1089,15 +1078,18 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
 
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Mostrar;
     private javax.swing.JLabel Usuario;
-    private javax.swing.JButton agregarBtn;
+    private javax.swing.JButton actualizarButton;
+    private javax.swing.JButton agregarButton;
     private javax.swing.JButton atrasBtn;
     private javax.swing.JButton buscarPorIdButton;
+    private javax.swing.JRadioButton contraseñaRadioButton;
     private javax.swing.JTextField contraseñaTextField;
+    private javax.swing.JRadioButton correoRadioButton;
     private javax.swing.JTextField correoTextField;
-    private javax.swing.JButton eliminarBtn;
+    private javax.swing.JButton eliminarButton;
     private javax.swing.JTextField idBusquedaTextField;
+    private javax.swing.JRadioButton idRadioButton;
     private javax.swing.JTextField idTextField;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1134,10 +1126,6 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1157,7 +1145,8 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JButton modificarBtn;
+    private javax.swing.JButton modificarButton;
+    private javax.swing.JRadioButton nombreRadioButton;
     private javax.swing.JTextField nombreTextField;
     // End of variables declaration//GEN-END:variables
 }
