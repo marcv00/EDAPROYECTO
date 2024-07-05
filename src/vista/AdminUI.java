@@ -608,9 +608,11 @@ public class AdminUI extends javax.swing.JFrame {
         listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
         listaDeDependenciasButton.setForeground(new java.awt.Color(255,255,255,255));
         tabsPanel.setSelectedIndex(0);
+        /*
         System.out.println(nuevo.getDependencia());
         VisualizaciónTrámite tramite = new VisualizaciónTrámite(nuevo);
         tramite.setVisible(true);
+        */
     }//GEN-LAST:event_homeButtonActionPerformed
 
 // ===============================================================================================================================
