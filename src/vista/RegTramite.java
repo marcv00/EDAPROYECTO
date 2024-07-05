@@ -5,6 +5,8 @@
 package vista;
 import helpers.Lector;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import model.*;
 /**
@@ -20,6 +22,7 @@ public class RegTramite extends javax.swing.JFrame {
     public RegTramite(Administrador admin_logueado) {
         initComponents();
         nuevo = admin_logueado;
+        jTextField1.setText(fechaActual());
     }
 
     /**
@@ -51,6 +54,8 @@ public class RegTramite extends javax.swing.JFrame {
         ReferenciaTextField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         AsuntoTextField = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +142,8 @@ public class RegTramite extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Fecha");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,7 +153,7 @@ public class RegTramite extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(205, 205, 205))
                     .addGroup(layout.createSequentialGroup()
@@ -154,34 +161,32 @@ public class RegTramite extends javax.swing.JFrame {
                             .addComponent(jButton3)
                             .addComponent(jLabel7)
                             .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(251, 251, 251)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 537, Short.MAX_VALUE)
-                                        .addComponent(jLabel1)
-                                        .addGap(486, 486, 486))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(218, 375, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel12)
-                                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(80, 80, 80)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(PrioridadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(AsuntoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(ReferenciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(70, 70, 70))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(55, 55, 55))))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(486, 486, 486))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(55, 55, 55))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel12)
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel8))
+                                    .addGap(80, 80, 80)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(PrioridadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(AsuntoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ReferenciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(70, 70, 70)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
@@ -233,6 +238,10 @@ public class RegTramite extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ReferenciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -269,37 +278,28 @@ public class RegTramite extends javax.swing.JFrame {
         String DNI = DNITextField.getText();
         String nombre = NombreTextField.getText();
         String correo = CorreoTextField.getText();
-        Interesado generado = new Interesado(DNI, nombre, correo);
-        Expediente exp = new Expediente(ID,prioridad,generado,asunto,referencia);
+        String estado = " En proceso";
+        String fechain = jTextField1.getText();
+        String fechafin = "-";
+        String horain = "-";
+        String horafin = "-";
+        String documento = "-";
         if (ID.isEmpty() || prioridad.isEmpty() || asunto.isEmpty() || referencia.isEmpty() || DNI.isEmpty() || nombre.isEmpty() || correo.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String[] datos = {ID, prioridad,DNI,nombre, correo, asunto, referencia};
-
+        String[] datos = {ID, prioridad,DNI,nombre, correo, asunto, referencia, estado, fechain, horain, fechafin, horafin, documento};
+        String dependencia = nuevo.getDependencia();
         // Ruta del archivo CSV
-        String filePath = "src/datos/admins.csv";
-
-        try {
-            // Verificar si el registro ya existe antes de agregarlo
-            Lector.agregarNuevoRegistro(filePath, datos);
-
-            // Agregar los datos a la tabla y a la clase interesados
-            Admins.insertar(datos[1],datos[2],datos[0],datos[3], datos[4]);
-            modelo.addRow(datos);
-
-            // Limpiar los campos de texto después de agregar
-            limpiartexto();
-
-            // Mostrar mensaje de éxito
-            JOptionPane.showMessageDialog(this, "Registro exitoso");
-        } catch (IllegalArgumentException e) {
-            // Manejar la excepción si el ID ya existe en el archivo CSV
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de duplicado", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException e) {
-            // Manejar cualquier excepción que ocurra durante la escritura del archivo
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al registrar el usuario");
+        if(dependencia.equalsIgnoreCase("Estudios Generales"))
+        {
+            agregar(dependencia,datos);
+            llenarInteresado(datos);
+        }
+        else if (dependencia.equalsIgnoreCase("DUIS"))
+        {
+            agregar(dependencia,datos);
+            llenarInteresado(datos);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -365,7 +365,77 @@ public class RegTramite extends javax.swing.JFrame {
             }
         });
     }
+    
+    public static String fechaActual()
+    {
+        Date fecha = new Date();
+        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
+        return formatofecha.format(fecha);
+        
+    }
+    
+    public void limpiartexto()
+    {
+        DNITextField.setText("");
+        NombreTextField.setText("");
+        CorreoTextField.setText("");
+        IDTextField.setText("");
+        PrioridadTextField.setText("");
+        AsuntoTextField.setText("");
+        ReferenciaTextField.setText("");
+    }
 
+    public void agregar(String dependencia, String[] datos)
+    {
+        String filePath = "src/datos/"+dependencia+".csv";
+
+            try {
+                // Verificar si el registro ya existe antes de agregarlo
+                Lector.agregarNuevoRegistro(filePath, datos);
+
+
+
+
+                // Limpiar los campos de texto después de agregar
+                limpiartexto();
+
+                // Mostrar mensaje de éxito
+                JOptionPane.showMessageDialog(this, "Registro exitoso");
+            } catch (IllegalArgumentException e) {
+                // Manejar la excepción si el ID ya existe en el archivo CSV
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error de duplicado", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                // Manejar cualquier excepción que ocurra durante la escritura del archivo
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al registrar el tramite");
+            }
+    }
+    
+    public void llenarInteresado(String[] datos)
+    {
+        String filePath = "src/datos/tramites.csv";
+        String[] nuevodatos = {datos[0],datos[5],datos[7],datos[8],datos[9],datos[10],datos[11],datos[12],nuevo.getDependencia()};
+        try {
+                // Verificar si el registro ya existe antes de agregarlo
+                Lector.agregarNuevoRegistro(filePath, nuevodatos);
+
+
+
+
+                // Limpiar los campos de texto después de agregar
+                limpiartexto();
+
+     
+            } catch (IllegalArgumentException e) {
+                // Manejar la excepción si el ID ya existe en el archivo CSV
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error de duplicado", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                // Manejar cualquier excepción que ocurra durante la escritura del archivo
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al registrar el tramite");
+            }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AsuntoTextField;
     private javax.swing.JTextField CorreoTextField;
@@ -386,6 +456,8 @@ public class RegTramite extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

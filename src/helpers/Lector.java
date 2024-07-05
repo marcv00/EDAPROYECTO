@@ -173,6 +173,40 @@ public class Lector {
         }
         return -1;
     }
+    /*
+     * Modifica el valor de una celda en un archivo CSV basado en la columna y el valor de búsqueda.
+     *
+     * @param filePath   Ruta del archivo CSV.
+     * @param columnName Nombre de la columna donde buscar el valor.
+     * @param oldValue   Valor que se busca en la columna para identificar la fila a modificar.
+     * @param newValue   Nuevo valor que reemplazará el valor encontrado en la columna especificada.
+     * @throws IOException Si ocurre un error al leer o escribir en el archivo.
+     */
+        public static void modificarLinea(String filePath, String columnName, String oldValue, String newValue) throws IOException {
+        List<String[]> registros = leerCSV(filePath);
+        String[] header = registros.get(0); // La primera línea es el encabezado
+        int columnIndex = findColumnIndex(header, columnName);
+
+        if (columnIndex == -1) {
+            throw new IllegalArgumentException("Columna '" + columnName + "' no encontrada en el archivo CSV");
+        }
+
+        // Iterar a través de los registros para encontrar y modificar el valor coincidente
+        for (int i = 1; i < registros.size(); i++) { // Empezamos desde 1 para omitir la cabecera
+            String[] row = registros.get(i);
+            if (row[columnIndex].equals(oldValue)) {
+                row[columnIndex] = newValue;
+                break;
+            }
+        }
+
+        // Escribir todos los registros de nuevo en el archivo CSV
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            escribirCSV(bw, registros);
+        }
+        
+        
+    }
     
     
 }

@@ -12,11 +12,13 @@ package model;
 public class Tramite {
     
     private Expediente exp;
-    private String horain, horafin,estado,dependencia,documento;
+    private String fechain, horain, fechafin,horafin,estado,dependencia,documento;
     private Tramite sgte;
 
-    public Tramite(Expediente exp, String estado, String horain, String horafin,String documento, String dependencia) {
+    public Tramite(Expediente exp, String estado, String fechain,String horain, String fechafin, String horafin,String documento, String dependencia) {
         this.exp = exp;
+        this.fechain = fechain;
+        this.fechafin = fechafin;
         this.horain = horain;
         this.horafin = horafin;
         this.estado = estado;
@@ -79,6 +81,22 @@ public class Tramite {
 
     public void setDocumento(String documento) {
         this.documento = documento;
+    }
+
+    public String getFechain() {
+        return fechain;
+    }
+
+    public void setFechain(String fechain) {
+        this.fechain = fechain;
+    }
+
+    public String getFechafin() {
+        return fechafin;
+    }
+
+    public void setFechafin(String fechafin) {
+        this.fechafin = fechafin;
     }
     
     

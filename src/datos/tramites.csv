@@ -1,2 +1,2 @@
-idexpediente;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento
-                                                                                
+idexpediente;nombreI;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento
+                                                                                   

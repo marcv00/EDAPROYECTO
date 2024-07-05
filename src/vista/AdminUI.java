@@ -175,7 +175,7 @@ public class AdminUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        System.out.println(nuevo.getDependencia());
         VisualizaciónTrámite tramite = new VisualizaciónTrámite(nuevo);
         tramite.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -196,7 +196,7 @@ public class MainUI extends javax.swing.JFrame{
 
                     String[] datos = line.split(";");
                     if (datos.length == 5) { // Verificar existencia de 5 columnas en admins.csv
-                        Admins.insertar (datos[1],datos[2],datos[0],datos[4], datos[3]);
+                        Admins.insertar (datos[1],datos[2],datos[0],datos[4],datos[3]);
   
                     }
                 }
