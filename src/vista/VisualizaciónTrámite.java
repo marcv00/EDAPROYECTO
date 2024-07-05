@@ -222,7 +222,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         String[] datos = {aux.getExp().getID(), aux.getExp().getPrioridad(),aux.getExp().getNuevo().getDNI(),aux.getExp().getNuevo().getNombre(), aux.getExp().getNuevo().getCorreo(), aux.getExp().getAsunto(), aux.getExp().getDocref(), aux.getEstado(), aux.getFechain(), aux.getHorain(), aux.getFechafin(), aux.getHorafin(), aux.getDocumento()};
         // Ruta del archivo CSV
         agregar(dependencia,datos);
-        llenarInteresado(aux);
+        CambiarSeguimiento(aux);
         jTextField2.setText(nuevo.getDependencia());
         eliminar(nuevo.getDependencia(),aux);
         
@@ -234,6 +234,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         // TODO add your handling code here:
         String dependencia = nuevo.getDependencia();
         Tramite aux = bandeja.desencolar();
+        CambiarEstado(aux);
         eliminar(dependencia,aux);
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -419,18 +420,38 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         
     }
     
-    public void llenarInteresado(Tramite aux)
+    public void CambiarSeguimiento(Tramite aux)
     {
         
         String filePath = "src/datos/tramites.csv";
 
             try {
-                String[] dato = {aux.getDependencia()};
+                String dato = aux.getDependencia();
                 // Verificar si el registro ya existe antes de agregarlo
-                Lector.agregarNuevoRegistro(filePath, dato);
+                Lector.modificarColumnaEnLineaAñadiendo(filePath,"idexpediente",aux.getExp().getID(),"seguimiento",dato);
 
-                // Mostrar mensaje de éxito
-                JOptionPane.showMessageDialog(this, "Designacion exitosa");
+                
+            } catch (IllegalArgumentException e) {
+                // Manejar la excepción si el ID ya existe en el archivo CSV
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error de duplicado", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                // Manejar cualquier excepción que ocurra durante la escritura del archivo
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al derivar el tramite");
+            }
+    }
+    
+    public void CambiarEstado(Tramite aux)
+    {
+        
+        String filePath = "src/datos/tramites.csv";
+
+            try {
+                System.out.println(aux.getExp().getID());
+                // Verificar si el registro ya existe antes de agregarlo
+                Lector.modificarColumnaEnLinea(filePath,"idexpediente",aux.getExp().getID(),"estado","Finalizado");
+
+                
             } catch (IllegalArgumentException e) {
                 // Manejar la excepción si el ID ya existe en el archivo CSV
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error de duplicado", JOptionPane.ERROR_MESSAGE);
