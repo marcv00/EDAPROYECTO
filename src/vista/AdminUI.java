@@ -1,13 +1,18 @@
 
 package vista;
+import helpers.DateTimeLabelUpdater;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import model.*;
+import javax.swing.Timer;
 
 public class AdminUI extends javax.swing.JFrame {
+    
+    
 
    private static Administrador nuevo;
     // Para testing
@@ -20,8 +25,18 @@ public class AdminUI extends javax.swing.JFrame {
         initComponents();
         welcomeLabel.setText("Bienvenido/a " + admin_logueado.getNombre().split(" ")[0]);
         nuevo = admin_logueado;
+        // Initialize DateTimeLabelUpdater and Timer
+        DateTimeLabelUpdater updater = new DateTimeLabelUpdater(dateTimeLabel);
+        Timer timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updater.updateLabel();
+            }
+        });
+        timer.start();
+        updater.updateLabel();
     }
-   
+
     // </editor-fold>
 @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -34,7 +49,9 @@ public class AdminUI extends javax.swing.JFrame {
         listaDeDependenciasButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         bandejaPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         salirButton = new javax.swing.JButton();
+        dateTimeLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,7 +119,7 @@ public class AdminUI extends javax.swing.JFrame {
                     .addComponent(listaDeUsuariosButton, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addComponent(listaDeDependenciasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 147, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Home", homePanel);
@@ -117,38 +134,59 @@ public class AdminUI extends javax.swing.JFrame {
         );
         bandejaPanelLayout.setVerticalGroup(
             bandejaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 381, Short.MAX_VALUE)
+            .addGap(0, 383, Short.MAX_VALUE)
         );
 
         tabsPanel.addTab("Bandeja", bandejaPanel);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         salirButton.setBackground(new java.awt.Color(255, 0, 0));
         salirButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         salirButton.setForeground(new java.awt.Color(255, 255, 255));
         salirButton.setText("Salir");
         salirButton.setBorder(null);
-        salirButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        salirButton.setBorderPainted(false);
+        salirButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         salirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirButtonActionPerformed(evt);
             }
         });
 
+        dateTimeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        dateTimeLabel.setText("Fecha y Hora Actual");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(dateTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(salirButton, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addComponent(dateTimeLabel))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPanel)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tabsPanel, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabsPanel))
+                .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -210,15 +248,17 @@ public class AdminUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run(){
-                new AdminUI(nuevo).setVisible(true);
+                new AdminUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bandejaPanel;
+    private javax.swing.JLabel dateTimeLabel;
     private javax.swing.JPanel homePanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton listaDeDependenciasButton;
     private javax.swing.JButton listaDeUsuariosButton;
     private javax.swing.JButton salirButton;
