@@ -29,9 +29,9 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         initComponents();
         modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
-        this.jTable1.setModel(modelo);
+        this.dependenciasTable.setModel(modelo);
         Dependencias = new AdminDependencia();
-        cargarTablaDesdeCSV();
+        cargarTablaDependenciasDesdeCSV();
         
         
     }
@@ -46,18 +46,18 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        dependenciasTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        agregarDependenciaButton = new javax.swing.JButton();
+        modificarDependenciaButton = new javax.swing.JButton();
+        eliminarDependenciaButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nombreDependenciaTextField = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        dependenciasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -68,36 +68,36 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        dependenciasTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                dependenciasTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(dependenciasTable);
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Lista de dependencias:");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        agregarDependenciaButton.setText("Agregar");
+        agregarDependenciaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                agregarDependenciaButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        modificarDependenciaButton.setText("Modificar");
+        modificarDependenciaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                modificarDependenciaButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        eliminarDependenciaButton.setText("Eliminar");
+        eliminarDependenciaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                eliminarDependenciaButtonActionPerformed(evt);
             }
         });
 
@@ -115,27 +115,24 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
+                        .addComponent(agregarDependenciaButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarDependenciaButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarDependenciaButton)
+                        .addGap(50, 50, 50))
+                    .addComponent(jButton4)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3)
-                                .addGap(50, 50, 50))
-                            .addComponent(jButton4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1)))))
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(nombreDependenciaTextField)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,29 +140,31 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nombreDependenciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                            .addComponent(agregarDependenciaButton)
+                            .addComponent(modificarDependenciaButton)
+                            .addComponent(eliminarDependenciaButton)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jButton4)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void agregarDependenciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarDependenciaButtonActionPerformed
         
-        String nombre = jTextField1.getText();
+        String nombre = nombreDependenciaTextField.getText();
         
         if(Dependencias.buscarNombre(nombre).equalsIgnoreCase(nombre))
         {    
@@ -175,27 +174,27 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         {
             Dependencias.insertar(nombre);
             JOptionPane.showMessageDialog(this, "Registro correcto");
-            Agregar();
-            jTextField1.setText("");
+            agregarDependencia();
+            nombreDependenciaTextField.setText("");
 
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_agregarDependenciaButtonActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void dependenciasTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dependenciasTableMouseClicked
         // TODO add your handling code here:
-        int fila = jTable1.getSelectedRow();
+        int fila = dependenciasTable.getSelectedRow();
         String nuevo = Dependencias.ObtenerDepedencias(fila);
         cambio = nuevo;
-        jTextField1.setText(nuevo);
+        nombreDependenciaTextField.setText(nuevo);
         
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_dependenciasTableMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void modificarDependenciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarDependenciaButtonActionPerformed
         // TODO add your handling code here:
         Dependencias.mostrar();System.out.println(cambio);
         Dependencia otro = Dependencias.buscarDependencia(cambio);
-        String cambio1 = jTextField1.getText();
+        String cambio1 = nombreDependenciaTextField.getText();
         String comparar = Dependencias.buscarNombre(cambio1);
         if(comparar.equalsIgnoreCase(cambio1))
         {
@@ -204,16 +203,16 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         else
         {
             otro.setNombre(cambio1);
-            modificar();
-            jTextField1.setText("");
+            modificarDependencia();
+            nombreDependenciaTextField.setText("");
 
         }
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_modificarDependenciaButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void eliminarDependenciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarDependenciaButtonActionPerformed
         // TODO add your handling code here:
-        int fila = jTable1.getSelectedRow();
+        int fila = dependenciasTable.getSelectedRow();
         String nuevo = Dependencias.ObtenerDepedencias(fila);
         if(!Dependencias.buscarNombre(nuevo).equalsIgnoreCase(nuevo))
         {
@@ -222,11 +221,11 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         else
         {
             Dependencias.eliminar(nuevo);
-            jTextField1.setText("");
-            eliminar();
+            nombreDependenciaTextField.setText("");
+            eliminarDependencia();
         }
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_eliminarDependenciaButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -247,7 +246,7 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         });
     }
     
-    public void cargarTablaDesdeCSV() {
+    public void cargarTablaDependenciasDesdeCSV() {
         String filePath = "src/datos/dependencias.csv";
         BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
                                     // Cada br.readLine() leera la linea siguiente a la almacenada en br
@@ -284,32 +283,32 @@ public class ListadedependenciasUI extends javax.swing.JFrame {
         }
     }
     
-    public void Agregar()
+    public void agregarDependencia()
     {
-        modelo.addRow(new Object[]{jTextField1.getText()});
+        modelo.addRow(new Object[]{nombreDependenciaTextField.getText()});
     }
     
-    public void modificar()
+    public void modificarDependencia()
     {
-        int fila = jTable1.getSelectedRow();
-        modelo.setValueAt(jTextField1.getText(), fila, 0);
+        int fila = dependenciasTable.getSelectedRow();
+        modelo.setValueAt(nombreDependenciaTextField.getText(), fila, 0);
     }
     
-    public void eliminar()
+    public void eliminarDependencia()
     {
-        int fila = jTable1.getSelectedRow();
+        int fila = dependenciasTable.getSelectedRow();
         modelo.removeRow(fila);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton agregarDependenciaButton;
+    private javax.swing.JTable dependenciasTable;
+    private javax.swing.JButton eliminarDependenciaButton;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton modificarDependenciaButton;
+    private javax.swing.JTextField nombreDependenciaTextField;
     // End of variables declaration//GEN-END:variables
 }

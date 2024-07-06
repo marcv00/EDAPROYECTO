@@ -14,13 +14,22 @@ import javax.swing.table.DefaultTableModel;
 
 public class AdminUI extends javax.swing.JFrame {
     
-// ===============================================================================================================================
-// Setup USUARIOS 
+    private static Administrador adminLogueado;
     
-    private DefaultTableModel modelo;
+    // ===============================================================================================================================
+    // Setup USUARIOS 
+    private DefaultTableModel modeloUsuarios;
     private AdministracionUsuario Admins;
 
-   private static Administrador nuevo;
+    // Setup TRAMITES 
+    private BandejaTramite bandeja;
+    private DefaultTableModel modeloTramites;
+    
+    // Setup DEPENDENCIAS
+    private DefaultTableModel modeloDependencias;
+    private AdminDependencia Dependencias;
+    private String cambio;
+    
     // Para testing
     public AdminUI() {
         initComponents();
@@ -36,23 +45,30 @@ public class AdminUI extends javax.swing.JFrame {
         updater.updateLabel();
         
         //Setup USUARIOS
-        modelo = new DefaultTableModel();
-        modelo.addColumn("Nombre");
-        modelo.addColumn("ID");
-        modelo.addColumn("Contraseña");
-        modelo.addColumn("Dependencia");
-        modelo.addColumn("Correo");
-        this.usuariosTable.setModel(modelo);
+        modeloUsuarios = new DefaultTableModel();
+        modeloUsuarios.addColumn("Nombre");
+        modeloUsuarios.addColumn("ID");
+        modeloUsuarios.addColumn("Contraseña");
+        modeloUsuarios.addColumn("Dependencia");
+        modeloUsuarios.addColumn("Correo");
+        this.usuariosTable.setModel(modeloUsuarios);
         Admins = new AdministracionUsuario();
         cargarTablaDesdeCSV();
-        CargarDependencias();
+        CargarDependenciasParaUsuariosPanel();
+        
+        // Setup DEPENDENCIAS
+        modeloDependencias = new DefaultTableModel();
+        modeloDependencias.addColumn("Nombre");
+        this.dependenciasTable.setModel(modeloDependencias);
+        Dependencias = new AdminDependencia();
+        cargarTablaDependenciasDesdeCSV();
     }
     
     // Para uso
     public AdminUI(Administrador admin_logueado) {
         initComponents();
         welcomeLabel.setText("Bienvenid@ " + admin_logueado.getNombre().split(" ")[0] + "!");
-        nuevo = admin_logueado;
+        adminLogueado = admin_logueado;
         // Initialize DateTimeLabelUpdater and Timer
         DateTimeLabelUpdater updater = new DateTimeLabelUpdater(dateTimeLabel);
         Timer timer = new Timer(500, new ActionListener() {
@@ -65,21 +81,28 @@ public class AdminUI extends javax.swing.JFrame {
         updater.updateLabel();
         
         //Setup USUARIOS
-        modelo = new DefaultTableModel();
-        modelo.addColumn("Nombre");
-        modelo.addColumn("ID");
-        modelo.addColumn("Contraseña");
-        modelo.addColumn("Dependencia");
-        modelo.addColumn("Correo");
-        this.usuariosTable.setModel(modelo);
+        modeloUsuarios = new DefaultTableModel();
+        modeloUsuarios.addColumn("Nombre");
+        modeloUsuarios.addColumn("ID");
+        modeloUsuarios.addColumn("Contraseña");
+        modeloUsuarios.addColumn("Dependencia");
+        modeloUsuarios.addColumn("Correo");
+        this.usuariosTable.setModel(modeloUsuarios);
         Admins = new AdministracionUsuario();
         cargarTablaDesdeCSV();
-        CargarDependencias();
+        CargarDependenciasParaUsuariosPanel();
+        
+        // Setup DEPENDENCIAS
+        modeloDependencias = new DefaultTableModel();
+        modeloDependencias.addColumn("Nombre");
+        this.dependenciasTable.setModel(modeloDependencias);
+        Dependencias = new AdminDependencia();
+        cargarTablaDependenciasDesdeCSV();
     }
 
 
 // ===============================================================================================================================
-// Para funcionamiento de UI 
+// Funcionamiento de UI 
     // </editor-fold>
 @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -92,6 +115,8 @@ public class AdminUI extends javax.swing.JFrame {
         welcomeLabel = new javax.swing.JLabel();
         tramitesPanel = new javax.swing.JPanel();
         welcomeLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tramitesTable = new javax.swing.JTable();
         listaDeUsuariosPanel = new javax.swing.JPanel();
         usuariosPanelTitleLabel = new javax.swing.JLabel();
         buscaUsuarioIdLabel = new javax.swing.JLabel();
@@ -116,6 +141,21 @@ public class AdminUI extends javax.swing.JFrame {
         correoLabel = new javax.swing.JLabel();
         dependenciasPanel = new javax.swing.JPanel();
         welcomeLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        dependenciasTable = new javax.swing.JTable();
+        agregarDependenciaButton = new javax.swing.JButton();
+        modificarDependenciaButton = new javax.swing.JButton();
+        eliminarDependenciaButton = new javax.swing.JButton();
+        dependenciaSeleccionadaLabel = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        nuevoNombreDependenciaLabel = new javax.swing.JLabel();
+        modificacionDependenciaLabel = new javax.swing.JLabel();
+        nuevoNombreNuevaDependenciaTextField = new javax.swing.JTextField();
+        crearDependenciaLabel = new javax.swing.JLabel();
+        nuevaDependenciaNombreLabel = new javax.swing.JLabel();
+        nombreNuevaDependenciaTextField = new javax.swing.JTextField();
+        eliminarDependenciaLabel = new javax.swing.JLabel();
+        eliminacionDependienciaLabel = new javax.swing.JLabel();
         salirButton = new javax.swing.JButton();
         listaDeUsuariosButton = new javax.swing.JButton();
         listaDeDependenciasButton = new javax.swing.JButton();
@@ -168,10 +208,31 @@ public class AdminUI extends javax.swing.JFrame {
         tramitesPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         welcomeLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        welcomeLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        welcomeLabel1.setForeground(new java.awt.Color(255, 102, 0));
         welcomeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         welcomeLabel1.setText("Trámites en Bandeja");
         welcomeLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        tramitesTable.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        tramitesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tramitesTable.setGridColor(new java.awt.Color(255, 255, 255));
+        tramitesTable.setRowHeight(30);
+        tramitesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tramitesTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tramitesTable);
 
         javax.swing.GroupLayout tramitesPanelLayout = new javax.swing.GroupLayout(tramitesPanel);
         tramitesPanel.setLayout(tramitesPanelLayout);
@@ -179,15 +240,19 @@ public class AdminUI extends javax.swing.JFrame {
             tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tramitesPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(648, Short.MAX_VALUE))
+                .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         tramitesPanelLayout.setVerticalGroup(
             tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tramitesPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(498, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addGap(326, 326, 326))
         );
 
         tabsPanel.addTab("Home", tramitesPanel);
@@ -272,7 +337,7 @@ public class AdminUI extends javax.swing.JFrame {
         agregarButton.setBackground(new java.awt.Color(255, 102, 0));
         agregarButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregarButton.setForeground(new java.awt.Color(255, 255, 255));
-        agregarButton.setText("Agregar");
+        agregarButton.setText("Crear Usuario");
         agregarButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         agregarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,7 +355,7 @@ public class AdminUI extends javax.swing.JFrame {
         eliminarButton.setBackground(new java.awt.Color(0, 0, 0));
         eliminarButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eliminarButton.setForeground(new java.awt.Color(255, 255, 255));
-        eliminarButton.setText("Eliminar");
+        eliminarButton.setText("Eliminar Usuario");
         eliminarButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         eliminarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,58 +394,59 @@ public class AdminUI extends javax.swing.JFrame {
         listaDeUsuariosPanelLayout.setHorizontalGroup(
             listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(27, 27, 27)
+                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                                        .addComponent(usuariosPanelTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(104, 104, 104)
-                                        .addComponent(modificarButton))
-                                    .addComponent(buscaUsuarioIdLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(220, 220, 220))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, listaDeUsuariosPanelLayout.createSequentialGroup()
-                                .addComponent(buscaUsuarioIdLabel)
+                                .addComponent(usuariosPanelTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
+                                .addComponent(modificarButton))
+                            .addComponent(buscaUsuarioIdLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(247, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, listaDeUsuariosPanelLayout.createSequentialGroup()
+                        .addComponent(buscaUsuarioIdLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(idBusquedaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buscarPorIdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, listaDeUsuariosPanelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(contraseñaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45)
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                                .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                                .addComponent(correoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(correoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(59, 59, 59)
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                                .addComponent(dependenciasLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(dependenciasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                                .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(idBusquedaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buscarPorIdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, listaDeUsuariosPanelLayout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(contraseñaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(45, 45, 45)
-                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                                    .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                                    .addComponent(correoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(correoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(59, 59, 59)
-                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(agregarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                                    .addComponent(dependenciasLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(26, 26, 26)
-                                    .addComponent(dependenciasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(eliminarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(actualizarButton)))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                                .addComponent(agregarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(actualizarButton))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         listaDeUsuariosPanelLayout.setVerticalGroup(
             listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,27 +462,33 @@ public class AdminUI extends javax.swing.JFrame {
                     .addComponent(actualizarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarPorIdButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addGap(27, 27, 27)
                 .addComponent(buscaUsuarioIdLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dependenciasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dependenciasLabel)
-                    .addComponent(idLabel)
-                    .addComponent(nombreLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(correoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(agregarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contraseñaLabel)
-                    .addComponent(correoLabel))
-                .addGap(18, 18, 18)
-                .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                    .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(dependenciasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dependenciasLabel)
+                        .addComponent(idLabel)
+                        .addComponent(nombreLabel)))
+                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(correoTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(contraseñaLabel)
+                                .addComponent(correoLabel))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listaDeUsuariosPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(agregarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(37, 37, 37))
         );
 
         tabsPanel.addTab("Home", listaDeUsuariosPanel);
@@ -424,10 +496,103 @@ public class AdminUI extends javax.swing.JFrame {
         dependenciasPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         welcomeLabel3.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        welcomeLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        welcomeLabel3.setForeground(new java.awt.Color(255, 102, 0));
         welcomeLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        welcomeLabel3.setText("Lista de Dependencias");
+        welcomeLabel3.setText("Administración de Dependencias");
         welcomeLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        dependenciasTable.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        dependenciasTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        dependenciasTable.setGridColor(new java.awt.Color(255, 255, 255));
+        dependenciasTable.setRowHeight(30);
+        dependenciasTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dependenciasTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(dependenciasTable);
+
+        agregarDependenciaButton.setBackground(new java.awt.Color(255, 102, 0));
+        agregarDependenciaButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        agregarDependenciaButton.setForeground(new java.awt.Color(255, 255, 255));
+        agregarDependenciaButton.setText("Agregar");
+        agregarDependenciaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        agregarDependenciaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarDependenciaButtonActionPerformed(evt);
+            }
+        });
+
+        modificarDependenciaButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        modificarDependenciaButton.setText("Modificar");
+        modificarDependenciaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        modificarDependenciaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarDependenciaButtonActionPerformed(evt);
+            }
+        });
+
+        eliminarDependenciaButton.setBackground(new java.awt.Color(0, 0, 0));
+        eliminarDependenciaButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarDependenciaButton.setForeground(new java.awt.Color(255, 255, 255));
+        eliminarDependenciaButton.setText("Eliminar");
+        eliminarDependenciaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        eliminarDependenciaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarDependenciaButtonActionPerformed(evt);
+            }
+        });
+
+        dependenciaSeleccionadaLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        dependenciaSeleccionadaLabel.setText("Dependencia Seleccionada:");
+
+        nuevoNombreDependenciaLabel.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        nuevoNombreDependenciaLabel.setText("Nuevo nombre:");
+
+        modificacionDependenciaLabel.setBackground(new java.awt.Color(255, 255, 255));
+        modificacionDependenciaLabel.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
+        modificacionDependenciaLabel.setForeground(new java.awt.Color(255, 102, 0));
+        modificacionDependenciaLabel.setText("Modificación");
+
+        nuevoNombreNuevaDependenciaTextField.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        nuevoNombreNuevaDependenciaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoNombreNuevaDependenciaTextFieldActionPerformed(evt);
+            }
+        });
+
+        crearDependenciaLabel.setBackground(new java.awt.Color(255, 255, 255));
+        crearDependenciaLabel.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
+        crearDependenciaLabel.setForeground(new java.awt.Color(255, 102, 0));
+        crearDependenciaLabel.setText("Crear Nueva Dependencia");
+
+        nuevaDependenciaNombreLabel.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        nuevaDependenciaNombreLabel.setText("Nueva Dependencia: ");
+
+        nombreNuevaDependenciaTextField.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        nombreNuevaDependenciaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreNuevaDependenciaTextFieldActionPerformed(evt);
+            }
+        });
+
+        eliminarDependenciaLabel.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        eliminarDependenciaLabel.setText("Eliminar la dependencia seleccionada");
+
+        eliminacionDependienciaLabel.setBackground(new java.awt.Color(255, 255, 255));
+        eliminacionDependienciaLabel.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
+        eliminacionDependienciaLabel.setForeground(new java.awt.Color(255, 102, 0));
+        eliminacionDependienciaLabel.setText("Eliminación");
 
         javax.swing.GroupLayout dependenciasPanelLayout = new javax.swing.GroupLayout(dependenciasPanel);
         dependenciasPanel.setLayout(dependenciasPanelLayout);
@@ -435,15 +600,79 @@ public class AdminUI extends javax.swing.JFrame {
             dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dependenciasPanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(welcomeLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(651, Short.MAX_VALUE))
+                .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(welcomeLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                        .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dependenciaSeleccionadaLabel)
+                            .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(nuevoNombreDependenciaLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(nuevoNombreNuevaDependenciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(modificarDependenciaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                                .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(eliminarDependenciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(nuevaDependenciaNombreLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(nombreNuevaDependenciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(agregarDependenciaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eliminarDependenciaButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(42, Short.MAX_VALUE))
+                    .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                        .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modificacionDependenciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(crearDependenciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eliminacionDependienciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         dependenciasPanelLayout.setVerticalGroup(
             dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dependenciasPanelLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(welcomeLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(482, Short.MAX_VALUE))
+                .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(welcomeLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dependenciasPanelLayout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(dependenciaSeleccionadaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(modificacionDependenciaLabel)
+                        .addGap(15, 15, 15)
+                        .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(modificarDependenciaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nuevoNombreNuevaDependenciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nuevoNombreDependenciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminacionDependienciaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(eliminarDependenciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eliminarDependenciaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(crearDependenciaLabel)
+                        .addGap(18, 18, 18)
+                        .addGroup(dependenciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nuevaDependenciaNombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(agregarDependenciaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombreNuevaDependenciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Home", dependenciasPanel);
@@ -462,7 +691,7 @@ public class AdminUI extends javax.swing.JFrame {
                 salirButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(salirButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 250, 48));
+        jPanel1.add(salirButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 250, 48));
 
         listaDeUsuariosButton.setBackground(new java.awt.Color(0, 0, 0));
         listaDeUsuariosButton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -591,7 +820,7 @@ public class AdminUI extends javax.swing.JFrame {
         listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
         listaDeDependenciasButton.setForeground(new java.awt.Color(255,255,255,255));
         tabsPanel.setSelectedIndex(1);
-        //VisualizaciónTrámite tramite = new VisualizaciónTrámite(nuevo);
+        //VisualizaciónTrámite tramite = new VisualizaciónTrámite(adminLogueado);
         //tramite.setVisible(true);
     }//GEN-LAST:event_tramitesButtonActionPerformed
 
@@ -609,8 +838,8 @@ public class AdminUI extends javax.swing.JFrame {
         listaDeDependenciasButton.setForeground(new java.awt.Color(255,255,255,255));
         tabsPanel.setSelectedIndex(0);
         /*
-        System.out.println(nuevo.getDependencia());
-        VisualizaciónTrámite tramite = new VisualizaciónTrámite(nuevo);
+        System.out.println(adminLogueado.getDependencia());
+        VisualizaciónTrámite tramite = new VisualizaciónTrámite(adminLogueado);
         tramite.setVisible(true);
         */
     }//GEN-LAST:event_homeButtonActionPerformed
@@ -639,10 +868,10 @@ public class AdminUI extends javax.swing.JFrame {
 
             if (datosEncontrados.length > 0) {
                 // Limpiar la tabla antes de agregar la nueva fila
-                limpiarTabla(); // Suponiendo que limpiarTabla() es un método que borra todas las filas del modelo
+                limpiarTabla(); // Suponiendo que limpiarTabla() es un método que borra todas las filas del modeloUsuarios
 
                 // Agregar los datos encontrados a la tabla
-                modelo.addRow(new Object[] { datosEncontrados[0], datosEncontrados[1], datosEncontrados[2], datosEncontrados[4] });
+                modeloUsuarios.addRow(new Object[] { datosEncontrados[0], datosEncontrados[1], datosEncontrados[2], datosEncontrados[4] });
 
                 // Limpiar los campos de texto de búsqueda
                 limpiartexto(); // Suponiendo que limpiarCamposBusqueda() limpia los campos de texto de búsqueda
@@ -701,7 +930,7 @@ public class AdminUI extends javax.swing.JFrame {
 
             // Agregar los datos a la tabla y a la clase interesados
             Admins.insertar(datos[1],datos[2],datos[0],datos[4], datos[3]);
-            modelo.addRow(datos);
+            modeloUsuarios.addRow(datos);
 
             // Limpiar los campos de texto después de agregar
             limpiartexto();
@@ -733,7 +962,7 @@ public class AdminUI extends javax.swing.JFrame {
             int fila = usuariosTable.getSelectedRow();
             if (fila != -1) {
                 // Obtener el ID de la fila seleccionada
-                String id = (String) modelo.getValueAt(fila, 1);
+                String id = (String) modeloUsuarios.getValueAt(fila, 1);
 
                 // Confirmar si se desea eliminar el usuario
                 int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar este usuario?", "Confirmar Eliminación", JOptionPane.OK_CANCEL_OPTION);
@@ -742,7 +971,7 @@ public class AdminUI extends javax.swing.JFrame {
                     Lector.eliminarRegistroPorValorEnColumna(filePath,"id", id);
 
                     // Eliminar la fila de la tabla
-                    modelo.removeRow(fila);
+                    modeloUsuarios.removeRow(fila);
                     limpiartexto();
 
                     JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente");
@@ -761,9 +990,9 @@ public class AdminUI extends javax.swing.JFrame {
                         Lector.eliminarRegistroPorValorEnColumna(filePath, "id", id);
 
                         // Eliminar la fila correspondiente en la tabla
-                        for (int i = 0; i < modelo.getRowCount(); i++) {
-                            if (modelo.getValueAt(i, 1).equals(id)) {
-                                modelo.removeRow(i);
+                        for (int i = 0; i < modeloUsuarios.getRowCount(); i++) {
+                            if (modeloUsuarios.getValueAt(i, 1).equals(id)) {
+                                modeloUsuarios.removeRow(i);
                                 break;
                             }
                         }
@@ -788,7 +1017,7 @@ public class AdminUI extends javax.swing.JFrame {
     private void usuariosTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuariosTableMouseClicked
         // TODO add your handling code here:
 
-        Object id_usuario_encontrado_object = modelo.getValueAt(usuariosTable.getSelectedRow(), 1);
+        Object id_usuario_encontrado_object = modeloUsuarios.getValueAt(usuariosTable.getSelectedRow(), 1);
         String id_usuario_encontrado = "";
         // Check and cast the value to the appropriate type
         if (id_usuario_encontrado_object != null) {
@@ -809,6 +1038,220 @@ public class AdminUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dependenciasComboBoxActionPerformed
 
+    private void tramitesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tramitesTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tramitesTableMouseClicked
+    
+// Funcionamiento DEPENDENCIAS  =============================================================================================    
+    private void dependenciasTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dependenciasTableMouseClicked
+        // TODO add your handling code here:
+        int fila = dependenciasTable.getSelectedRow();
+        String nuevo = Dependencias.ObtenerDepedencias(fila);
+        cambio = nuevo;
+        dependenciaSeleccionadaLabel.setText("Dependencia Seleccionada: " + nuevo);
+        nuevoNombreNuevaDependenciaTextField.setText(nuevo);
+    }//GEN-LAST:event_dependenciasTableMouseClicked
+
+    private void agregarDependenciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarDependenciaButtonActionPerformed
+
+        String nombre = nombreNuevaDependenciaTextField.getText();
+
+        if (Dependencias.buscarNombre(nombre).equalsIgnoreCase(nombre)) {
+            JOptionPane.showMessageDialog(this, "Dependencia ya registrada");
+            nombreNuevaDependenciaTextField.setText("");
+        } else {
+            String filePath = "src/datos/dependencias.csv";
+            String[] new_dep = {nombre};
+            try {
+                Lector.agregarNuevoRegistro(filePath, new_dep);
+                modeloDependencias.setRowCount(0); // Remove all existing rows
+                Dependencias = new AdminDependencia(); // Reset the current Dependencias in linked list
+                cargarTablaDependenciasDesdeCSV();
+                JOptionPane.showMessageDialog(this, "Registro correcto");
+
+            } catch (IOException e) {
+                e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+            } finally {
+                nombreNuevaDependenciaTextField.setText("");
+            }
+        }
+
+    }//GEN-LAST:event_agregarDependenciaButtonActionPerformed
+
+    private void modificarDependenciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarDependenciaButtonActionPerformed
+        // Verificar que se ha seleccionado una fila
+        int fila = dependenciasTable.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una dependencia de la tabla.");
+            return;
+        }
+
+        try {
+            // Obtener el nombre de la dependencia desde la tabla
+            int columnIndexNombre = dependenciasTable.getColumnModel().getColumnIndex("Nombre");
+            String nombre_dependencia = (String) dependenciasTable.getValueAt(fila, columnIndexNombre);
+
+            // Obtener el nuevo nombre de la dependencia desde el campo de texto
+            String cambio1 = nuevoNombreNuevaDependenciaTextField.getText().trim();
+
+            // Verificar que el nuevo nombre no esté vacío
+            if (cambio1.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un nuevo nombre para la dependencia.");
+                return;
+            }
+
+            // Verificar si el nuevo nombre ya existe
+            String comparar = Dependencias.buscarNombre(cambio1);
+            if (comparar.equalsIgnoreCase(cambio1)) {
+                JOptionPane.showMessageDialog(this, "Dependencia ya existe");
+                return;
+            }
+
+            // Actualizar el nombre de la dependencia en la lista de dependencias
+            Dependencia otro = Dependencias.buscarDependencia(nombre_dependencia);
+            if (otro == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró la dependencia seleccionada.");
+                return;
+            }
+            otro.setNombre(cambio1);
+            
+
+            // Actualizar los archivos CSV
+            String dependenciasFilePath = "src/datos/dependencias.csv";
+            String tramitesFilePath = "src/datos/tramites.csv";
+            try {
+                Lector.modificarValorEnTodasLasColumnas(dependenciasFilePath, "nombre", nombre_dependencia, cambio1);
+                Lector.modificarValorEnTodasLasColumnas(tramitesFilePath, "seguimiento", nombre_dependencia, cambio1);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al modificar los archivos: " + e.getMessage());
+                return;
+            }
+
+            // Limpiar el campo de texto y actualizar la tabla
+            nuevoNombreNuevaDependenciaTextField.setText("");
+            dependenciaSeleccionadaLabel.setText("Dependencia Seleccionada: ");
+            modeloDependencias.setRowCount(0);
+            Dependencias = new AdminDependencia(); // Reiniciar la lista de dependencias
+            cargarTablaDependenciasDesdeCSV();
+
+            // Mostrar mensaje de confirmación
+            JOptionPane.showMessageDialog(this, "La dependencia ha sido modificada con éxito.");
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_modificarDependenciaButtonActionPerformed
+
+    private void eliminarDependenciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarDependenciaButtonActionPerformed
+        int fila = dependenciasTable.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione una dependencia");
+            return;
+        }
+
+        String nombre = Dependencias.ObtenerDepedencias(fila);
+        if (nombre == null || nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontró la dependencia seleccionada");
+            return;
+        }
+
+        String filePath = "src/datos/dependencias.csv";
+        String tramitesFilePath = "src/datos/tramites.csv";
+
+        if (Dependencias.buscarNombre(nombre) == null || !Dependencias.buscarNombre(nombre).equalsIgnoreCase(nombre)) {
+            JOptionPane.showMessageDialog(this, "No se encontró la dependencia");
+            dependenciaSeleccionadaLabel.setText("Dependencia Seleccionada: ");
+            nuevoNombreNuevaDependenciaTextField.setText("");
+            return;
+        }
+
+        // Verificar que la dependencia no tenga tramites en seguimiento
+        try {
+            if (Lector.retornarFilaPorValorEnColumna(tramitesFilePath, "seguimiento", nombre) != null) {
+                JOptionPane.showMessageDialog(this, "La dependencia tiene trámites en proceso y/o finalizados");
+                dependenciaSeleccionadaLabel.setText("Dependencia Seleccionada: ");
+                nuevoNombreNuevaDependenciaTextField.setText("");
+                return;
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+        }
+
+        // Eliminar dependencia
+        try {
+            Lector.eliminarRegistroPorValorEnColumna(filePath, "nombre", nombre);
+            modeloDependencias.setRowCount(0); // Remove all existing rows
+            Dependencias = new AdminDependencia(); // Reset the current Dependencias in linked list
+            cargarTablaDependenciasDesdeCSV();
+            JOptionPane.showMessageDialog(this, "Eliminación Correcta");
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+        } finally {
+            dependenciaSeleccionadaLabel.setText("Dependencia Seleccionada: ");
+            nuevoNombreNuevaDependenciaTextField.setText("");
+        }
+        
+
+    }//GEN-LAST:event_eliminarDependenciaButtonActionPerformed
+
+    private void nuevoNombreNuevaDependenciaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoNombreNuevaDependenciaTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevoNombreNuevaDependenciaTextFieldActionPerformed
+
+    private void nombreNuevaDependenciaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreNuevaDependenciaTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreNuevaDependenciaTextFieldActionPerformed
+    
+    public void cargarTablaDependenciasDesdeCSV() {
+        String filePath = "src/datos/dependencias.csv";
+        BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
+                                    // Cada br.readLine() leera la linea siguiente a la almacenada en br
+        
+                                    
+        try {
+            br = new BufferedReader(new FileReader(filePath));
+            String line;
+            boolean firstLine = true; // Para saltar la primera línea (encabezados)
+            
+            while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Saltar la primera línea (encabezados)
+                }
+                
+                String dato = line.trim();
+                if (!dato.isEmpty()) { // Verificar existencia de 5 columnas en admins.csv
+                    Dependencias.insertar(dato);
+                    String[] row_a_insertar = {dato};
+                    modeloDependencias.addRow(row_a_insertar);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+        } finally { // Se ejecuta independientemente de si se produjo una excepción durante la ejecución del código en el bloque try
+            if (br != null) {
+                try {
+                    br.close(); // Cerrar el BufferedReader para liberar recursos usados en la lectura
+                } catch (IOException e) {
+                    e.printStackTrace(); // Manejo de errores al cerrar el archivo
+                }
+            }
+        }
+    }
+      
+    public void modificarDependencia()
+    {
+        int fila = dependenciasTable.getSelectedRow();
+        modeloDependencias.setValueAt(nombreNuevaDependenciaTextField.getText(), fila, 0);
+    }
+    
+    public void eliminarDependencia()
+    {
+        int fila = dependenciasTable.getSelectedRow();
+        modeloDependencias.removeRow(fila);
+    }
+// Funcionamiento USUARIOS =====================================================================================
     public void cargarTablaDesdeCSV() {
         String filePath = "src/datos/admins.csv";
         BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
@@ -830,7 +1273,7 @@ public class AdminUI extends javax.swing.JFrame {
                 if (datos.length == 5) { // Verificar existencia de 5 columnas en admins.csv
                     Admins.insertar(datos[1],datos[2],datos[0],datos[4], datos[3]);
                     String[] row_a_insertar = {datos[0],datos[1],datos[2], datos[3], datos[4]};
-                    modelo.addRow(row_a_insertar);
+                    modeloUsuarios.addRow(row_a_insertar);
                 }
             }
         } catch (IOException e) {
@@ -850,7 +1293,7 @@ public class AdminUI extends javax.swing.JFrame {
         int filas = usuariosTable.getRowCount();
         for (int i=0;i<filas;i++)
         {
-            modelo.removeRow(0);
+            modeloUsuarios.removeRow(0);
         }
     }
     
@@ -863,7 +1306,7 @@ public class AdminUI extends javax.swing.JFrame {
         dependenciasComboBox.setSelectedItem(null);
     }
     
-    public void CargarDependencias(){
+    public void CargarDependenciasParaUsuariosPanel(){
         String filePath = "src/datos/dependencias.csv";
         BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
                                     // Cada br.readLine() leera la linea siguiente a la almacenada en br
@@ -928,7 +1371,7 @@ public class AdminUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run(){
-                new AdminUI(nuevo).setVisible(true);
+                new AdminUI().setVisible(true);
             }
         });
     }
@@ -936,6 +1379,7 @@ public class AdminUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizarButton;
     private javax.swing.JButton agregarButton;
+    private javax.swing.JButton agregarDependenciaButton;
     private javax.swing.JLabel buscaUsuarioIdLabel;
     private javax.swing.JLabel buscaUsuarioIdLabel1;
     private javax.swing.JButton buscarPorIdButton;
@@ -943,11 +1387,17 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JTextField contraseñaTextField;
     private javax.swing.JLabel correoLabel;
     private javax.swing.JTextField correoTextField;
+    private javax.swing.JLabel crearDependenciaLabel;
     private javax.swing.JLabel dateTimeLabel;
+    private javax.swing.JLabel dependenciaSeleccionadaLabel;
     private javax.swing.JComboBox<String> dependenciasComboBox;
     private javax.swing.JLabel dependenciasLabel;
     private javax.swing.JPanel dependenciasPanel;
+    private javax.swing.JTable dependenciasTable;
+    private javax.swing.JLabel eliminacionDependienciaLabel;
     private javax.swing.JButton eliminarButton;
+    private javax.swing.JButton eliminarDependenciaButton;
+    private javax.swing.JLabel eliminarDependenciaLabel;
     private javax.swing.JButton homeButton;
     private javax.swing.JPanel homePanel;
     private javax.swing.JTextField idBusquedaTextField;
@@ -955,16 +1405,26 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JTextField idTextField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton listaDeDependenciasButton;
     private javax.swing.JButton listaDeUsuariosButton;
     private javax.swing.JPanel listaDeUsuariosPanel;
+    private javax.swing.JLabel modificacionDependenciaLabel;
     private javax.swing.JButton modificarButton;
+    private javax.swing.JButton modificarDependenciaButton;
     private javax.swing.JLabel nombreLabel;
+    private javax.swing.JTextField nombreNuevaDependenciaTextField;
     private javax.swing.JTextField nombreTextField;
+    private javax.swing.JLabel nuevaDependenciaNombreLabel;
+    private javax.swing.JLabel nuevoNombreDependenciaLabel;
+    private javax.swing.JTextField nuevoNombreNuevaDependenciaTextField;
     private javax.swing.JButton salirButton;
     private javax.swing.JTabbedPane tabsPanel;
     private javax.swing.JButton tramitesButton;
     private javax.swing.JPanel tramitesPanel;
+    private javax.swing.JTable tramitesTable;
     private javax.swing.JLabel usuariosPanelTitleLabel;
     private javax.swing.JTable usuariosTable;
     private javax.swing.JLabel welcomeLabel;
