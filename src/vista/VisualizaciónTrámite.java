@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class VisualizaciónTrámite extends javax.swing.JFrame {
     
     private BandejaTramite bandeja;
-    private DefaultTableModel modelo;
+    private DefaultTableModel modeloTramites;
     private static Administrador nuevo;
     
     /**
@@ -32,17 +32,17 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         initComponents();
         bandeja = new BandejaTramite();
         nuevo = admin_logueado;
-        modelo = new DefaultTableModel();
-        modelo.addColumn("ID");
-        modelo.addColumn("Prioridad");
-        modelo.addColumn("Asunto");
-        modelo.addColumn("Referencia");
-        modelo.addColumn("DNI");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Correo");
-        this.jTable1.setModel(modelo);
-        CargarDependencias();
-        cargarTablaDesdeCSV();
+        modeloTramites = new DefaultTableModel();
+        modeloTramites.addColumn("ID");
+        modeloTramites.addColumn("Prioridad");
+        modeloTramites.addColumn("Asunto");
+        modeloTramites.addColumn("Referencia");
+        modeloTramites.addColumn("DNI");
+        modeloTramites.addColumn("Nombre");
+        modeloTramites.addColumn("Correo");
+        this.jTable1.setModel(modeloTramites);
+        CargarTramites();
+        cargarTablaTramiteDesdeCSV();
     }
     
     /**
@@ -199,14 +199,14 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         if(Busqueda.getSelectedItem().toString().equalsIgnoreCase("Prioridad"))
         {
             BandejaTramite ordenado = OrdenarPrioridad(bandeja);
-            limpiarTabla();
-            CargarTabla(ordenado);
+            limpiarTablaTramites();
+            CargarTablaTramites(ordenado);
             
             
         }
         else if (Busqueda.getSelectedItem().toString().equalsIgnoreCase("Antiguedad") )
         {
-            limpiarTabla();
+            limpiarTablaTramites();
             
         }
     }//GEN-LAST:event_BusquedaActionPerformed
@@ -229,9 +229,9 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         aux.setDependencia(dependencia);
         String[] datos = {aux.getExp().getID(), aux.getExp().getPrioridad(),aux.getExp().getNuevo().getDNI(),aux.getExp().getNuevo().getNombre(), aux.getExp().getNuevo().getCorreo(), aux.getExp().getAsunto(), aux.getExp().getDocref(), aux.getEstado(), aux.getFechain(), aux.getHorain(), aux.getFechafin(), aux.getHorafin(), aux.getDocumento()};
         // Ruta del archivo CSV
-        agregar(dependencia,datos);
+        agregarTramite(dependencia,datos);
         CambiarSeguimiento(aux);
-        eliminar(nuevo.getDependencia(),aux);
+        eliminarTramite(nuevo.getDependencia(),aux);
         
         
         
@@ -250,7 +250,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
             Cambiar("idexpediente",aux,"fecha_fin");
             Cambiar("idexpediente",aux,"hora_fin");
             Cambiar("idexpediente",aux,"documento_producto");
-            eliminar(dependencia,aux);
+            eliminarTramite(dependencia,aux);
         
     }//GEN-LAST:event_FinalizarActionPerformed
 
@@ -289,7 +289,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         });
     }
 
-    public void CargarDependencias()
+    public void CargarTramites()
     {
         String filePath = "src/datos/dependencias.csv";
         BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
@@ -350,7 +350,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                         Tramite t1 = new Tramite(e1,datos[7],datos[8],datos[9],datos[10],datos[11],datos[12],dependencia);
                         bandeja.encolar(t1);
                         String[] row_a_insertar = {datos[0],datos[1],datos[2],datos[3],datos[4],datos[5],datos[6]};
-                        modelo.addRow(row_a_insertar);
+                        modeloTramites.addRow(row_a_insertar);
                     }
                 }
             } catch (IOException e) {
@@ -366,7 +366,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
             }
     }
     
-    public void cargarTablaDesdeCSV() 
+    public void cargarTablaTramiteDesdeCSV() 
     {
         if (nuevo.getDependencia().equalsIgnoreCase("Estudios Generales"))
         {
@@ -378,7 +378,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         }
     }
     
-    public void agregar(String dependencia, String[] datos)
+    public void agregarTramite(String dependencia, String[] datos)
     {
         String filePath = "src/datos/"+dependencia+".csv";
 
@@ -397,25 +397,25 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error al derivar el tramite");
             }
     }
-    public void eliminar(String dependencia,Tramite aux)
+    public void eliminarTramite(String dependencia,Tramite aux)
     {
         String filePath = "src/datos/"+dependencia+".csv";
 
             try {
                 if (0 != -1) {
                     // Obtener el ID de la fila seleccionada
-                    String id = (String) modelo.getValueAt(0, 0);
+                    String id = (String) modeloTramites.getValueAt(0, 0);
                 // Verificar si hay una fila seleccionada en la tabla
                 
                     // Obtener el ID de la fila seleccionada
                 
 
-                    // Confirmar si se desea eliminar el usuario
+                    // Confirmar si se desea eliminarTramite el usuario
                         // Eliminar el registro del archivo CSV
                 Lector.eliminarRegistroPorValorEnColumna(filePath,"id", id);
 
                         // Eliminar la fila de la tabla
-                modelo.removeRow(0);
+                modeloTramites.removeRow(0);
                 }    
                     
                 
@@ -515,22 +515,22 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         return aux;
     }
     
-    public void limpiarTabla()
+    public void limpiarTablaTramites()
     {
-        int filas = modelo.getRowCount();
+        int filas = modeloTramites.getRowCount();
         for(int i =0;i<filas;i++)
         {
-            modelo.removeRow(0); 
+            modeloTramites.removeRow(0); 
         }
     }
     
-    public void CargarTabla(BandejaTramite ordenada)
+    public void CargarTablaTramites(BandejaTramite ordenada)
     {
         while(!ordenada.esVacia())
         {   
             Tramite orden = ordenada.desencolar();
             String[] datos ={orden.getExp().getID(),orden.getExp().getPrioridad(),orden.getExp().getAsunto(),orden.getExp().getDocref(),orden.getExp().getNuevo().getDNI(),orden.getExp().getNuevo().getNombre(),orden.getExp().getNuevo().getCorreo()};
-            modelo.addRow(datos);
+            modeloTramites.addRow(datos);
         }
     }
     

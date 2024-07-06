@@ -381,7 +381,7 @@ public class RegTramite extends javax.swing.JFrame {
 
 
 
-                // Limpiar los campos de texto después de agregar
+                // Limpiar los campos de texto después de agregarTramite
                 limpiartexto();
 
                 // Mostrar mensaje de éxito
@@ -407,7 +407,7 @@ public class RegTramite extends javax.swing.JFrame {
 
 
 
-                // Limpiar los campos de texto después de agregar
+                // Limpiar los campos de texto después de agregarTramite
                 limpiartexto();
 
      

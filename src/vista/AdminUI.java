@@ -6,12 +6,16 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.*;
 import model.*;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import helpers.FechaHora;
+
 
 public class AdminUI extends javax.swing.JFrame {
     
@@ -114,6 +118,19 @@ public class AdminUI extends javax.swing.JFrame {
         });
         delayTimer.setRepeats(false);
         delayTimer.start();
+        
+        // Setup TRAMITES
+        modeloTramites = new DefaultTableModel();
+        modeloTramites.addColumn("ID");
+        modeloTramites.addColumn("Prioridad");
+        modeloTramites.addColumn("Asunto");
+        modeloTramites.addColumn("Referencia");
+        modeloTramites.addColumn("DNI");
+        modeloTramites.addColumn("Nombre");
+        modeloTramites.addColumn("Correo");
+        this.tramitesTable.setModel(modeloTramites);
+        CargarTramites();
+        
     
     }
 
@@ -134,6 +151,18 @@ public class AdminUI extends javax.swing.JFrame {
         welcomeLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tramitesTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        Busqueda = new javax.swing.JComboBox<>();
+        Registro = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        dependenciasComboBox1 = new javax.swing.JComboBox<>();
+        Derivar = new javax.swing.JButton();
+        Finalizar = new javax.swing.JButton();
+        DocumentoGenerado = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        buscaUsuarioIdLabel2 = new javax.swing.JLabel();
+        buscaUsuarioIdLabel3 = new javax.swing.JLabel();
+        buscaUsuarioIdLabel4 = new javax.swing.JLabel();
         listaDeUsuariosPanel = new javax.swing.JPanel();
         usuariosPanelTitleLabel = new javax.swing.JLabel();
         buscaUsuarioIdLabel = new javax.swing.JLabel();
@@ -251,6 +280,78 @@ public class AdminUI extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tramitesTable);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        jLabel1.setText("Seleccionar Tipo de Ordenamiento");
+
+        Busqueda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Busqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Antiguedad", "Prioridad" }));
+        Busqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BusquedaActionPerformed(evt);
+            }
+        });
+
+        Registro.setBackground(new java.awt.Color(255, 102, 0));
+        Registro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Registro.setForeground(new java.awt.Color(255, 255, 255));
+        Registro.setText("Registro Tramite");
+        Registro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        Registro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistroActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        jLabel2.setText("Derivar a:");
+
+        dependenciasComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        dependenciasComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dependenciasComboBox1ActionPerformed(evt);
+            }
+        });
+
+        Derivar.setBackground(new java.awt.Color(0, 0, 0));
+        Derivar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Derivar.setForeground(new java.awt.Color(255, 255, 255));
+        Derivar.setText("Derivar Tramite");
+        Derivar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        Derivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DerivarActionPerformed(evt);
+            }
+        });
+
+        Finalizar.setBackground(new java.awt.Color(0, 0, 0));
+        Finalizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Finalizar.setForeground(new java.awt.Color(255, 255, 255));
+        Finalizar.setText("Finalizar Tramite");
+        Finalizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        Finalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinalizarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        jLabel3.setText("Documento generado:");
+
+        buscaUsuarioIdLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        buscaUsuarioIdLabel2.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
+        buscaUsuarioIdLabel2.setForeground(new java.awt.Color(255, 102, 0));
+        buscaUsuarioIdLabel2.setText("Derivación de Trámites");
+
+        buscaUsuarioIdLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        buscaUsuarioIdLabel3.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
+        buscaUsuarioIdLabel3.setForeground(new java.awt.Color(255, 102, 0));
+        buscaUsuarioIdLabel3.setText("Finalización de Trámites");
+
+        buscaUsuarioIdLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        buscaUsuarioIdLabel4.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
+        buscaUsuarioIdLabel4.setForeground(new java.awt.Color(255, 102, 0));
+        buscaUsuarioIdLabel4.setText("Crear un nuevo trámite");
+
         javax.swing.GroupLayout tramitesPanelLayout = new javax.swing.GroupLayout(tramitesPanel);
         tramitesPanel.setLayout(tramitesPanelLayout);
         tramitesPanelLayout.setHorizontalGroup(
@@ -258,18 +359,69 @@ public class AdminUI extends javax.swing.JFrame {
             .addGroup(tramitesPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(83, Short.MAX_VALUE))
+                    .addGroup(tramitesPanelLayout.createSequentialGroup()
+                        .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(tramitesPanelLayout.createSequentialGroup()
+                        .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(tramitesPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(27, 27, 27)
+                                .addComponent(Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buscaUsuarioIdLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(tramitesPanelLayout.createSequentialGroup()
+                                .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(buscaUsuarioIdLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(tramitesPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(dependenciasComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(48, 48, 48)
+                                        .addComponent(Derivar, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(112, 112, 112)
+                                .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(buscaUsuarioIdLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(tramitesPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(DocumentoGenerado, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(Finalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 30, Short.MAX_VALUE))))
         );
         tramitesPanelLayout.setVerticalGroup(
             tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tramitesPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscaUsuarioIdLabel4))
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
+                .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscaUsuarioIdLabel2)
+                    .addComponent(buscaUsuarioIdLabel3))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                .addGap(326, 326, 326))
+                .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Finalizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DocumentoGenerado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(tramitesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Derivar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dependenciasComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
+                .addGap(177, 177, 177))
         );
 
         tabsPanel.addTab("Home", tramitesPanel);
@@ -411,59 +563,57 @@ public class AdminUI extends javax.swing.JFrame {
         listaDeUsuariosPanelLayout.setHorizontalGroup(
             listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, listaDeUsuariosPanelLayout.createSequentialGroup()
                                 .addComponent(usuariosPanelTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(104, 104, 104)
                                 .addComponent(modificarButton))
-                            .addComponent(buscaUsuarioIdLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(247, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, listaDeUsuariosPanelLayout.createSequentialGroup()
-                        .addComponent(buscaUsuarioIdLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(idBusquedaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buscarPorIdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, listaDeUsuariosPanelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(contraseñaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45)
-                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                                .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                                .addComponent(correoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(correoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(59, 59, 59)
-                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                                .addComponent(dependenciasLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(dependenciasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                                .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buscaUsuarioIdLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, listaDeUsuariosPanelLayout.createSequentialGroup()
+                                .addComponent(buscaUsuarioIdLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(agregarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(actualizarButton))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                                .addComponent(idBusquedaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buscarPorIdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, listaDeUsuariosPanelLayout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(contraseñaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(45, 45, 45)
+                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                                    .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                                    .addComponent(correoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(correoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(59, 59, 59)
+                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                                    .addComponent(dependenciasLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(26, 26, 26)
+                                    .addComponent(dependenciasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                                    .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(agregarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(actualizarButton)))))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         listaDeUsuariosPanelLayout.setVerticalGroup(
             listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,20 +641,17 @@ public class AdminUI extends javax.swing.JFrame {
                         .addComponent(dependenciasLabel)
                         .addComponent(idLabel)
                         .addComponent(nombreLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(listaDeUsuariosPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(correoTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(contraseñaLabel)
-                                .addComponent(correoLabel))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listaDeUsuariosPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(agregarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(correoTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(contraseñaLabel)
+                            .addComponent(correoLabel)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listaDeUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(agregarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37))
         );
 
@@ -1220,6 +1367,63 @@ public class AdminUI extends javax.swing.JFrame {
     private void nombreNuevaDependenciaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreNuevaDependenciaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreNuevaDependenciaTextFieldActionPerformed
+
+    private void BusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaActionPerformed
+        // TODO add your handling code here:
+        if(Busqueda.getSelectedItem().toString().equalsIgnoreCase("Prioridad"))
+        {
+            BandejaTramite ordenado = OrdenarPrioridad(bandeja);
+            limpiarTablaTramites();
+            CargarTablaTramites(ordenado);
+
+        }
+        else if (Busqueda.getSelectedItem().toString().equalsIgnoreCase("Antiguedad") )
+        {
+            limpiarTablaTramites();
+
+        }
+    }//GEN-LAST:event_BusquedaActionPerformed
+
+    private void RegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistroActionPerformed
+        // TODO add your handling code here:
+        RegTramite registrar = new RegTramite(adminLogueado);
+        registrar.setVisible(true);
+    }//GEN-LAST:event_RegistroActionPerformed
+
+    private void dependenciasComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dependenciasComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dependenciasComboBox1ActionPerformed
+
+    private void DerivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DerivarActionPerformed
+        // TODO add your handling code here:
+        String dependencia = dependenciasComboBox.getSelectedItem().toString();
+        DocumentoGenerado.setText(dependencia);
+        Tramite aux = bandeja.desencolar();
+        aux.setDependencia(dependencia);
+        String[] datos = {aux.getExp().getID(), aux.getExp().getPrioridad(),aux.getExp().getNuevo().getDNI(),aux.getExp().getNuevo().getNombre(), aux.getExp().getNuevo().getCorreo(), aux.getExp().getAsunto(), aux.getExp().getDocref(), aux.getEstado(), aux.getFechain(), aux.getHorain(), aux.getFechafin(), aux.getHorafin(), aux.getDocumento()};
+        // Ruta del archivo CSV
+        agregarTramite(dependencia,datos);
+        CambiarSeguimiento(aux);
+        eliminarTramite(adminLogueado.getDependencia(),aux);
+
+    }//GEN-LAST:event_DerivarActionPerformed
+
+    private void FinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarActionPerformed
+        // TODO add your handling code here:
+        String dependencia = adminLogueado.getDependencia();
+
+        Tramite aux = bandeja.desencolar();
+        aux.setDocumento(DocumentoGenerado.getText());
+        aux.setEstado("Finalizado");
+        aux.setFechafin(FechaHora.Fecha());
+        aux.setHorafin(FechaHora.FechaHora());
+        Cambiar("idexpediente",aux,"estado");
+        Cambiar("idexpediente",aux,"fecha_fin");
+        Cambiar("idexpediente",aux,"hora_fin");
+        Cambiar("idexpediente",aux,"documento_producto");
+        eliminarTramite(dependencia,aux);
+
+    }//GEN-LAST:event_FinalizarActionPerformed
     
     public void cargarTablaDependenciasDesdeCSV() {
         String filePath = "src/datos/dependencias.csv";
@@ -1452,6 +1656,241 @@ public class AdminUI extends javax.swing.JFrame {
         }
     }
 
+// Funcionamiento TRAMITES
+    public void CargarTramites()
+    {
+        String filePath = "src/datos/dependencias.csv";
+        BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
+                                    // Cada br.readLine() leera la linea siguiente a la almacenada en br
+        
+                                    
+        try {
+            br = new BufferedReader(new FileReader(filePath));
+            String line;
+            boolean firstLine = true; // Para saltar la primera línea (encabezados)
+            
+            while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Saltar la primera línea (encabezados)
+                }
+                
+                String datos = line.trim();
+                if (!datos.isEmpty()) { // Verificar existencia de 6 columnas en admins.csv
+                    dependenciasComboBox.addItem(datos);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+        } finally { // Se ejecuta independientemente de si se produjo una excepción durante la ejecución del código en el bloque try
+            if (br != null) {
+                try {
+                    br.close(); // Cerrar el BufferedReader para liberar recursos usados en la lectura
+                } catch (IOException e) {
+                    e.printStackTrace(); // Manejo de errores al cerrar el archivo
+                }
+            }
+        }
+    }
+    
+    public void cargarinfo(String dependencia)
+    {
+            String filePath = "src/datos/"+dependencia+".csv";
+            BufferedReader br = null; // Se utilizara para tener en memoria la linea que se leeyo previamente en el archivo
+                                        // Cada br.readLine() leera la linea siguiente a la almacenada en br
+
+
+            try {
+                br = new BufferedReader(new FileReader(filePath));
+                String line;
+                boolean firstLine = true; // Para saltar la primera línea (encabezados)
+
+                while ((line = br.readLine()) != null) {
+                    if (firstLine) {
+                        firstLine = false;
+                        continue; // Saltar la primera línea (encabezados)
+                    }
+
+                    String[] datos = line.split(";");
+                    if (datos.length == 13) { // Verificar existencia de 5 columnas en admins.csv
+                        Interesado i1 = new Interesado(datos[4],datos[5],datos[6]);
+                        Expediente e1 = new Expediente(datos[0],datos[1],i1,datos[2],datos[3]);
+                        Tramite t1 = new Tramite(e1,datos[7],datos[8],datos[9],datos[10],datos[11],datos[12],dependencia);
+                        bandeja.encolar(t1);
+                        String[] row_a_insertar = {datos[0],datos[1],datos[2],datos[3],datos[4],datos[5],datos[6]};
+                        modeloTramites.addRow(row_a_insertar);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace(); // Manejo de errores en caso de problemas al leer el archivo
+            } finally { // Se ejecuta independientemente de si se produjo una excepción durante la ejecución del código en el bloque try
+                if (br != null) {
+                    try {
+                        br.close(); // Cerrar el BufferedReader para liberar recursos usados en la lectura
+                    } catch (IOException e) {
+                        e.printStackTrace(); // Manejo de errores al cerrar el archivo
+                    }
+                }
+            }
+    }
+    
+   
+    
+    public void agregarTramite(String dependencia, String[] datos)
+    {
+        String filePath = "src/datos/"+dependencia+".csv";
+
+            try {
+                // Verificar si el registro ya existe antes de agregarlo
+                Lector.agregarNuevoRegistro(filePath, datos);
+
+                // Mostrar mensaje de éxito
+                JOptionPane.showMessageDialog(this, "Designacion exitosa");
+            } catch (IllegalArgumentException e) {
+                // Manejar la excepción si el ID ya existe en el archivo CSV
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error de duplicado", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                // Manejar cualquier excepción que ocurra durante la escritura del archivo
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al derivar el tramite");
+            }
+    }
+    public void eliminarTramite(String dependencia,Tramite aux)
+    {
+        String filePath = "src/datos/"+dependencia+".csv";
+
+            try {
+                if (0 != -1) {
+                    // Obtener el ID de la fila seleccionada
+                    String id = (String) modeloTramites.getValueAt(0, 0);
+                // Verificar si hay una fila seleccionada en la tabla
+                
+                    // Obtener el ID de la fila seleccionada
+                
+
+                    // Confirmar si se desea eliminarTramite el usuario
+                        // Eliminar el registro del archivo CSV
+                Lector.eliminarRegistroPorValorEnColumna(filePath,"id", id);
+
+                        // Eliminar la fila de la tabla
+                modeloTramites.removeRow(0);
+                }    
+                    
+                
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al eliminar el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }
+    
+    public static String fechaActual()
+    {
+        Date fecha = new Date();
+        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
+        return formatofecha.format(fecha);
+        
+    }
+    
+    public void CambiarSeguimiento(Tramite aux)
+    {
+        
+        String filePath = "src/datos/tramites.csv";
+
+            try {
+                String dato = aux.getDependencia();
+                // Verificar si el registro ya existe antes de agregarlo
+                Lector.modificarColumnaEnLineaAñadiendo(filePath,"idexpediente",aux.getExp().getID(),"seguimiento",dato);
+
+                
+            } catch (IllegalArgumentException e) {
+                // Manejar la excepción si el ID ya existe en el archivo CSV
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error de duplicado", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                // Manejar cualquier excepción que ocurra durante la escritura del archivo
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al derivar el tramite");
+            }
+    }
+    
+    public void Cambiar(String cabecera,Tramite aux,String buscacabecera)
+    {
+        
+        String filePath = "src/datos/tramites.csv";
+
+            try {
+                if (buscacabecera.equalsIgnoreCase("estado"))
+                { 
+                    
+                    String valorcambiar = aux.getEstado();
+                    // Verificar si el registro ya existe antes de agregarlo
+                    Lector.modificarColumnaEnLinea(filePath,cabecera,aux.getExp().getID(),buscacabecera,valorcambiar);
+                }
+                else if(buscacabecera.equalsIgnoreCase("fecha_fin"))
+                {
+                    String valorcambiar = aux.getFechafin();
+                    // Verificar si el registro ya existe antes de agregarlo
+                    Lector.modificarColumnaEnLinea(filePath,cabecera,aux.getExp().getID(),buscacabecera,valorcambiar);
+                }
+                else if(buscacabecera.equalsIgnoreCase("hora_fin"))
+                {
+                    String valorcambiar = aux.getHorafin();
+                    // Verificar si el registro ya existe antes de agregarlo
+                    Lector.modificarColumnaEnLinea(filePath,cabecera,aux.getExp().getID(),buscacabecera,valorcambiar);
+                }
+                
+            } catch (IllegalArgumentException e) {
+                // Manejar la excepción si el ID ya existe en el archivo CSV
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error de duplicado", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                // Manejar cualquier excepción que ocurra durante la escritura del archivo
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al derivar el tramite");
+            }
+    }
+    
+    public BandejaTramite OrdenarPrioridad(BandejaTramite bandeja)
+    {
+        BandejaTramite aux = new BandejaTramite();
+        BandejaTramite tempBandeja = new BandejaTramite();
+        // Procesar trámites con prioridad alta
+        while (!bandeja.esVacia()) {
+            Tramite mover = bandeja.desencolar();
+            String prioridad = mover.getExp().getPrioridad();
+            if (prioridad.equalsIgnoreCase("Alta")) {
+                aux.encolar(mover);
+            } else {
+                tempBandeja.encolar(mover);
+            }
+        }
+        // Procesar trámites con prioridad baja
+        while (!tempBandeja.esVacia()) {
+            Tramite mover = tempBandeja.desencolar();
+            aux.encolar(mover);
+        }
+        aux.mostrarCola();
+        return aux;
+    }
+    
+    public void limpiarTablaTramites()
+    {
+        int filas = modeloTramites.getRowCount();
+        for(int i =0;i<filas;i++)
+        {
+            modeloTramites.removeRow(0); 
+        }
+    }
+    
+    public void CargarTablaTramites(BandejaTramite ordenada)
+    {
+        while(!ordenada.esVacia())
+        {   
+            Tramite orden = ordenada.desencolar();
+            String[] datos ={orden.getExp().getID(),orden.getExp().getPrioridad(),orden.getExp().getAsunto(),orden.getExp().getDocref(),orden.getExp().getNuevo().getDNI(),orden.getExp().getNuevo().getNombre(),orden.getExp().getNuevo().getCorreo()};
+            modeloTramites.addRow(datos);
+        }
+    }
     /*/
     /**
      * @param args the command line arguments
@@ -1488,11 +1927,19 @@ public class AdminUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Busqueda;
+    private javax.swing.JButton Derivar;
+    private javax.swing.JTextField DocumentoGenerado;
+    private javax.swing.JButton Finalizar;
+    private javax.swing.JButton Registro;
     private javax.swing.JButton actualizarButton;
     private javax.swing.JButton agregarButton;
     private javax.swing.JButton agregarDependenciaButton;
     private javax.swing.JLabel buscaUsuarioIdLabel;
     private javax.swing.JLabel buscaUsuarioIdLabel1;
+    private javax.swing.JLabel buscaUsuarioIdLabel2;
+    private javax.swing.JLabel buscaUsuarioIdLabel3;
+    private javax.swing.JLabel buscaUsuarioIdLabel4;
     private javax.swing.JButton buscarPorIdButton;
     private javax.swing.JLabel contraseñaLabel;
     private javax.swing.JTextField contraseñaTextField;
@@ -1502,6 +1949,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel dateTimeLabel;
     private javax.swing.JLabel dependenciaSeleccionadaLabel;
     private javax.swing.JComboBox<String> dependenciasComboBox;
+    private javax.swing.JComboBox<String> dependenciasComboBox1;
     private javax.swing.JLabel dependenciasLabel;
     private javax.swing.JPanel dependenciasPanel;
     private javax.swing.JTable dependenciasTable;
@@ -1514,6 +1962,9 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JTextField idBusquedaTextField;
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField idTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
