@@ -1,15 +1,2 @@
-idexpediente;DNI;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento
-1111111111;sdasdasd;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>DUIS>Administracion>Contabilidad
-4565;adsadas; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>Contabilidad>Administracion>DUIS>
-123;sdsads; En proceso;05/07/2024;-;-;-;-;Estudios Generales>Contabilidad>DUIS>
-12;sadsad;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>Estudios Generales>
-1111;sadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
-2222;sdsad;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
-3333;sdsadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
-4444;ytrytyu;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>
-111;sadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
-2222;dsadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales>
-333;dsdasd; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
-55555555;dasdsadsa; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
-666666;jhjhkhjk;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>
-99999;gfdgfdg; En proceso;05/07/2024;-;-;-;-;Estudios Generales>
+DNI;nombre;correo;idexpediente;prioridad;asunto;referencia;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento
+73787105;marco;marco@gmail.com;01;Alta;Obtencion de oficio;;proceso;22/05/2024;08:52;;;;IDIC>DUIS>

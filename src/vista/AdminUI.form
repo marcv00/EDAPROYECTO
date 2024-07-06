@@ -143,89 +143,81 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="welcomeLabel1" min="-2" pref="415" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                          <Component id="Busqueda" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="buscaUsuarioIdLabel4" min="-2" pref="191" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="Registro" min="-2" pref="248" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="buscaUsuarioIdLabel2" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="dependenciasComboBox1" min="-2" pref="129" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                                  <Component id="Derivar" min="-2" pref="182" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="buscaUsuarioIdLabel3" min="-2" pref="191" max="-2" attributes="0"/>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                                  <Component id="DocumentoGenerado" min="-2" pref="129" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                                  <Component id="Finalizar" min="-2" pref="177" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="welcomeLabel1" min="-2" pref="415" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="tipoDeOrdenamientoLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="tipoOrdenamientoComboBox" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                      <Component id="ordenarTramitesButton" min="-2" pref="93" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" alignment="0" min="-2" pref="1031" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="derivarLabel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                              <Component id="dependenciasEnvioTramiteComboBox" min="-2" pref="178" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                              <Component id="DerivarTramiteButton" min="-2" pref="141" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="derivacionDeTramitesLabel" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
+                                          <Component id="buscaUsuarioIdLabel4" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="finalizacionDeTramiteLabel" min="-2" pref="191" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="documentoGeneradoLabel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Component id="DocumentoGeneradoTextField" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                              <Component id="finalizarTramiteButton" min="-2" pref="148" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                               </Group>
+                              <Component id="Registro" alignment="1" min="-2" pref="148" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="welcomeLabel1" min="-2" pref="50" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Busqueda" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="Registro" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                              <Component id="buscaUsuarioIdLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" pref="155" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="buscaUsuarioIdLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="buscaUsuarioIdLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="welcomeLabel1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="tipoDeOrdenamientoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tipoOrdenamientoComboBox" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="ordenarTramitesButton" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="189" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="Finalizar" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                      <Component id="DocumentoGenerado" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="Derivar" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Component id="dependenciasComboBox1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="derivacionDeTramitesLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="finalizacionDeTramiteLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="derivarLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="dependenciasEnvioTramiteComboBox" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="DerivarTramiteButton" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="finalizarTramiteButton" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="DocumentoGeneradoTextField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="documentoGeneradoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="buscaUsuarioIdLabel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="83" max="32767" attributes="0"/>
+                          <Component id="Registro" min="-2" pref="43" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -275,15 +267,15 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JLabel" name="jLabel1">
+                <Component class="javax.swing.JLabel" name="tipoDeOrdenamientoLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI Semibold" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Seleccionar Tipo de Ordenamiento"/>
+                    <Property name="text" type="java.lang.String" value="Tipo de Ordenamiento"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="Busqueda">
+                <Component class="javax.swing.JComboBox" name="tipoOrdenamientoComboBox">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
@@ -296,7 +288,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BusquedaActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipoOrdenamientoComboBoxActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -322,7 +314,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegistroActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel2">
+                <Component class="javax.swing.JLabel" name="derivarLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI Semibold" size="12" style="1"/>
@@ -330,7 +322,7 @@
                     <Property name="text" type="java.lang.String" value="Derivar a:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="dependenciasComboBox1">
+                <Component class="javax.swing.JComboBox" name="dependenciasEnvioTramiteComboBox">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
@@ -340,13 +332,13 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dependenciasComboBox1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dependenciasEnvioTramiteComboBoxActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="Derivar">
+                <Component class="javax.swing.JButton" name="DerivarTramiteButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="0" type="rgb"/>
@@ -363,10 +355,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DerivarActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DerivarTramiteButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="Finalizar">
+                <Component class="javax.swing.JButton" name="finalizarTramiteButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="0" type="rgb"/>
@@ -383,12 +375,12 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FinalizarActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="finalizarTramiteButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="DocumentoGenerado">
+                <Component class="javax.swing.JTextField" name="DocumentoGeneradoTextField">
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel3">
+                <Component class="javax.swing.JLabel" name="documentoGeneradoLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI Semibold" size="12" style="1"/>
@@ -396,7 +388,7 @@
                     <Property name="text" type="java.lang.String" value="Documento generado:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="buscaUsuarioIdLabel2">
+                <Component class="javax.swing.JLabel" name="derivacionDeTramitesLabel">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -410,7 +402,7 @@
                     <Property name="text" type="java.lang.String" value="Derivaci&#xf3;n de Tr&#xe1;mites"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="buscaUsuarioIdLabel3">
+                <Component class="javax.swing.JLabel" name="finalizacionDeTramiteLabel">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -438,6 +430,26 @@
                     <Property name="text" type="java.lang.String" value="Crear un nuevo tr&#xe1;mite"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JButton" name="ordenarTramitesButton">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="66" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="12" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Ordenar"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)" type="code"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ordenarTramitesButtonActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="listaDeUsuariosPanel">
@@ -462,11 +474,7 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="usuariosPanelTitleLabel" min="-2" pref="631" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                                          <Component id="modificarButton" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="usuariosPanelTitleLabel" alignment="0" min="-2" pref="631" max="-2" attributes="0"/>
                                       <Component id="buscaUsuarioIdLabel1" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="buscaUsuarioIdLabel" min="-2" max="-2" attributes="0"/>
@@ -525,7 +533,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="74" max="32767" attributes="0"/>
+                          <EmptySpace pref="79" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -533,10 +541,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="usuariosPanelTitleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="modificarButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="usuariosPanelTitleLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="buscaUsuarioIdLabel" alignment="1" max="32767" attributes="0"/>
@@ -545,7 +550,7 @@
                               <Component id="buscarPorIdButton" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="243" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="247" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="buscaUsuarioIdLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -736,14 +741,6 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agregarButtonActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="modificarButton">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Modificar"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarButtonActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="eliminarButton">

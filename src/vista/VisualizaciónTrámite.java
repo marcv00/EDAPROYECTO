@@ -226,7 +226,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         String dependencia = dependenciasComboBox.getSelectedItem().toString();
         DocumentoGenerado.setText(dependencia);
         Tramite aux = bandeja.desencolar();
-        aux.setDependencia(dependencia);
+        //aux.setDependencia(dependencia);
         String[] datos = {aux.getExp().getID(), aux.getExp().getPrioridad(),aux.getExp().getNuevo().getDNI(),aux.getExp().getNuevo().getNombre(), aux.getExp().getNuevo().getCorreo(), aux.getExp().getAsunto(), aux.getExp().getDocref(), aux.getEstado(), aux.getFechain(), aux.getHorain(), aux.getFechafin(), aux.getHorafin(), aux.getDocumento()};
         // Ruta del archivo CSV
         agregarTramite(dependencia,datos);
@@ -435,15 +435,15 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         
     }
     
-    public void CambiarSeguimiento(Tramite aux)
+    public void CambiarSeguimiento(Tramite tramite)
     {
         
         String filePath = "src/datos/tramites.csv";
 
             try {
-                String dato = aux.getDependencia();
+                String dato = tramite.getSeguimiento() + dependenciasComboBox.getSelectedItem().toString() + ">";
                 // Verificar si el registro ya existe antes de agregarlo
-                Lector.modificarColumnaEnLineaAñadiendo(filePath,"idexpediente",aux.getExp().getID(),"seguimiento",dato);
+                Lector.modificarColumnaEnLineaAñadiendo(filePath,"idexpediente",tramite.getExp().getID(),"seguimiento",dato);
 
                 
             } catch (IllegalArgumentException e) {
