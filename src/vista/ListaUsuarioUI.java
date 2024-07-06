@@ -1029,24 +1029,7 @@ public class ListaUsuarioUI extends javax.swing.JFrame {
             });
     }
         
-    public void CargarTabla()
-    {
-        int filas = this.jTable1.getRowCount();
-        for (int i =0;i<filas;i++)
-        {
-            modelo.removeRow(0);
-        }
-        String datos[] = new String[4];
-        for(int i = 0;i<Admins.NDep();i++)
-        {
-            Administrador encontrado = Admins.ObtenerUsuario(i);
-            datos[0] = encontrado.getID();
-            datos[1] = encontrado.getContraseña();
-            datos[2] = encontrado.getNombre();
-            datos[3] = encontrado.getCorreo();
-            modelo.addRow(datos);
-        }    
-    }
+    
     public void Agregar()
     {
         modelo.addRow(new Object[]{

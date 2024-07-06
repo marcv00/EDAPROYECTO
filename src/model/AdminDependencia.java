@@ -98,19 +98,7 @@ public class AdminDependencia {
        }
    }
    
-   public int NDep()
-   {
-       int cant = 0;
    
-       Dependencia ptr = this.U;
-       while (ptr != null)
-       {   
-           cant++;
-           ptr = ptr.getSgte();
-       }
-       return cant;
-
-   }
    
    public String ObtenerDepedencias(int ubicacion)
    {

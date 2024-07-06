@@ -35,4 +35,30 @@ public class DateTimeLabelUpdater {
         // Set the text of the label
         label.setText(dateTimeString);
     }
+    public static void updateLabelStatic(JLabel label) {
+        new DateTimeLabelUpdater(label);
+    }
+
+    // Método estático para obtener la hora actual en formato HH:mm a
+    public static String getCurrentTime() {
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm a");
+        Date date = new Date();
+        return timeFormatter.format(date);
+    }
+
+    // Método estático para obtener la fecha actual en formato EEEE d 'de' MMMM 'del' yyyy
+    public static String getCurrentDate() {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE d 'de' MMMM 'del' yyyy");
+        Date date = new Date();
+        String dateString = dateFormatter.format(date);
+        return dateString.substring(0, 1).toUpperCase() + dateString.substring(1); // Capitaliza la primera letra
+    }
+
+    // Método estático para obtener la fecha y hora actual en formato completo
+    public static String getCurrentDateTime() {
+        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("EEEE d 'de' MMMM 'del' yyyy, HH:mm a");
+        Date date = new Date();
+        String dateTimeString = dateTimeFormatter.format(date);
+        return dateTimeString.substring(0, 1).toUpperCase() + dateTimeString.substring(1); // Capitaliza la primera letra
+    }
 }

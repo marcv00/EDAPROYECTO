@@ -22,6 +22,7 @@ public class SegTramiteUI extends javax.swing.JFrame {
                 initComponents();
             modelo = new DefaultTableModel();
             modelo.addColumn("ID");
+            modelo.addColumn("Estado");
             modelo.addColumn("Fecha inicio");
             modelo.addColumn("Hora Inicio");
             modelo.addColumn("Fecha fin");
@@ -53,6 +54,7 @@ public class SegTramiteUI extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        Interesado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -102,6 +104,8 @@ public class SegTramiteUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        Interesado.setText("jLabel5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,13 +133,15 @@ public class SegTramiteUI extends javax.swing.JFrame {
                                         .addComponent(DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Interesado, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel4))
-                        .addGap(0, 33, Short.MAX_VALUE)))
+                        .addGap(0, 51, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -159,12 +165,13 @@ public class SegTramiteUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(Interesado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,12 +240,11 @@ public class SegTramiteUI extends javax.swing.JFrame {
                     }
 
                     String[] datos = line.split(";");
-                    if (datos.length == 9) { // Verificar existencia de 5 columnas en admins.csv
+                    if (datos.length == 10) { // Verificar existencia de 5 columnas en admins.csv
                         if(datos[1].equalsIgnoreCase(DNI.getText()))
                         {
-                            Interesado.setText(datos[1]);
-                            Estado.setText(datos[2]);
-                            String[] row_a_insertar = {datos[0],datos[3],datos[4],datos[5],datos[6],datos[7],datos[8]};
+                            Interesado.setText(datos[2]);
+                            String[] row_a_insertar = {datos[0],datos[3],datos[4],datos[5],datos[6],datos[7],datos[8],datos[9]};
                             modelo.addRow(row_a_insertar);
                         }
                     }
@@ -258,6 +264,7 @@ public class SegTramiteUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Busqueda;
     private javax.swing.JTextField DNI;
+    private javax.swing.JLabel Interesado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

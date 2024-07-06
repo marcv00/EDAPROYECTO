@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vista;
-import helpers.Lector;
+import helpers.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,8 +35,8 @@ public class RegTramite extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Registrar = new javax.swing.JButton();
+        Atras = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         IDTextField = new javax.swing.JTextField();
@@ -59,17 +59,17 @@ public class RegTramite extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("REGISTRAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Registrar.setText("REGISTRAR");
+        Registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                RegistrarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("ATRAS");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Atras.setText("ATRAS");
+        Atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                AtrasActionPerformed(evt);
             }
         });
 
@@ -158,7 +158,7 @@ public class RegTramite extends javax.swing.JFrame {
                         .addGap(205, 205, 205))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
+                            .addComponent(Atras)
                             .addComponent(jLabel7)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -187,7 +187,7 @@ public class RegTramite extends javax.swing.JFrame {
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(70, 70, 70)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(Registrar)
                                 .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,21 +255,21 @@ public class RegTramite extends javax.swing.JFrame {
                         .addGap(222, 222, 222)))
                 .addGap(113, 113, 113)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(Registrar)
+                    .addComponent(Atras))
                 .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtrasActionPerformed
         // TODO add your handling code here:
         VisualizaciónTrámite tramite = new VisualizaciónTrámite(nuevo);
         tramite.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_AtrasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
         // TODO add your handling code here:
         String ID = IDTextField.getText();
         String prioridad = PrioridadTextField.getText();
@@ -281,14 +281,16 @@ public class RegTramite extends javax.swing.JFrame {
         String estado = " En proceso";
         String fechain = jTextField1.getText();
         String fechafin = "-";
-        String horain = "-";
+        String horain = DateTimeLabelUpdater.getCurrentTime();
+        System.out.println(horain);
         String horafin = "-";
         String documento = "-";
         if (ID.isEmpty() || prioridad.isEmpty() || asunto.isEmpty() || referencia.isEmpty() || DNI.isEmpty() || nombre.isEmpty() || correo.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String[] datos = {ID, prioridad,DNI,nombre, correo, asunto, referencia, estado, fechain, horain, fechafin, horafin, documento};
+        
+        String[] datos = {ID, prioridad, asunto, referencia, DNI,nombre, correo, estado, fechain, horain, fechafin, horafin, documento};
         String dependencia = nuevo.getDependencia();
         // Ruta del archivo CSV
         if(dependencia.equalsIgnoreCase("Estudios Generales"))
@@ -301,7 +303,7 @@ public class RegTramite extends javax.swing.JFrame {
             agregar(dependencia,datos);
             llenarInteresado(datos);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_RegistrarActionPerformed
 
     private void IDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDTextFieldActionPerformed
         // TODO add your handling code here:
@@ -414,7 +416,7 @@ public class RegTramite extends javax.swing.JFrame {
     public void llenarInteresado(String[] datos)
     {
         String filePath = "src/datos/tramites.csv";
-        String[] nuevodatos = {datos[0],datos[5],datos[7],datos[8],datos[9],datos[10],datos[11],datos[12],nuevo.getDependencia()};
+        String[] nuevodatos = {datos[0],datos[1],datos[2],datos[3],datos[4],datos[5],datos[6],datos[7],datos[8],nuevo.getDependencia()};
         try {
                 // Verificar si el registro ya existe antes de agregarlo
                 Lector.agregarNuevoRegistro(filePath, nuevodatos);
@@ -438,15 +440,15 @@ public class RegTramite extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AsuntoTextField;
+    private javax.swing.JButton Atras;
     private javax.swing.JTextField CorreoTextField;
     private javax.swing.JTextField DNITextField;
     private javax.swing.JTextField IDTextField;
     private javax.swing.JTextField NombreTextField;
     private javax.swing.JTextField PrioridadTextField;
     private javax.swing.JTextField ReferenciaTextField;
+    private javax.swing.JButton Registrar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
