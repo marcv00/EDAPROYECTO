@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import model.*;
 import javax.swing.Timer;
@@ -29,6 +30,10 @@ public class AdminUI extends javax.swing.JFrame {
     private DefaultTableModel modeloDependencias;
     private AdminDependencia Dependencias;
     private String cambio;
+    
+    // Setup NOTIFICACIONES
+    private Timer notificationTimer;
+    private boolean atenderPressed = false;
     
     // Para testing
     public AdminUI() {
@@ -98,6 +103,18 @@ public class AdminUI extends javax.swing.JFrame {
         this.dependenciasTable.setModel(modeloDependencias);
         Dependencias = new AdminDependencia();
         cargarTablaDependenciasDesdeCSV();
+        
+        // Schedule the initial notification after 1 second delay
+        Timer delayTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                scheduleNextNotification();
+                ((Timer)e.getSource()).stop();
+            }
+        });
+        delayTimer.setRepeats(false);
+        delayTimer.start();
+    
     }
 
 
@@ -820,8 +837,8 @@ public class AdminUI extends javax.swing.JFrame {
         listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
         listaDeDependenciasButton.setForeground(new java.awt.Color(255,255,255,255));
         tabsPanel.setSelectedIndex(1);
-        VisualizaciónTrámite tramite = new VisualizaciónTrámite(adminLogueado);
-        tramite.setVisible(true);
+        //VisualizaciónTrámite tramite = new VisualizaciónTrámite(adminLogueado);
+        //tramite.setVisible(true);
     }//GEN-LAST:event_tramitesButtonActionPerformed
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
@@ -1341,7 +1358,100 @@ public class AdminUI extends javax.swing.JFrame {
             }
         }
     }
+// Funcionamiento NOTIFICACION =====================================================================================
     
+    // Function to notify about tramites en bandeja
+    public void notificarTramitesEnBandeja() {
+        // Count tramites en bandeja
+        int tramitesEnBandeja = contarTramitesEnProceso();
+
+        // Check if there are tramites to notify about
+        if (tramitesEnBandeja > 0) {
+            // Show dialog with "Atender" and "Cerrar" options
+            int option = JOptionPane.showOptionDialog(this,
+                    "Hay " + tramitesEnBandeja + " trámites en bandeja.",
+                    "Notificación de Trámites en Bandeja",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    new String[]{"Atender", "Cerrar"},
+                    "Cerrar");
+
+            // Check user selection
+            if (option == JOptionPane.YES_OPTION) {
+                // User pressed "Atender", perform actions
+                tramitesButton.setBackground(new java.awt.Color(220,223,228,255));
+                tramitesButton.setForeground(new java.awt.Color(0,0,0,255));
+                homeButton.setBackground(new java.awt.Color(0, 0, 0));
+                homeButton.setForeground(new java.awt.Color(255,255,255,255));
+                listaDeUsuariosButton.setBackground(new java.awt.Color(0, 0, 0));
+                listaDeUsuariosButton.setForeground(new java.awt.Color(255,255,255,255));
+                listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
+                listaDeDependenciasButton.setForeground(new java.awt.Color(255,255,255,255));
+                tabsPanel.setSelectedIndex(1);
+
+                // Cancel the notification timer
+                cancelNotificationTimer();
+            } else {
+                // User pressed "Cerrar" or closed the dialog
+                // Schedule next notification after 1 minute (60 seconds)
+                scheduleNextNotification();
+            }
+        } else {
+            // No tramites en bandeja, cancel notification
+            cancelNotificationTimer();
+        }
+    }
+
+    // Function to count tramites en proceso
+    public int contarTramitesEnProceso() {
+        int tramitesEnProceso = 0;
+        String tramitesFilePath = "src/datos/tramites.csv";
+
+        try {
+            // Leer todos los registros de trámites
+            List<String[]> registros = Lector.leerCSV(tramitesFilePath);
+
+            // Contar los trámites en proceso del administrador logueado
+            for (String[] registro : registros) {
+                String estado = registro[2].trim(); // Estado del trámite
+                String seguimiento = registro[8].trim(); // Seguimiento del trámite
+
+                // Verificar que el trámite está en proceso y en la bandeja del administrador logueado
+                if (estado.equalsIgnoreCase("En proceso") && seguimiento.endsWith(adminLogueado.getDependencia() + ">")) {
+                    tramitesEnProceso++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return tramitesEnProceso;
+    }
+
+    // Function to schedule the next notification after 1 minute (60 seconds)
+    private void scheduleNextNotification() {
+        if (notificationTimer != null) {
+            notificationTimer.stop();
+        }
+        notificationTimer = new Timer(60 * 1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notificarTramitesEnBandeja();
+            }
+        });
+        notificationTimer.setRepeats(false); // Ensure it runs only once unless rescheduled
+        notificationTimer.start();
+    }
+
+    // Function to cancel the notification timer
+    private void cancelNotificationTimer() {
+        if (notificationTimer != null) {
+            notificationTimer.stop();
+            notificationTimer = null; // Set to null to prevent further notifications
+        }
+    }
+
     /*/
     /**
      * @param args the command line arguments

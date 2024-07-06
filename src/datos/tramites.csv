@@ -1,33 +1,15 @@
-idexpediente;DNI;nombre;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento
-1111111111;123;Jose;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>DUIS>Administracion>Contabilidad
-4565;123;Jose; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>Contabilidad>Administracion
-123;123;Jose; En proceso;05/07/2024;-;-;-;-;Estudios Generales>Contabilidad>DUIS
-12;sadsad;Finalizado;05/07/2024;-;-;-;-;Estudios GeneralesEstudios Generales
-1111;sadsad; En proceso;05/07/2024;-;-;-;-;Estudios GeneralesDUIS
-2222;sdsad;Finalizado;05/07/2024;-;-;-;-;Estudios GeneralesDUIS
-3333;sdsadsad; En proceso;05/07/2024;-;-;-;-;Estudios GeneralesDUIS
-4444;ytrytyu;Finalizado;05/07/2024;-;-;-;-;Estudios Generales
-111;sadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS
-2222;dsadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales
-333;dsdasd; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS
-55555555;dasdsadsa; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS
-666666;jhjhkhjk;Finalizado;05/07/2024;-;-;-;-;Estudios Generales
-99999;gfdgfdg; En proceso;Finalizado;-;-;-;-;Estudios Generales
-12;sadsad;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>Estudios Generales
-sadsad;sdasdas; En proceso;Finalizado;-;-;5/7/2024;22:30;Estudios Generales
-sdsadsadf;sdsadsa; En proceso;Finalizado;-;-;5/6/2024;22:8;Estudios Generales
-55555;sadasd; En proceso;Finalizado;-;-;5/6/2024;22:8;Estudios Generales
-5555666;sadsad; En proceso;Finalizado;-;-;5/6/2024;22:8;Estudios Generales
-478;sadsad; En proceso;Finalizado;-;-;5/6/2024;22:8;Estudios Generales
-333333;fdsfdsf; En proceso;Finalizado;-;-;5/6/2024;22:8;Estudios Generales
-4444444;dfdfdfvcvc; En proceso;Finalizado;-;-;5/6/2024;22:8;Estudios Generales
-dsadsad;dsdsad;sadsad;Finalizado;dsadsad;fddsadsad;5/6/2024;22:8;05/07/2024;Estudios Generales
-Sassd;fdsfdsf;sdfdsf;Finalizado;dsadsad;sadsad;5/6/2024;22:8;05/07/2024;Estudios Generales
-fdsff;sadsad;sdsad;Finalizado;sadsad;dfdsf;5/6/2024;22:8;5/6/2024;Estudios Generales
-sadsadsdad;sdsadsad;sadsadsad;Finalizado;sadsad;sadsadafdsfdsf;5/6/2024;22:8;5/6/2024;Estudios Generales
-dsdsads;dsdsada;dsdsadsds;Finalizado;sdsadsad;dsadsad;5/6/2024;22:8;5/6/2024;Estudios Generales
-adsadsad;sadsaddsadsd;sdsad;Finalizado;dasdsad;dsadsad;5/7/2024;22:15;5/7/2024;22:15;-;-;Estudios Generales
-sadsad;Alto;dsfdsfsdf;dsfdsfds;1234;fdsfdsf;sdfdsfdf; En proceso;5/7/2024;22:23;-;-;Estudios Generales
-dsadsa;Baja;sadsad;Finalizado;1234;adsadasd;5/7/2024;22:30;5/7/2024;22:23;-;-;Estudios Generales
-adwrqrr;Alta;sadsad;Finalizado;1234;sdasdsad;5/7/2024;22:30;5/7/2024;22:23;-;-;Estudios Generales
-asdsadsd;4444;dsadasd;Finalizado;5/7/2024;22:30;5/7/2024;22:30;-;Estudios Generales
+idexpediente;DNI;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento
+1111111111;sdasdasd;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>DUIS>Administracion>Contabilidad
+4565;adsadas; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>Contabilidad>Administracion>DUIS>
+123;sdsads; En proceso;05/07/2024;-;-;-;-;Estudios Generales>Contabilidad>DUIS>
+12;sadsad;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>Estudios Generales>
+1111;sadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
+2222;sdsad;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
+3333;sdsadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
+4444;ytrytyu;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>
+111;sadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
+2222;dsadsad; En proceso;05/07/2024;-;-;-;-;Estudios Generales>
+333;dsdasd; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
+55555555;dasdsadsa; En proceso;05/07/2024;-;-;-;-;Estudios Generales>DUIS>
+666666;jhjhkhjk;Finalizado;05/07/2024;-;-;-;-;Estudios Generales>
+99999;gfdgfdg; En proceso;05/07/2024;-;-;-;-;Estudios Generales>

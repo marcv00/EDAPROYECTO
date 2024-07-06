@@ -133,7 +133,7 @@ public class Lector {
      * @return Lista de arrays de strings, donde cada array representa una fila del archivo CSV.
      * @throws IOException Si ocurre un error al leer el archivo.
      */
-    private static List<String[]> leerCSV(String filePath) throws IOException {
+    public static List<String[]> leerCSV(String filePath) throws IOException {
         List<String[]> registros = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
