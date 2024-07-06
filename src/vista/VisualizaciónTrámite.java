@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vista;
+import helpers.FechaHora;
 import helpers.Lector;
 import model.*;
 import java.io.BufferedReader;
@@ -64,8 +65,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         dependenciasComboBox = new javax.swing.JComboBox<>();
         Finalizar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        DocumentoGenerado = new javax.swing.JTextField();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -150,12 +150,10 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                                     .addComponent(Finalizar)
                                     .addComponent(jLabel2)
                                     .addComponent(dependenciasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(DocumentoGenerado, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(24, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Registro)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Registro)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -176,9 +174,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
+                        .addGap(123, 123, 123)
                         .addComponent(Registro)
                         .addGap(27, 27, 27)
                         .addComponent(jLabel2)
@@ -188,8 +184,8 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                         .addComponent(Derivar)
                         .addGap(54, 54, 54)
                         .addComponent(Finalizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DocumentoGenerado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addContainerGap())
@@ -228,14 +224,13 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
     private void DerivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DerivarActionPerformed
         // TODO add your handling code here:
         String dependencia = dependenciasComboBox.getSelectedItem().toString();
-        jTextField1.setText(dependencia);
+        DocumentoGenerado.setText(dependencia);
         Tramite aux = bandeja.desencolar();
         aux.setDependencia(dependencia);
         String[] datos = {aux.getExp().getID(), aux.getExp().getPrioridad(),aux.getExp().getNuevo().getDNI(),aux.getExp().getNuevo().getNombre(), aux.getExp().getNuevo().getCorreo(), aux.getExp().getAsunto(), aux.getExp().getDocref(), aux.getEstado(), aux.getFechain(), aux.getHorain(), aux.getFechafin(), aux.getHorafin(), aux.getDocumento()};
         // Ruta del archivo CSV
         agregar(dependencia,datos);
         CambiarSeguimiento(aux);
-        jTextField2.setText(nuevo.getDependencia());
         eliminar(nuevo.getDependencia(),aux);
         
         
@@ -247,7 +242,14 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         String dependencia = nuevo.getDependencia();
         
             Tramite aux = bandeja.desencolar();
-            CambiarEstado(aux);
+            aux.setDocumento(DocumentoGenerado.getText());
+            aux.setEstado("Finalizado");
+            aux.setFechafin(FechaHora.Fecha());
+            aux.setHorafin(FechaHora.FechaHora());
+            Cambiar("idexpediente",aux,"estado");
+            Cambiar("idexpediente",aux,"fecha_fin");
+            Cambiar("idexpediente",aux,"hora_fin");
+            Cambiar("idexpediente",aux,"documento_producto");
             eliminar(dependencia,aux);
         
     }//GEN-LAST:event_FinalizarActionPerformed
@@ -454,16 +456,31 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
             }
     }
     
-    public void CambiarEstado(Tramite aux)
+    public void Cambiar(String cabecera,Tramite aux,String buscacabecera)
     {
         
         String filePath = "src/datos/tramites.csv";
 
             try {
-                System.out.println(aux.getExp().getID());
-                // Verificar si el registro ya existe antes de agregarlo
-                Lector.modificarColumnaEnLinea(filePath,"idexpediente",aux.getExp().getID(),"estado","Finalizado");
-
+                if (buscacabecera.equalsIgnoreCase("estado"))
+                { 
+                    
+                    String valorcambiar = aux.getEstado();
+                    // Verificar si el registro ya existe antes de agregarlo
+                    Lector.modificarColumnaEnLinea(filePath,cabecera,aux.getExp().getID(),buscacabecera,valorcambiar);
+                }
+                else if(buscacabecera.equalsIgnoreCase("fecha_fin"))
+                {
+                    String valorcambiar = aux.getFechafin();
+                    // Verificar si el registro ya existe antes de agregarlo
+                    Lector.modificarColumnaEnLinea(filePath,cabecera,aux.getExp().getID(),buscacabecera,valorcambiar);
+                }
+                else if(buscacabecera.equalsIgnoreCase("hora_fin"))
+                {
+                    String valorcambiar = aux.getHorafin();
+                    // Verificar si el registro ya existe antes de agregarlo
+                    Lector.modificarColumnaEnLinea(filePath,cabecera,aux.getExp().getID(),buscacabecera,valorcambiar);
+                }
                 
             } catch (IllegalArgumentException e) {
                 // Manejar la excepción si el ID ya existe en el archivo CSV
@@ -520,6 +537,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Busqueda;
     private javax.swing.JButton Derivar;
+    private javax.swing.JTextField DocumentoGenerado;
     private javax.swing.JButton Finalizar;
     private javax.swing.JButton Registro;
     private javax.swing.JComboBox<String> dependenciasComboBox;
@@ -529,7 +547,5 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

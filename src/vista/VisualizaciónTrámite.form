@@ -47,15 +47,12 @@
                                   <Component id="Finalizar" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="dependenciasComboBox" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="DocumentoGenerado" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="24" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Registro" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField2" min="-2" pref="129" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="Registro" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -84,9 +81,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="443" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                      <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                       <Component id="Registro" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -96,8 +91,8 @@
                       <Component id="Derivar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       <Component id="Finalizar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="DocumentoGenerado" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="21" max="32767" attributes="0"/>
@@ -242,9 +237,7 @@
         <Property name="text" type="java.lang.String" value="Atras"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="DocumentoGenerado">
     </Component>
   </SubComponents>
 </Form>
