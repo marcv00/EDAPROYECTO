@@ -820,8 +820,8 @@ public class AdminUI extends javax.swing.JFrame {
         listaDeDependenciasButton.setBackground(new java.awt.Color(0, 0, 0));
         listaDeDependenciasButton.setForeground(new java.awt.Color(255,255,255,255));
         tabsPanel.setSelectedIndex(1);
-        //VisualizaciónTrámite tramite = new VisualizaciónTrámite(adminLogueado);
-        //tramite.setVisible(true);
+        VisualizaciónTrámite tramite = new VisualizaciónTrámite(adminLogueado);
+        tramite.setVisible(true);
     }//GEN-LAST:event_tramitesButtonActionPerformed
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
@@ -1040,6 +1040,7 @@ public class AdminUI extends javax.swing.JFrame {
 
     private void tramitesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tramitesTableMouseClicked
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_tramitesTableMouseClicked
     
 // Funcionamiento DEPENDENCIAS  =============================================================================================    

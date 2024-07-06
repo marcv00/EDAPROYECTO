@@ -233,7 +233,7 @@ public class Lector {
         for (int i = 1; i < registros.size(); i++) { // Empezamos desde 1 para omitir la cabecera
             String[] row = registros.get(i);
             if (row[columnIndex].equals(oldValue)) {
-                row[columnIndexCambiarColumn] = row[columnIndexCambiarColumn]+newValue;
+                row[columnIndexCambiarColumn] = row[columnIndexCambiarColumn]+">"+newValue;
                 break;
             }
 

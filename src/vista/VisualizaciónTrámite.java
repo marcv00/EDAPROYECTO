@@ -22,6 +22,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
     private BandejaTramite bandeja;
     private DefaultTableModel modelo;
     private static Administrador nuevo;
+    private BandejaTramite ordenado;
     
     /**
      * Creates new form VisualizaciónTrámite
@@ -30,6 +31,7 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
     public VisualizaciónTrámite(Administrador admin_logueado) {
         initComponents();
         bandeja = new BandejaTramite();
+        ordenado = new BandejaTramite();
         nuevo = admin_logueado;
         modelo = new DefaultTableModel();
         modelo.addColumn("ID");
@@ -200,7 +202,19 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        
+        if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("Prioridad"))
+        {
+            ordenado = OrdenarPrioridad(bandeja);
+            limpiarTabla();
+            CargarTabla(ordenado);
+            
+            
+        }
+        else if (jComboBox1.getSelectedItem().toString().equalsIgnoreCase("Antiguedad") )
+        {
+            limpiarTabla();
+            cargarTablaDesdeCSV();
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -217,15 +231,29 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
         // TODO add your handling code here:
         String dependencia = dependenciasComboBox.getSelectedItem().toString();
         jTextField1.setText(dependencia);
-        Tramite aux = bandeja.desencolar();
-        aux.setDependencia(dependencia);
-        String[] datos = {aux.getExp().getID(), aux.getExp().getPrioridad(),aux.getExp().getNuevo().getDNI(),aux.getExp().getNuevo().getNombre(), aux.getExp().getNuevo().getCorreo(), aux.getExp().getAsunto(), aux.getExp().getDocref(), aux.getEstado(), aux.getFechain(), aux.getHorain(), aux.getFechafin(), aux.getHorafin(), aux.getDocumento()};
-        // Ruta del archivo CSV
-        agregar(dependencia,datos);
-        CambiarSeguimiento(aux);
-        jTextField2.setText(nuevo.getDependencia());
-        eliminar(nuevo.getDependencia(),aux);
-        System.out.println("bien");
+        if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("Antiguedad"))
+        {
+            Tramite aux = bandeja.desencolar();
+            aux.setDependencia(dependencia);
+            String[] datos = {aux.getExp().getID(), aux.getExp().getPrioridad(),aux.getExp().getNuevo().getDNI(),aux.getExp().getNuevo().getNombre(), aux.getExp().getNuevo().getCorreo(), aux.getExp().getAsunto(), aux.getExp().getDocref(), aux.getEstado(), aux.getFechain(), aux.getHorain(), aux.getFechafin(), aux.getHorafin(), aux.getDocumento()};
+            // Ruta del archivo CSV
+            agregar(dependencia,datos);
+            CambiarSeguimiento(aux);
+            jTextField2.setText(nuevo.getDependencia());
+            eliminar(nuevo.getDependencia(),aux);
+        }
+        else if (jComboBox1.getSelectedItem().toString().equalsIgnoreCase("Prioridad"))
+        {
+            
+            Tramite aux = ordenado.desencolar();
+            aux.setDependencia(dependencia);
+            String[] datos = {aux.getExp().getID(), aux.getExp().getPrioridad(),aux.getExp().getNuevo().getDNI(),aux.getExp().getNuevo().getNombre(), aux.getExp().getNuevo().getCorreo(), aux.getExp().getAsunto(), aux.getExp().getDocref(), aux.getEstado(), aux.getFechain(), aux.getHorain(), aux.getFechafin(), aux.getHorafin(), aux.getDocumento()};
+            // Ruta del archivo CSV
+            agregar(dependencia,datos);
+            CambiarSeguimiento(aux);
+            jTextField2.setText(nuevo.getDependencia());
+            eliminar(nuevo.getDependencia(),aux);
+        }
         
         
         
@@ -234,10 +262,19 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         String dependencia = nuevo.getDependencia();
-        Tramite aux = bandeja.desencolar();
-        CambiarEstado(aux);
-        eliminar(dependencia,aux);
-        
+        if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("Antiguedad"))
+        {
+            Tramite aux = bandeja.desencolar();
+            CambiarEstado(aux);
+            eliminar(dependencia,aux);
+        }
+        else if (jComboBox1.getSelectedItem().toString().equalsIgnoreCase("Prioridad"))
+        {
+            
+            Tramite aux = ordenado.desencolar();
+            CambiarEstado(aux);
+            eliminar(dependencia,aux);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -461,6 +498,48 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error al derivar el tramite");
             }
+    }
+    
+    public BandejaTramite OrdenarPrioridad(BandejaTramite bandeja)
+    {
+        BandejaTramite aux = new BandejaTramite();
+        BandejaTramite tempBandeja = new BandejaTramite();
+        // Procesar trámites con prioridad alta
+        while (!bandeja.esVacia()) {
+            Tramite mover = bandeja.desencolar();
+            String prioridad = mover.getExp().getPrioridad();
+            if (prioridad.equalsIgnoreCase("Alta")) {
+                aux.encolar(mover);
+            } else {
+                tempBandeja.encolar(mover);
+            }
+        }
+        // Procesar trámites con prioridad baja
+        while (!tempBandeja.esVacia()) {
+            Tramite mover = tempBandeja.desencolar();
+            aux.encolar(mover);
+        }
+        aux.mostrarCola();
+        return aux;
+    }
+    
+    public void limpiarTabla()
+    {
+        int filas = modelo.getRowCount();
+        for(int i =0;i<filas;i++)
+        {
+            modelo.removeRow(0); 
+        }
+    }
+    
+    public void CargarTabla(BandejaTramite ordenada)
+    {
+        while(!ordenada.esVacia())
+        {   
+            Tramite orden = ordenada.desencolar();
+            String[] datos ={orden.getExp().getID(),orden.getExp().getPrioridad(),orden.getExp().getAsunto(),orden.getExp().getDocref(),orden.getExp().getNuevo().getDNI(),orden.getExp().getNuevo().getNombre(),orden.getExp().getNuevo().getCorreo()};
+            modelo.addRow(datos);
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
