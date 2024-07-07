@@ -94,4 +94,49 @@ public class BandejaTramite {
             
         }
     }
+    
+    // Método para ordenar la cola por prioridad
+    public void ordenarPorPrioridad() {
+       if (esVacia() || frente.getSgte() == null) {
+        return; // Si la bandeja está vacía o tiene un solo elemento, no se necesita ordenar
+       }
+
+        BandejaTramite alta = new BandejaTramite();
+        BandejaTramite baja = new BandejaTramite();
+
+        Tramite actual = frente;
+        while (actual != null) {
+            // Crear una nueva instancia de Tramite
+            Tramite nuevoTramite = new Tramite(
+                actual.getExp(),
+                actual.getEstado(),
+                actual.getFechain(),
+                actual.getHorain(),
+                actual.getFechafin(),
+                actual.getHorafin(),
+                actual.getDocumento(),
+                actual.getSeguimiento()
+            );
+
+            if (actual.getExp().getPrioridad().equals("Alta")) {
+                alta.encolar(nuevoTramite);
+            } else {
+                baja.encolar(nuevoTramite);
+            }
+            actual = actual.getSgte();
+        }
+
+        if (!alta.esVacia()) {
+            frente = alta.frente();
+            ultimo = alta.ultimo;
+            if (!baja.esVacia()) {
+                ultimo.setSgte(baja.frente());
+                ultimo = baja.ultimo;
+            }
+        } else {
+            frente = baja.frente();
+            ultimo = baja.ultimo;
+        }
+
+    }
 }

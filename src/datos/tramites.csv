@@ -1,2 +1,16 @@
 DNI;nombre;correo;idexpediente;prioridad;asunto;referencia;estado;fecha_inicio;hora_inicio;fecha_fin;hora_fin;documento_producto;seguimiento
-73787105;marco;marco@gmail.com;01;Alta;Obtencion de oficio;;proceso;22/05/2024;08:52;;;;IDIC>DUIS>
+73787105;Marco Villanueva;marco@gmail.com;01;Alta;Obtencion de oficio;;finalizado;22/05/2024;08:52;07/07/2024;08:33:52;DOCUMENTO FINAL;IDIC>DUIS>
+75839201;Lucia Gomez;lucia.gomez@yahoo.com;45132;Alta;Revision de documentos;;proceso;03/07/2024;14:30;;;;Contabilidad>Administracion>DUIS>IDIC>DUIS>Idiomas>
+82930457;Jose Torres;jose.torres@enterprise.com;48210;Baja;Evaluacion de riesgos;;finalizado;03/07/2024;10:50;03/07/2024;12:45;oficio;DUIS>Innova Ulima>Externo>
+84920347;Juan Martinez;juan.martinez@company.com;32874;Baja;Seguimiento de solicitud;;finalizado;04/07/2024;09:10;04/07/2024;11:20;autorizacion;Innova Ulima>DUIS>Externo>
+93048561;Laura Fernandez;laura.fernandez@gmail.com;67894;Alta;Control de calidad;;proceso;04/07/2024;12:35;;;;Escuela Posgrado>Idiomas>
+93248750;Ana Lopez;ana.lopez@hotmail.com;57294;Alta;Aprobacion de proyecto;;proceso;05/07/2024;11:45;;;;Estudios Generales>Escuela Posgrado>
+84720193;Miguel Sanchez;miguel.sanchez@biz.com;23049;Baja;Entrega de materiales;;finalizado;05/07/2024;15:10;05/07/2024;17:00;factura;CREA>Administracion>
+60471839;Carlos Perez;carlos.perez@gmail.com;14738;Baja;Actualizacion de datos;;finalizado;06/07/2024;13:00;06/07/2024;15:30;informe;Idiomas>IDIC>
+90234876;Patricia Morales;patricia.morales@service.com;79530;Alta;Planificacion estrategica;;proceso;06/07/2024;17:25;;;;IDIC>DUIS>Externo>
+71502943;Maria Rivera;maria.rivera@outlook.com;90328;Alta;Generacion de informe;;finalizado;07/07/2024;16:20;07/07/2024;16:59;Documento Prueba;CREA>DUIS>
+71420385;Rafael Diaz;rafael.diaz@network.com;54218;Baja;Mantenimiento del sistema;;proceso;07/07/2024;19:00;;;;Innova Ulima>DUIS>
+84598562;Leoncio Prado;leoncio@gmail.com;56400;Alta;Obtener certificacion;Oficio;finalizado;07/07/2024;06:52:06;07/07/2024;07:04:15;Aprobacion Presupuesto;DUIS>
+00002125;Jose Olaya;joseolaya@gmaill.com;94937;Baja;Obtener autorizacion de presupuesto;Formulario;proceso;07/07/2024;07:03:16;;;;DUIS>Idiomas>
+78787852;Will Smith;will@gmail.com;59390;Alta;Taller de Actuacion;Formulario;finalizado;07/07/2024;07:05:56;07/07/2024;07:06:33;Aprobacion Presupuesto;DUIS>
+71420385;Rafael Diaz;rafael.diaz@network.com;54217;Alta;Mantenimiento del sistema;;proceso;08/07/2024;19:00;;;;Innova Ulima>DUIS>

@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vista;
-import helpers.FechaHora;
+
 import helpers.Lector;
+import helpers.Tiempo;
 import model.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -244,8 +245,8 @@ public class VisualizaciónTrámite extends javax.swing.JFrame {
             Tramite aux = bandeja.desencolar();
             aux.setDocumento(DocumentoGenerado.getText());
             aux.setEstado("Finalizado");
-            aux.setFechafin(FechaHora.Fecha());
-            aux.setHorafin(FechaHora.FechaHora());
+            aux.setFechafin(Tiempo.getCurrentDateSimple());
+            aux.setHorafin(Tiempo.getCurrentTime());
             Cambiar("idexpediente",aux,"estado");
             Cambiar("idexpediente",aux,"fecha_fin");
             Cambiar("idexpediente",aux,"hora_fin");

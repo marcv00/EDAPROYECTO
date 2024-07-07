@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vista;
-import helpers.*;
+import helpers.Lector;
+import helpers.Tiempo;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -267,9 +268,9 @@ public class RegTramite extends javax.swing.JFrame {
         String nombre = NombreTextField.getText();
         String correo = CorreoTextField.getText();
         String estado = " En proceso";
-        String fechain = FechaHora.Fecha();
+        String fechain = Tiempo.getCurrentDateSimple();
         String fechafin = "-";
-        String horain = FechaHora.FechaHora();
+        String horain = Tiempo.getCurrentTime();
         String horafin = "-";
         String documento = "-";
         if (ID.isEmpty() || prioridad.isEmpty() || asunto.isEmpty() || referencia.isEmpty() || DNI.isEmpty() || nombre.isEmpty() || correo.isEmpty()) {

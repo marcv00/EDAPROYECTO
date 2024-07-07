@@ -174,7 +174,7 @@ public class Lector {
         return -1;
     }
     /*
-     * Modifica el valor de una celda en un archivo CSV basado en la columna y el valor de búsqueda.
+     * Encuentra la fila en el archivo y reemplaza el valor encontrado en la columna buscada por el nuevo valor dado.
      *
      * @param filePath   Ruta del archivo CSV.
      * @param columnName Nombre de la columna donde buscar el valor.
@@ -197,7 +197,7 @@ public class Lector {
             String[] row = registros.get(i);
             if (row[columnIndex].equals(oldValue)) {
                 row[columnIndexCambiarColumn] = newValue;
-                break;
+                break; // Parar la busqueda una vez se hizo la modificacion en la linea
             }
             
         }
@@ -211,7 +211,7 @@ public class Lector {
     }
     
     /*
-     * Modifica el valor de una celda en un archivo CSV basado en la columna y el valor de búsqueda.
+     * Encuentra la fila en el archivo y añade al valor encontrado en esa columna el valor proporcionado.
      *
      * @param filePath   Ruta del archivo CSV.
      * @param columnName Nombre de la columna donde buscar el valor.
@@ -233,8 +233,8 @@ public class Lector {
         for (int i = 1; i < registros.size(); i++) { // Empezamos desde 1 para omitir la cabecera
             String[] row = registros.get(i);
             if (row[columnIndex].equals(oldValue)) {
-                row[columnIndexCambiarColumn] = row[columnIndexCambiarColumn]+">"+newValue;
-                break;
+                row[columnIndexCambiarColumn] = row[columnIndexCambiarColumn]+ newValue;
+                break; // Parar la busqueda una vez se hizo la modificacion en la linea
             }
 
         }
@@ -257,7 +257,7 @@ public class Lector {
      * @param newValue   Nuevo valor que reemplazará el valor encontrado en la columna especificada.
      * @throws IOException Si ocurre un error al leer o escribir en el archivo.
      */
-    public static void modificarValorEnTodasLasColumnas(String filePath, String columnName, String oldValue, String newValue) throws IOException {
+    public static void reemplazarValorDeColumnaEnTodasLasFilas(String filePath, String columnName, String oldValue, String newValue) throws IOException {
         List<String[]> registros = leerCSV(filePath);
         String[] header = registros.get(0); // La primera línea es el encabezado
         int columnIndex = findColumnIndex(header, columnName);
@@ -278,5 +278,82 @@ public class Lector {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             escribirCSV(bw, registros);
         }
+    }
+    
+     /**
+     * Identificar linea en csv y reemplazar los valores encontrados en las columnas especificadas por los valores dados
+     *
+     * @param filePath         Ruta del archivo CSV.
+     * @param columnNameBuscar Nombre de la columna donde buscar el valor.
+     * @param valorBuscar      Valor que se busca en la columna especificada.
+     * @param nombresColumnas  Arreglo de strings con los nombres de las columnas a modificar.
+     * @param valoresColumnas  Arreglo de strings con los nuevos valores que se escribirán en las columnas.
+     * @throws IOException Si ocurre un error al leer o escribir en el archivo.
+     */
+    public static void modificarColumnasEnLinea(String filePath, String columnNameBuscar, String valorBuscar,
+                                                String[] nombresColumnas, String[] valoresColumnas) throws IOException {
+        List<String[]> registros = leerCSV(filePath);
+        String[] header = registros.get(0); // La primera línea es el encabezado
+        int columnIndexBuscar = findColumnIndex(header, columnNameBuscar);
+
+        if (columnIndexBuscar == -1) {
+            throw new IllegalArgumentException("Columna '" + columnNameBuscar + "' no encontrada en el archivo CSV");
+        }
+
+        // Iterar a través de los registros para encontrar y modificar el valor coincidente
+        for (int i = 1; i < registros.size(); i++) { // Empezamos desde 1 para omitir la cabecera
+            String[] row = registros.get(i);
+            if (row[columnIndexBuscar].equals(valorBuscar)) {
+                // Modificar las columnas especificadas
+                for (int j = 0; j < nombresColumnas.length; j++) {
+                    String nombreColumna = nombresColumnas[j];
+                    int columnIndexModificar = findColumnIndex(header, nombreColumna);
+                    if (columnIndexModificar != -1) {
+                        // Asignar el nuevo valor a la columna correspondiente
+                        row[columnIndexModificar] = valoresColumnas[j];
+                    } else {
+                        throw new IllegalArgumentException("Columna '" + nombreColumna + "' no encontrada en el archivo CSV");
+                    }
+                }
+                break; // Salir del bucle una vez que se ha encontrado y modificado la línea
+            }
+        }
+
+        // Escribir todos los registros de nuevo en el archivo CSV
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            escribirCSV(bw, registros);
+        }
+    }
+    
+        /**
+     * Retorna un array de strings con los valores encontrados en una columna especificada de todas las filas.
+     *
+     * @param filePath   Ruta del archivo CSV.
+     * @param columnName Nombre de la columna de la cual se desea extraer los valores.
+     * @return Array de strings con los valores de la columna especificada.
+     * @throws IOException Si ocurre un error al leer el archivo.
+     */
+    public static String[] obtenerValoresDeColumna(String filePath, String columnName) throws IOException {
+        List<String[]> registros = leerCSV(filePath);
+        List<String> valores = new ArrayList<>();
+
+        if (registros.isEmpty()) {
+            throw new IllegalArgumentException("El archivo CSV está vacío.");
+        }
+
+        String[] header = registros.get(0); // La primera línea es el encabezado
+        int columnIndex = findColumnIndex(header, columnName);
+
+        if (columnIndex == -1) {
+            throw new IllegalArgumentException("Columna '" + columnName + "' no encontrada en el archivo CSV");
+        }
+
+        // Iterar a través de los registros para obtener los valores de la columna especificada
+        for (int i = 1; i < registros.size(); i++) { // Empezamos desde 1 para omitir la cabecera
+            String[] row = registros.get(i);
+            valores.add(row[columnIndex]);
+        }
+
+        return valores.toArray(new String[0]);
     }
 }

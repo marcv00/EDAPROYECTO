@@ -11,10 +11,10 @@ import javax.swing.JLabel;
  *
  * @author villa
  */
-public class DateTimeLabelUpdater {
+public class Tiempo {
     private JLabel label;
 
-    public DateTimeLabelUpdater(JLabel label) {
+    public Tiempo(JLabel label) {
         this.label = label;
         updateLabel();
     }
@@ -36,12 +36,12 @@ public class DateTimeLabelUpdater {
         label.setText(dateTimeString);
     }
     public static void updateLabelStatic(JLabel label) {
-        new DateTimeLabelUpdater(label);
+        new Tiempo(label);
     }
 
-    // Método estático para obtener la hora actual en formato HH:mm a
+    // Método estático para obtener la hora actual en formato HH:mm:ss
     public static String getCurrentTime() {
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm a");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
         return timeFormatter.format(date);
     }
@@ -60,5 +60,12 @@ public class DateTimeLabelUpdater {
         Date date = new Date();
         String dateTimeString = dateTimeFormatter.format(date);
         return dateTimeString.substring(0, 1).toUpperCase() + dateTimeString.substring(1); // Capitaliza la primera letra
+    }
+    
+    // Método estático para obtener la fecha actual en formato dd/MM/yyyy
+    public static String getCurrentDateSimple() {
+        SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        return simpleDateFormatter.format(date);
     }
 }
