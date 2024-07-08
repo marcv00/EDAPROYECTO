@@ -240,11 +240,11 @@ public class SegTramiteUI extends javax.swing.JFrame {
                     }
 
                     String[] datos = line.split(";");
-                    if (datos.length == 10) { // Verificar existencia de 5 columnas en admins.csv
-                        if(datos[1].equalsIgnoreCase(DNI.getText()))
+                    if (datos.length == 14) { // Verificar existencia de 5 columnas en admins.csv
+                        if(datos[0].equalsIgnoreCase(DNI.getText()))
                         {
-                            Interesado.setText(datos[2]);
-                            String[] row_a_insertar = {datos[0],datos[3],datos[4],datos[5],datos[6],datos[7],datos[8],datos[9]};
+                            Interesado.setText(datos[1]);
+                            String[] row_a_insertar = {datos[3],datos[7],datos[8],datos[9],datos[10],datos[11],datos[12],datos[13]};
                             modelo.addRow(row_a_insertar);
                         }
                     }
